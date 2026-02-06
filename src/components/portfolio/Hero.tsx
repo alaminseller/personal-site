@@ -7,9 +7,10 @@ const Hero = () => {
       <div className="section-container">
         <div className="max-w-3xl mx-auto text-center">
           {/* Empty placeholder for profile image */}
-          <div 
-            className="w-32 h-32 mx-auto mb-8 rounded-full bg-secondary border-2 border-border"
-            aria-label="Profile image placeholder"
+          <img 
+            src="/Profile.png" 
+            alt="Alamin Rafi"
+            className="w-32 h-32 mx-auto mb-8 rounded-full object-cover border-2 border-border"
           />
           
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold text-foreground mb-4 text-balance">
