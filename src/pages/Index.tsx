@@ -1,7 +1,7 @@
-import ProfessionalPage from "./Professional";
+import ModernPage from "./Modern";
 
 const Index = () => {
-  return <ProfessionalPage />;
+  return <ModernPage />;
 };
 
 export default Index;
