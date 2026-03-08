@@ -1,32 +1,36 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const Anthropic = require('@anthropic-ai/sdk');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const client = new Anthropic({
-    apiKey: process.env.ANTHROPIC_API_KEY
-});
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 app.post('/api/chat', async (req, res) => {
     try {
         const { messages } = req.body;
-        const response = await client.messages.create({
-            model: 'claude-3-5-haiku-20241022',
-            max_tokens: 1024,
-            system: "You are Alamin's personal AI assistant on his portfolio website. Help visitors learn about his SEO expertise, digital marketing experience, and content strategies. Be helpful, concise and professional.",
-            messages: messages
+        const model = genAI.getGenerativeModel({
+            model: 'gemini-1.5-flash',
+            systemInstruction: "You are Alamin's personal AI assistant on his portfolio website. Help visitors learn about his SEO expertise, digital marketing and content strategies. Be helpful, concise and professional. Reply in the same language the user uses."
         });
-        res.json({ message: response.content[0].text });
+
+        // Gemini history format
+        const history = messages.slice(0, -1).map(m => ({
+            role: m.role === 'assistant' ? 'model' : 'user',
+            parts: [{ text: m.content }]
+        }));
+
+        const chat = model.startChat({ history });
+        const result = await chat.sendMessage(messages[messages.length - 1].content);
+
+        res.json({ message: result.response.text() });
     } catch (error) {
-        console.error('Claude API Error:', error);
+        console.error('Gemini Error:', error);
         res.status(500).json({ error: 'Something went wrong.' });
     }
 });
 
-app.listen(3001, () => {
-    console.log('Server running on http://localhost:3001');
-});
+app.listen(3001, () => console.log('Server running on http://localhost:3001'));

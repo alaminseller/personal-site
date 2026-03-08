@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { MessageSquare, Send, X, MoreHorizontal, Minimize2 } from "lucide-react";
+import { MessageSquare, Send, X, Maximize2, Minimize2, MoreHorizontal } from "lucide-react";
 
 interface Message {
     role: "user" | "assistant";
@@ -11,7 +11,7 @@ export const ChatWidget = () => {
     const [messages, setMessages] = useState<Message[]>([
         {
             role: "assistant",
-            content: "Hello! I'm Alamin's personal AI assistant. How can I help you learn about his SEO expertise or digital marketing today?"
+            content: "Hi! I'm Alamin's personal AI assistant. How can I help you today?"
         }
     ]);
     const [input, setInput] = useState("");
@@ -36,7 +36,7 @@ export const ChatWidget = () => {
         setIsLoading(true);
 
         try {
-            const res = await fetch("/api/chat", {
+            const res = await fetch("http://localhost:3001/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -54,7 +54,7 @@ export const ChatWidget = () => {
             console.error(error);
             setMessages(prev => [...prev, {
                 role: "assistant",
-                content: "Sorry, I'm having trouble connecting to the server. Please try again."
+                content: "Sorry, I'm having trouble connecting to the server. Please check if the Gemini backend is running."
             }]);
         } finally {
             setIsLoading(false);
@@ -69,10 +69,10 @@ export const ChatWidget = () => {
     };
 
     return (
-        <div className="fixed bottom-[24px] right-[24px] z-[9999] flex flex-col items-end pointer-events-none">
+        <div className="fixed bottom-[24px] right-[24px] z-[9999] flex flex-col items-end pointer-events-none font-sans">
             {/* Chat Popup */}
             {isOpen && (
-                <div className="pointer-events-auto mb-4 w-[340px] h-[480px] bg-white rounded-[20px] shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-300">
+                <div className="pointer-events-auto mb-4 w-[340px] h-[480px] bg-white rounded-[20px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-300 border border-zinc-100">
                     {/* Header */}
                     <div className="p-4 bg-white border-b flex items-center justify-between">
                         <div className="flex items-center gap-3">
@@ -84,26 +84,31 @@ export const ChatWidget = () => {
                             </div>
                             <div>
                                 <h3 className="text-zinc-900 font-bold text-sm leading-tight">Alamin's Assistant</h3>
-                                <p className="text-zinc-500 text-[11px]">Powered by Claude</p>
+                                <p className="text-zinc-400 text-[10px] font-medium uppercase tracking-wider">Powered by Gemini</p>
                             </div>
                         </div>
-                        <button onClick={() => setIsOpen(false)} className="text-zinc-400 hover:text-zinc-600 transition-colors">
-                            <Minimize2 className="w-4 h-4" />
-                        </button>
+                        <div className="flex items-center gap-1">
+                            <button className="p-1.5 text-zinc-400 hover:text-zinc-600 transition-colors">
+                                <Maximize2 className="w-3.5 h-3.5" />
+                            </button>
+                            <button onClick={() => setIsOpen(false)} className="p-1.5 text-zinc-400 hover:text-red-500 transition-colors">
+                                <X className="w-4 h-4" />
+                            </button>
+                        </div>
                     </div>
 
                     {/* Messages Area */}
-                    <div className="flex-1 bg-zinc-50 overflow-y-auto p-4 space-y-4">
+                    <div className="flex-1 bg-[#F8F9FA] overflow-y-auto p-4 space-y-4">
                         {messages.map((m, i) => (
-                            <div key={i} className={`flex gap-2 ${m.role === "user" ? "flex-row-reverse" : ""}`}>
+                            <div key={i} className={`flex gap-2.5 ${m.role === "user" ? "flex-row-reverse" : ""}`}>
                                 {m.role === "assistant" && (
-                                    <div className="w-6 h-6 rounded-full bg-zinc-900 flex items-center justify-center text-white text-[10px] shrink-0 mt-1">
+                                    <div className="w-7 h-7 rounded-full bg-zinc-900 flex items-center justify-center text-white text-[11px] font-bold shrink-0 mt-0.5">
                                         A
                                     </div>
                                 )}
-                                <div className={`max-w-[80%] p-3 rounded-[15px] text-xs leading-relaxed ${m.role === "user"
+                                <div className={`max-w-[80%] p-3 px-4 rounded-[18px] text-[13px] leading-relaxed shadow-sm ${m.role === "user"
                                     ? "bg-zinc-900 text-white rounded-tr-none"
-                                    : "bg-white text-zinc-800 border rounded-tl-none"
+                                    : "bg-white text-zinc-800 border-zinc-100 border rounded-tl-none font-medium"
                                     }`}>
                                     {m.content}
                                 </div>
@@ -111,11 +116,11 @@ export const ChatWidget = () => {
                         ))}
 
                         {isLoading && (
-                            <div className="flex gap-2">
-                                <div className="w-6 h-6 rounded-full bg-zinc-900 flex items-center justify-center text-white text-[10px] shrink-0 mt-1">
+                            <div className="flex gap-2.5">
+                                <div className="w-7 h-7 rounded-full bg-zinc-900 flex items-center justify-center text-white text-[11px] font-bold shrink-0 mt-0.5">
                                     A
                                 </div>
-                                <div className="bg-white border p-3 rounded-[15px] rounded-tl-none flex gap-1">
+                                <div className="bg-white border p-3.5 px-4 rounded-[18px] rounded-tl-none flex gap-1.5 items-center shadow-sm">
                                     <span className="w-1.5 h-1.5 bg-zinc-300 rounded-full animate-bounce"></span>
                                     <span className="w-1.5 h-1.5 bg-zinc-300 rounded-full animate-bounce delay-150"></span>
                                     <span className="w-1.5 h-1.5 bg-zinc-300 rounded-full animate-bounce delay-300"></span>
@@ -126,20 +131,20 @@ export const ChatWidget = () => {
                     </div>
 
                     {/* Input Area */}
-                    <div className="p-4 bg-white border-t">
+                    <div className="p-4 bg-white border-t border-zinc-50">
                         <form onSubmit={handleSend} className="relative flex items-center">
                             <textarea
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 onKeyDown={handleKeyDown}
-                                placeholder="Type your message..."
-                                className="w-full bg-zinc-100 rounded-[15px] pl-3 pr-10 py-2.5 text-xs text-zinc-900 focus:outline-none resize-none max-h-[100px]"
+                                placeholder="Message Alamin's AI..."
+                                className="w-full bg-zinc-50 rounded-[15px] pl-4 pr-12 py-3 text-[13px] text-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-200 resize-none max-h-[120px] placeholder:text-zinc-400"
                                 rows={1}
                             />
                             <button
                                 type="submit"
                                 disabled={!input.trim() || isLoading}
-                                className="absolute right-2 top-1.5 w-7 h-7 bg-zinc-900 text-white rounded-full flex items-center justify-center hover:bg-zinc-800 transition-colors disabled:bg-zinc-300"
+                                className="absolute right-2 top-2 w-8 h-8 bg-zinc-900 text-white rounded-full flex items-center justify-center hover:bg-zinc-800 transition-all active:scale-95 disabled:bg-zinc-200"
                             >
                                 <Send className="w-3.5 h-3.5" />
                             </button>
@@ -151,7 +156,7 @@ export const ChatWidget = () => {
             {/* Toggle Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="pointer-events-auto w-[54px] h-[54px] bg-zinc-900 rounded-full flex items-center justify-center text-white shadow-xl hover:scale-105 transition-transform"
+                className="pointer-events-auto w-[54px] h-[54px] bg-zinc-900 rounded-full flex items-center justify-center text-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:scale-105 active:scale-95 transition-all"
             >
                 {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
             </button>
