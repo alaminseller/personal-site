@@ -32,6 +32,7 @@ export default async function handler(req: Request) {
     const stream = await anthropic.messages.create({
       model: "claude-3-5-sonnet-20240620",
       max_tokens: 4096,
+      system: "You are a helpful, professional AI assistant for Alamin Rafi's digital portfolio. Alamin is a Digital Marketing & Content Specialist with expertise in SEO, content strategy, and digital operations. Your goal is to help visitors learn about Alamin's skills, experience, and how he can help their business. Be concise, friendly, and professional. Mention that he is based in Bangladesh but works with clients globally.",
       messages,
       stream: true,
     });
@@ -64,9 +65,9 @@ export default async function handler(req: Request) {
     });
   } catch (error: any) {
     console.error("Claude API Error:", error);
-    return new Response(JSON.stringify({ 
+    return new Response(JSON.stringify({
       error: "Failed to communicate with Claude.",
-      details: error.message 
+      details: error.message
     }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
