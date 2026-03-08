@@ -36,7 +36,7 @@ export const ChatWidget = () => {
         setIsLoading(true);
 
         try {
-            const res = await fetch("http://localhost:3001/api/chat", {
+            const res = await fetch("/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -102,8 +102,8 @@ export const ChatWidget = () => {
                                     </div>
                                 )}
                                 <div className={`max-w-[80%] p-3 rounded-[15px] text-xs leading-relaxed ${m.role === "user"
-                                        ? "bg-zinc-900 text-white rounded-tr-none"
-                                        : "bg-white text-zinc-800 border rounded-tl-none"
+                                    ? "bg-zinc-900 text-white rounded-tr-none"
+                                    : "bg-white text-zinc-800 border rounded-tl-none"
                                     }`}>
                                     {m.content}
                                 </div>
