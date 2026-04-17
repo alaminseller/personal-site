@@ -1,6 +1,8 @@
 import ModernHeader from "@/components/modern/Header";
 import ModernHeroVisual from "@/components/modern/Hero";
 import ProfessionalAbout from "@/components/professional/About";
+import ServicesSection from "@/components/professional/Services";
+import ProjectsSection from "@/components/professional/Projects";
 import ProfessionalExperience from "@/components/professional/Experience";
 import ProfessionalSkills from "@/components/professional/Skills";
 import ProfessionalAchievements from "@/components/professional/Achievements";
@@ -15,6 +17,8 @@ export default function ModernPage() {
             <main>
                 <ModernHeroVisual />
                 <div id="about"><ProfessionalAbout /></div>
+                <div id="services"><ServicesSection /></div>
+                <div id="projects"><ProjectsSection /></div>
                 <div id="experience"><ProfessionalExperience /></div>
                 <div id="skills"><ProfessionalSkills /></div>
                 <div id="achievements"><ProfessionalAchievements /></div>

@@ -88,10 +88,10 @@ export const ChatWidget = () => {
                             </div>
                         </div>
                         <div className="flex items-center gap-1">
-                            <button className="p-1.5 text-zinc-400 hover:text-zinc-600 transition-colors">
+                            <button title="Expand chat" className="p-1.5 text-zinc-400 hover:text-zinc-600 transition-colors">
                                 <Maximize2 className="w-3.5 h-3.5" />
                             </button>
-                            <button onClick={() => setIsOpen(false)} className="p-1.5 text-zinc-400 hover:text-red-500 transition-colors">
+                            <button title="Close chat" onClick={() => setIsOpen(false)} className="p-1.5 text-zinc-400 hover:text-red-500 transition-colors">
                                 <X className="w-4 h-4" />
                             </button>
                         </div>
@@ -143,6 +143,7 @@ export const ChatWidget = () => {
                             />
                             <button
                                 type="submit"
+                                title="Send message"
                                 disabled={!input.trim() || isLoading}
                                 className="absolute right-2 top-2 w-8 h-8 bg-zinc-900 text-white rounded-full flex items-center justify-center hover:bg-zinc-800 transition-all active:scale-95 disabled:bg-zinc-200"
                             >

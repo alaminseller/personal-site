@@ -60,7 +60,7 @@ export function ClaudeChat() {
             if (!response.ok) throw new Error("Failed to send message");
 
             const reader = response.body?.getReader();
-            const decoder = new TextEncoder();
+            const decoder = new TextDecoder();
             let assistantMessage = "";
 
             // Add a placeholder message for the assistant that we'll update with chunks
@@ -158,9 +158,9 @@ export function ClaudeChat() {
                                                 >
                                                     {m.content || (
                                                         <div className="flex gap-1 py-1">
-                                                            <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "0ms" }}></span>
-                                                            <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "150ms" }}></span>
-                                                            <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "300ms" }}></span>
+                                                            <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 animate-bounce delay-0"></span>
+                                                            <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 animate-bounce delay-150"></span>
+                                                            <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 animate-bounce delay-300"></span>
                                                         </div>
                                                     )}
                                                 </div>
@@ -173,9 +173,9 @@ export function ClaudeChat() {
                                                 </Avatar>
                                                 <div className="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-4 py-3 rounded-2xl rounded-tl-none">
                                                     <div className="flex gap-1">
-                                                        <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "0ms" }}></span>
-                                                        <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "150ms" }}></span>
-                                                        <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "300ms" }}></span>
+                                                        <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 animate-bounce delay-0"></span>
+                                                        <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 animate-bounce delay-150"></span>
+                                                        <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 animate-bounce delay-300"></span>
                                                     </div>
                                                 </div>
                                             </div>
