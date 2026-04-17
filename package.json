@@ -1,7 +1,11 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "rafi-digital-hub",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,7 +14,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "server": "node server.js"
+    "server": "node server.cjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",
