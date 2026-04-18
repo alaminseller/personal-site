@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Github, Linkedin, Twitter, Globe, Briefcase, Star, Clock } from "lucide-react";
 
 /* ─── Floating Badge ────────────────────────────────────────────────── */
@@ -57,15 +57,54 @@ function SocialLink({ href, label, icon, delayClass = "" }: SocialLinkProps) {
 /* ─── Main Hero ─────────────────────────────────────────────────────── */
 export default function ModernHeroVisual() {
   const glowRef = useRef<HTMLDivElement>(null);
+  const [projectCount, setProjectCount] = useState(0);
 
   useEffect(() => {
+    // Dynamic project count based on date string
+    const today = new Date();
+    const dateStr = today.toISOString().split('T')[0];
+    let hash = 0;
+    for (let i = 0; i < dateStr.length; i++) {
+        hash = ((hash << 5) - hash) + dateStr.charCodeAt(i);
+        hash |= 0;
+    }
+    const offsets = [-3, -1, 1, 3];
+    const index = Math.abs(hash) % offsets.length;
+    const targetCount = 14 + offsets[index]; // 14-3=11, 14-1=13, 14+1=15, 14+3=17
+
+    // Count-up animation logic
+    const duration = 1200; // 1.2 seconds (fast & subtle)
+    const fps = 60;
+    const totalFrames = (duration / 1000) * fps;
+    let currentFrame = 0;
+
+    const easeOutCubic = (x: number): number => 1 - Math.pow(1 - x, 3);
+
+    const animationInterval = setInterval(() => {
+      currentFrame++;
+      const progress = currentFrame / totalFrames;
+      const currentVal = Math.floor(targetCount * easeOutCubic(progress));
+      
+      setProjectCount(currentVal);
+
+      if (currentFrame >= totalFrames) {
+        setProjectCount(targetCount);
+        clearInterval(animationInterval);
+      }
+    }, 1000 / fps);
+
+    // Mouse glow effect
     const handleMouseMove = (e: MouseEvent) => {
       if (glowRef.current) {
         glowRef.current.style.background = `radial-gradient(800px circle at ${e.clientX}px ${e.clientY}px, rgba(139,92,246,0.06), transparent 60%)`;
       }
     };
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      clearInterval(animationInterval);
+    };
   }, []);
 
   return (
@@ -209,7 +248,7 @@ export default function ModernHeroVisual() {
           {/* ── Floating Badges ── */}
           <FloatingBadge
             icon={<Star className="w-4 h-4 text-amber-400" />}
-            label="5+ Years Exp."
+            label="8+ Years Experience"
             sublabel="Web & Digital"
             className="top-[8%] -left-2 sm:left-4 animate-float"
             delayClass="anim-delay-900"
@@ -217,7 +256,7 @@ export default function ModernHeroVisual() {
 
           <FloatingBadge
             icon={<Briefcase className="w-4 h-4 text-violet-400" />}
-            label="30+ Projects"
+            label={`${projectCount}+ Projects`}
             sublabel="Live & Running"
             className="bottom-[20%] -left-4 sm:left-0 animate-float-delayed"
             delayClass="anim-delay-1100"
