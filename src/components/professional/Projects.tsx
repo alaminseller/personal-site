@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ExternalLink, Github, Globe, Figma } from "lucide-react";
+import { Figma, Layers } from "lucide-react";
 
-type Category = "All" | "Website" | "WordPress" | "UI/UX";
+type Category = "All" | "UI/UX Design";
 
 interface Project {
     title: string;
@@ -10,92 +10,64 @@ interface Project {
     tags: string[];
     gradient: string;
     emoji: string;
-    liveUrl?: string;
-    githubUrl?: string;
     featured?: boolean;
 }
 
 const projects: Project[] = [
     {
-        title: "RangTVBD – News Portal",
-        description: "A high-traffic Bengali news and entertainment portal. I managed SEO strategy, content structure, and optimized the WordPress architecture for 500k+ monthly readers.",
-        category: "WordPress",
-        tags: ["WordPress", "SEO", "Content Strategy", "Performance"],
+        title: "Task Management SaaS Dashboard",
+        description: "A modern UI/UX concept design created to demonstrate layout, usability, and visual hierarchy for a SaaS productivity app.",
+        category: "UI/UX Design",
+        tags: ["Figma", "SaaS Dashboard", "UI Concept"],
         gradient: "from-blue-500 to-indigo-600",
-        emoji: "📰",
-        liveUrl: "https://rangtvbd.com",
-        featured: true,
-    },
-    {
-        title: "Medi-Aid Hospital Website",
-        description: "Professional hospital website with patient engagement features, appointment booking information, and department pages — designed for trust and accessibility.",
-        category: "WordPress",
-        tags: ["WordPress", "Healthcare", "UI Design", "Mobile-First"],
-        gradient: "from-green-500 to-teal-600",
-        emoji: "🏥",
-        featured: true,
-    },
-    {
-        title: "Orthosongbad – Finance News",
-        description: "A financial news website with custom theme, optimized on-page SEO, internal linking structure, and schema markup for improved search visibility.",
-        category: "WordPress",
-        tags: ["WordPress", "SEO Audit", "Technical SEO", "Schema"],
-        gradient: "from-amber-500 to-orange-600",
-        emoji: "💰",
-        liveUrl: "https://orthosongbad.com",
-    },
-    {
-        title: "Startup Landing Page",
-        description: "A clean, high-converting landing page for a SaaS startup. Focused on conversion rate optimization, clear value proposition, and mobile-first design.",
-        category: "Website",
-        tags: ["HTML/CSS", "JavaScript", "Conversion", "Responsive"],
-        gradient: "from-violet-500 to-purple-600",
-        emoji: "🚀",
-    },
-    {
-        title: "E-Commerce Store",
-        description: "A fully functional WooCommerce store with custom product pages, cart flow, payment gateway integration, and inventory management setup.",
-        category: "WordPress",
-        tags: ["WooCommerce", "WordPress", "E-Commerce", "Payments"],
-        gradient: "from-pink-500 to-rose-600",
-        emoji: "🛒",
-    },
-    {
-        title: "Restaurant Website",
-        description: "Modern restaurant website with menu showcase, online reservation form, photo gallery, and Google Maps integration — fully mobile responsive.",
-        category: "Website",
-        tags: ["HTML/CSS/JS", "Responsive", "UI Design", "Google Maps"],
-        gradient: "from-red-500 to-orange-500",
-        emoji: "🍽️",
-    },
-    {
-        title: "SaaS Dashboard UI Design",
-        description: "A complete UI/UX design for a project management SaaS app. Includes dashboard, task boards, analytics views, and a full design system in Figma.",
-        category: "UI/UX",
-        tags: ["Figma", "Design System", "SaaS", "Dashboard"],
-        gradient: "from-cyan-500 to-blue-600",
         emoji: "📊",
         featured: true,
     },
     {
-        title: "Mobile App UI – Food Delivery",
-        description: "A modern food delivery app UI concept with home screen, restaurant list, order flow, and real-time tracking screen — designed in Figma with prototype links.",
-        category: "UI/UX",
-        tags: ["Figma", "Mobile UI", "Prototype", "App Design"],
-        gradient: "from-yellow-500 to-amber-600",
-        emoji: "🍱",
+        title: "Fintech Mobile Wallet App",
+        description: "An intuitive mobile wallet UI exploration focusing on clean transactions, easy navigation, and financial data visualization.",
+        category: "UI/UX Design",
+        tags: ["Figma", "Mobile UI", "Fintech Concept"],
+        gradient: "from-green-500 to-teal-600",
+        emoji: "💳",
+        featured: true,
     },
     {
-        title: "Personal Portfolio UI Kit",
-        description: "A reusable UI kit and design template for professional portfolios. Includes light/dark mode, component library, and Figma auto-layout system.",
-        category: "UI/UX",
-        tags: ["Figma", "UI Kit", "Dark Mode", "Components"],
-        gradient: "from-indigo-500 to-violet-600",
+        title: "E-Commerce Storefront Concept",
+        description: "A conceptual e-commerce design with a focus on product discovery, seamless checkout flow, and a minimalist aesthetic.",
+        category: "UI/UX Design",
+        tags: ["UI Concept", "E-Commerce", "Web Design"],
+        gradient: "from-pink-500 to-rose-600",
+        emoji: "🛍️",
+    },
+    {
+        title: "Real Estate Property Finder",
+        description: "A structured layout design demo showcasing property listings, interactive map interfaces, and advanced search filter systems.",
+        category: "UI/UX Design",
+        tags: ["Web App UI", "Design Demo", "Wireframing"],
+        gradient: "from-amber-500 to-orange-600",
+        emoji: "🏢",
+    },
+    {
+        title: "Healthcare Doctor Booking UI",
+        description: "A clean, accessible UI concept for a patient booking system, emphasizing trust, typography, and clear call-to-actions.",
+        category: "UI/UX Design",
+        tags: ["UI Exploration", "Healthcare", "Clean UI"],
+        gradient: "from-cyan-500 to-blue-500",
+        emoji: "🏥",
+    },
+    {
+        title: "Modern Portfolio UI Kit",
+        description: "A scalable UI kit and template concept demonstrating cohesive component structure, light/dark mode foundations, and Figma auto-layout.",
+        category: "UI/UX Design",
+        tags: ["UI Kit", "Design System", "Figma"],
+        gradient: "from-violet-500 to-purple-600",
         emoji: "🎨",
+        featured: true,
     },
 ];
 
-const categories: Category[] = ["All", "Website", "WordPress", "UI/UX"];
+const categories: Category[] = ["All", "UI/UX Design"];
 
 export default function ProjectsSection() {
     const [activeCategory, setActiveCategory] = useState<Category>("All");
@@ -108,7 +80,7 @@ export default function ProjectsSection() {
                 <p className="text-sm font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3">Portfolio</p>
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
                     <h2 className="text-4xl font-bold text-zinc-900 dark:text-white max-w-lg leading-snug">
-                        Projects &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">Work Showcase</span>
+                        Design <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">Showcase</span>
                     </h2>
                 </div>
 
@@ -124,7 +96,7 @@ export default function ProjectsSection() {
                                     : "bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700"
                             }`}
                         >
-                            {cat === "UI/UX" ? "🎨 UI/UX Design" : cat === "WordPress" ? "⚙️ WordPress" : cat === "Website" ? "🌐 Website" : "✦ All"}
+                            {cat === "UI/UX Design" ? "🎨 UI/UX Design" : "✦ All"}
                         </button>
                     ))}
                 </div>
@@ -134,10 +106,10 @@ export default function ProjectsSection() {
                     {filtered.map((project, i) => (
                         <div
                             key={i}
-                            className="group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                            className="group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
                         >
                             {/* Preview banner */}
-                            <div className={`h-44 bg-gradient-to-br ${project.gradient} flex items-center justify-center relative overflow-hidden`}>
+                            <div className={`h-44 bg-gradient-to-br ${project.gradient} flex items-center justify-center relative overflow-hidden shrink-0`}>
                                 <span className="text-6xl filter drop-shadow-lg z-10">{project.emoji}</span>
                                 <div className="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,transparent,transparent_20px,rgba(255,255,255,0.1)_20px,rgba(255,255,255,0.1)_40px)]" />
                                 {project.featured && (
@@ -151,39 +123,15 @@ export default function ProjectsSection() {
                             </div>
 
                             {/* Content */}
-                            <div className="p-6">
+                            <div className="p-6 flex flex-col grow">
                                 <div className="flex items-start justify-between gap-3 mb-3">
-                                    <h3 className="text-base font-semibold text-zinc-900 dark:text-white leading-snug">{project.title}</h3>
-                                    {/* Links */}
-                                    <div className="flex gap-1.5 shrink-0">
-                                        {project.liveUrl && (
-                                            <a
-                                                href={project.liveUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="p-1.5 rounded-lg text-zinc-400 hover:text-violet-600 hover:bg-violet-50 dark:hover:bg-violet-900/20 transition-colors"
-                                                title="View Live"
-                                            >
-                                                <ExternalLink className="h-4 w-4" />
-                                            </a>
-                                        )}
-                                        {project.githubUrl && (
-                                            <a
-                                                href={project.githubUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-                                                title="View Code"
-                                            >
-                                                <Github className="h-4 w-4" />
-                                            </a>
-                                        )}
-                                    </div>
+                                    <h3 className="text-[17px] font-semibold text-zinc-900 dark:text-white leading-snug">{project.title}</h3>
                                 </div>
-                                <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">{project.description}</p>
-                                <div className="flex flex-wrap gap-1.5">
+                                <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-5 grow">{project.description}</p>
+                                <div className="flex flex-wrap gap-1.5 mt-auto">
                                     {project.tags.map((tag, t) => (
-                                        <span key={t} className="px-2.5 py-1 text-[11px] font-medium rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                                        <span key={t} className="px-2.5 py-1 text-[11px] font-medium rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 flex items-center gap-1.5">
+                                            {tag.toLowerCase().includes('figma') ? <Figma className="w-3 h-3" /> : null}
                                             {tag}
                                         </span>
                                     ))}
@@ -195,7 +143,7 @@ export default function ProjectsSection() {
 
                 {/* Bottom note */}
                 <p className="text-center text-zinc-400 dark:text-zinc-500 text-sm mt-12">
-                    More projects available on request. <a href="#contact" className="text-violet-600 dark:text-violet-400 hover:underline font-medium">Get in touch →</a>
+                    Design samples created for demonstration and portfolio purposes.
                 </p>
             </div>
         </section>
