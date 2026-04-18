@@ -134,7 +134,7 @@ export default function ModernHeroVisual() {
 
       {/* ── BIG background name text ── */}
       <div className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center overflow-hidden select-none">
-        <span className="hero-watermark-text text-[min(14vw,160px)] font-black tracking-tighter text-transparent leading-none whitespace-nowrap">
+        <span className="hero-watermark-text text-[min(14vw,160px)] font-black tracking-tighter text-transparent leading-none whitespace-nowrap opacity-30 sm:opacity-100">
           ALAMIN RAFI
         </span>
       </div>
@@ -202,7 +202,7 @@ export default function ModernHeroVisual() {
           </div>
 
           {/* Social Icons */}
-          <div className="flex items-center gap-3 animate-slide-up anim-delay-750">
+          <div className="hidden sm:flex items-center gap-3 animate-slide-up anim-delay-750">
             <span className="text-zinc-400 dark:text-white/30 text-xs font-medium uppercase tracking-widest mr-1">Follow</span>
             <SocialLink href="https://github.com" label="GitHub" icon={<Github className="w-4 h-4" />} delayClass="anim-delay-800" />
             <SocialLink href="https://linkedin.com" label="LinkedIn" icon={<Linkedin className="w-4 h-4" />} delayClass="anim-delay-900" />
@@ -266,7 +266,7 @@ export default function ModernHeroVisual() {
             icon={<Clock className="w-4 h-4 text-cyan-400" />}
             label="Available Now"
             sublabel="Open to Work"
-            className="top-[10%] sm:top-[30%] -right-8 sm:right-2 animate-float scale-90 sm:scale-100"
+            className="top-[10%] sm:top-[30%] right-2 sm:right-2 animate-float scale-90 sm:scale-100"
             delayClass="anim-delay-1300"
           />
         </div>
@@ -276,7 +276,7 @@ export default function ModernHeroVisual() {
       <div className="hero-section-fade pointer-events-none absolute bottom-0 left-0 right-0 h-32 z-10" />
 
       {/* ── Scroll indicator ── */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2
+      <div className="hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-2
           animate-slide-up opacity-0 anim-delay-1500">
         <span className="text-zinc-400 dark:text-white/30 text-[10px] uppercase tracking-[0.2em] font-medium">Scroll</span>
         <div className="w-5 h-8 rounded-full border border-zinc-300 dark:border-white/15 flex items-start justify-center pt-1.5">
