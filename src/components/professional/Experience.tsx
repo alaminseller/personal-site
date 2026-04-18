@@ -2,8 +2,8 @@ const experiences = [
     {
         company: "RangTVBD.com",
         title: "Content & SEO Manager",
-        period: "January 2024 – Present",
-        type: "Full-time",
+        period: "Jul 2025 – Dec 2025",
+        type: "Part-time",
         description: "Leading web content management and SEO strategy for one of Bangladesh's growing digital media platforms.",
         responsibilities: [
             "Lead SEO strategy and WordPress content optimization, improving organic search rankings and website traffic by 150%+",
@@ -68,6 +68,7 @@ const experiences = [
 
 const typeColor: Record<string, string> = {
     "Full-time": "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400",
+    "Part-time": "bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400",
     "Contract": "bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400",
     "Freelance": "bg-violet-50 text-violet-700 dark:bg-violet-900/20 dark:text-violet-400",
 };
