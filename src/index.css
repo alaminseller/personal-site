@@ -143,3 +143,98 @@
     overflow-wrap: break-word;
   }
 }
+
+/* ─── Hero Section CSS ──────────────────────────────────────────────── */
+
+/* Animation stagger delays (replaces animationDelay inline styles) */
+.anim-delay-100 { animation-delay: 0.1s; animation-fill-mode: both; }
+.anim-delay-200 { animation-delay: 0.2s; animation-fill-mode: both; }
+.anim-delay-300 { animation-delay: 0.3s; animation-fill-mode: both; }
+.anim-delay-400 { animation-delay: 0.4s; animation-fill-mode: both; }
+.anim-delay-450 { animation-delay: 0.45s; animation-fill-mode: both; }
+.anim-delay-600 { animation-delay: 0.6s; animation-fill-mode: both; }
+.anim-delay-750 { animation-delay: 0.75s; animation-fill-mode: both; }
+.anim-delay-800 { animation-delay: 0.8s; animation-fill-mode: both; }
+.anim-delay-900 { animation-delay: 0.9s; animation-fill-mode: both; }
+.anim-delay-1000 { animation-delay: 1.0s; animation-fill-mode: both; }
+.anim-delay-1100 { animation-delay: 1.1s; animation-fill-mode: both; }
+.anim-delay-1300 { animation-delay: 1.3s; animation-fill-mode: both; }
+.anim-delay-1500 { animation-delay: 1.5s; animation-fill-mode: both; }
+
+/* Purple blob delayed */
+.blob-delay-cyan { animation-delay: 3.5s; }
+.blob-delay-indigo { animation-delay: 1.8s; }
+
+/* Grid texture background */
+.hero-grid-texture {
+  background-image:
+    linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* Noise / film-grain texture */
+.hero-noise-texture {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* Watermark name text */
+.hero-watermark-text {
+  -webkit-text-stroke: 1px rgba(139, 92, 246, 0.10);
+  text-shadow: none;
+}
+
+/* Shimmer gradient headline span */
+.hero-shimmer-text {
+  background-size: 200% 200%;
+  animation: shimmer 4s linear infinite;
+}
+
+/* Counter-spinning inner ring */
+.ring-counter-spin {
+  animation: spin-slow 25s linear infinite reverse;
+}
+
+/* Radial spotlight behind image */
+.hero-spotlight {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.35) 0%, rgba(6, 182, 212, 0.15) 50%, transparent 75%);
+  filter: blur(30px);
+}
+
+/* Cyan accent glow under image */
+.hero-accent-glow {
+  background: radial-gradient(ellipse, rgba(6, 182, 212, 0.3) 0%, transparent 70%);
+  filter: blur(20px);
+}
+
+/* Glowing gradient border frame around photo */
+.hero-photo-frame {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.6) 0%, rgba(6, 182, 212, 0.4) 50%, rgba(139, 92, 246, 0.2) 100%);
+  box-shadow: 0 0 60px rgba(139, 92, 246, 0.25), 0 0 120px rgba(6, 182, 212, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Image blending on dark background */
+.hero-photo-img {
+  mix-blend-mode: luminosity;
+  filter: brightness(1.05) contrast(1.05);
+}
+
+/* Bottom gradient fade inside photo card */
+.hero-photo-fade {
+  background: linear-gradient(to top, #070711 0%, transparent 100%);
+}
+
+/* Full-section bottom fade to next section */
+.hero-section-fade {
+  background: linear-gradient(to bottom, transparent, #070711);
+}
+
+/* ─── Header / Nav ───────────────────────────────────────────────────── */
+
+/* Violet-to-cyan brand gradient — logo badge & Hire Me CTA */
+.bg-brand-gradient {
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+}
+
+
