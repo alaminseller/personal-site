@@ -14,15 +14,15 @@ function FloatingBadge({ icon, label, sublabel, className = "", delayClass = "" 
   return (
     <div
       className={`absolute z-30 flex items-center gap-2.5 px-4 py-2.5 rounded-2xl
-        bg-white/[0.07] backdrop-blur-xl border border-white/[0.12]
-        shadow-[0_8px_32px_rgba(0,0,0,0.4)] animate-badge-pop ${delayClass} ${className}`}
+        bg-white dark:bg-white/[0.07] backdrop-blur-xl border border-zinc-200 dark:border-white/[0.12]
+        shadow-sm dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] animate-badge-pop ${delayClass} ${className}`}
     >
-      <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500/30 to-cyan-500/30 border border-white/10 flex items-center justify-center shrink-0">
+      <div className="w-9 h-9 rounded-xl bg-violet-50 dark:bg-gradient-to-br dark:from-violet-500/30 dark:to-cyan-500/30 border border-violet-100 dark:border-white/10 flex items-center justify-center shrink-0">
         {icon}
       </div>
       <div>
-        <p className="text-white font-semibold text-[13px] leading-tight">{label}</p>
-        <p className="text-white/50 text-[10px] font-medium leading-tight mt-0.5">{sublabel}</p>
+        <p className="text-zinc-900 dark:text-white font-semibold text-[13px] leading-tight">{label}</p>
+        <p className="text-zinc-500 dark:text-white/50 text-[10px] font-medium leading-tight mt-0.5">{sublabel}</p>
       </div>
     </div>
   );
@@ -44,9 +44,9 @@ function SocialLink({ href, label, icon, delayClass = "" }: SocialLinkProps) {
       rel="noopener noreferrer"
       aria-label={label}
       title={label}
-      className={`group w-10 h-10 rounded-xl bg-white/[0.06] hover:bg-white/[0.14] border border-white/[0.10] hover:border-violet-500/50
-        flex items-center justify-center text-white/50 hover:text-white
-        transition-all duration-300 hover:scale-110 hover:shadow-[0_0_20px_rgba(139,92,246,0.35)]
+      className={`group w-10 h-10 rounded-xl bg-white dark:bg-white/[0.06] hover:bg-zinc-50 dark:hover:bg-white/[0.14] border border-zinc-200 dark:border-white/[0.10] hover:border-violet-300 dark:hover:border-violet-500/50
+        flex items-center justify-center text-zinc-400 dark:text-white/50 hover:text-violet-600 dark:hover:text-white
+        transition-all duration-300 hover:scale-110 shadow-sm dark:shadow-none dark:hover:shadow-[0_0_20px_rgba(139,92,246,0.35)]
         animate-fade-in ${delayClass}`}
     >
       {icon}
@@ -108,13 +108,13 @@ export default function ModernHeroVisual() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#070711]">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-zinc-50 dark:bg-[#070711] transition-colors duration-500">
 
       {/* ── Mouse-tracking glow layer ── */}
-      <div ref={glowRef} className="pointer-events-none absolute inset-0 z-0 transition-all duration-500" />
+      <div ref={glowRef} className="pointer-events-none absolute inset-0 z-0 transition-all duration-500 hidden dark:block" />
 
       {/* ── Background gradient blobs ── */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden hidden dark:block">
         <div className="absolute -top-1/4 -left-1/4 w-[90vw] h-[90vw] rounded-full
           bg-gradient-radial from-violet-700/20 via-violet-900/10 to-transparent
           blur-[120px] animate-blob" />
@@ -130,7 +130,7 @@ export default function ModernHeroVisual() {
       <div className="hero-grid-texture pointer-events-none absolute inset-0 z-0" />
 
       {/* ── Noise texture ── */}
-      <div className="hero-noise-texture pointer-events-none absolute inset-0 z-0 opacity-[0.025]" />
+      <div className="hero-noise-texture pointer-events-none absolute inset-0 z-0 opacity-[0.015] dark:opacity-[0.025]" />
 
       {/* ── BIG background name text ── */}
       <div className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center overflow-hidden select-none">
@@ -147,8 +147,8 @@ export default function ModernHeroVisual() {
 
           {/* Available pill */}
           <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full
-              bg-white/[0.06] border border-white/[0.10] backdrop-blur-sm
-              text-sm font-medium text-white/80 animate-slide-right anim-delay-100">
+              bg-white dark:bg-white/[0.06] border border-zinc-200 dark:border-white/[0.10] backdrop-blur-sm shadow-sm dark:shadow-none
+              text-sm font-medium text-zinc-600 dark:text-white/80 animate-slide-right anim-delay-100">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
@@ -157,20 +157,20 @@ export default function ModernHeroVisual() {
           </div>
 
           {/* Hi label */}
-          <p className="text-violet-400 font-semibold text-lg mb-3 tracking-wide animate-slide-right anim-delay-200">
+          <p className="text-violet-600 dark:text-violet-400 font-semibold text-lg mb-3 tracking-wide animate-slide-right anim-delay-200">
             Hi, I'm Alamin Rafi
           </p>
 
           {/* Main headline */}
-          <h1 className="text-5xl sm:text-6xl lg:text-[clamp(3rem,5.5vw,4.5rem)] font-black text-white leading-[1.05] tracking-tight mb-6 animate-slide-up anim-delay-300">
+          <h1 className="text-5xl sm:text-6xl lg:text-[clamp(3rem,5.5vw,4.5rem)] font-black text-zinc-900 dark:text-white leading-[1.05] tracking-tight mb-6 animate-slide-up anim-delay-300">
             Web Developer{" "}
-            <span className="hero-shimmer-text block bg-gradient-to-r from-violet-400 via-fuchsia-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="hero-shimmer-text block bg-gradient-to-r from-violet-600 to-cyan-500 dark:from-violet-400 dark:via-fuchsia-400 dark:to-cyan-400 bg-clip-text text-transparent">
               &amp; Digital Creator.
             </span>
           </h1>
 
           {/* Description */}
-          <p className="text-white/55 text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-10 animate-slide-up anim-delay-450">
+          <p className="text-zinc-600 dark:text-white/55 text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-10 animate-slide-up anim-delay-450">
             I build modern, fast, and affordable websites that help businesses
             grow online — from portfolio sites to full-stack web apps.
           </p>
@@ -192,9 +192,9 @@ export default function ModernHeroVisual() {
             {/* Secondary */}
             <a
               href="#projects"
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-semibold text-[15px] text-white/80
-                bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.12] hover:border-white/[0.25]
-                transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-semibold text-[15px] text-zinc-700 dark:text-white/80
+                bg-white dark:bg-white/[0.06] hover:bg-zinc-50 dark:hover:bg-white/[0.12] border border-zinc-200 dark:border-white/[0.12] hover:border-zinc-300 dark:hover:border-white/[0.25]
+                transition-all duration-300 hover:scale-105 shadow-sm dark:shadow-none backdrop-blur-sm"
             >
               <Globe className="w-4 h-4" />
               View Portfolio
@@ -203,7 +203,7 @@ export default function ModernHeroVisual() {
 
           {/* Social Icons */}
           <div className="flex items-center gap-3 animate-slide-up anim-delay-750">
-            <span className="text-white/30 text-xs font-medium uppercase tracking-widest mr-1">Follow</span>
+            <span className="text-zinc-400 dark:text-white/30 text-xs font-medium uppercase tracking-widest mr-1">Follow</span>
             <SocialLink href="https://github.com" label="GitHub" icon={<Github className="w-4 h-4" />} delayClass="anim-delay-800" />
             <SocialLink href="https://linkedin.com" label="LinkedIn" icon={<Linkedin className="w-4 h-4" />} delayClass="anim-delay-900" />
             <SocialLink href="https://twitter.com" label="Twitter" icon={<Twitter className="w-4 h-4" />} delayClass="anim-delay-1000" />
@@ -232,7 +232,7 @@ export default function ModernHeroVisual() {
           <div className="relative z-20 w-[260px] sm:w-[310px] lg:w-[350px] xl:w-[380px] animate-scale-in anim-delay-400">
             {/* Glowing border frame */}
             <div className="hero-photo-frame relative rounded-[32px] p-[2px]">
-              <div className="rounded-[30px] overflow-hidden bg-[#0e0b1e]">
+              <div className="rounded-[30px] overflow-hidden bg-white dark:bg-[#0e0b1e]">
                 <img
                   src="/Alamin.png"
                   alt="Alamin Rafi — Web Developer & Digital Creator"
@@ -278,9 +278,9 @@ export default function ModernHeroVisual() {
       {/* ── Scroll indicator ── */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2
           animate-slide-up opacity-0 anim-delay-1500">
-        <span className="text-white/30 text-[10px] uppercase tracking-[0.2em] font-medium">Scroll</span>
-        <div className="w-5 h-8 rounded-full border border-white/15 flex items-start justify-center pt-1.5">
-          <div className="w-1 h-2 rounded-full bg-violet-400 animate-bounce" />
+        <span className="text-zinc-400 dark:text-white/30 text-[10px] uppercase tracking-[0.2em] font-medium">Scroll</span>
+        <div className="w-5 h-8 rounded-full border border-zinc-300 dark:border-white/15 flex items-start justify-center pt-1.5">
+          <div className="w-1 h-2 rounded-full bg-violet-500 dark:bg-violet-400 animate-bounce" />
         </div>
       </div>
     </section>

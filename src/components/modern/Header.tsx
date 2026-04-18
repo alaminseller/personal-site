@@ -49,7 +49,7 @@ export default function ModernHeader() {
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
                 isScrolled
-                    ? "py-3 bg-[#070711]/80 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_1px_40px_rgba(0,0,0,0.6)]"
+                    ? "py-3 bg-white/90 dark:bg-[#070711]/80 backdrop-blur-xl border-b border-zinc-200 dark:border-white/[0.06] shadow-sm dark:shadow-[0_1px_40px_rgba(0,0,0,0.6)]"
                     : "py-5 bg-transparent"
             )}
         >
@@ -58,12 +58,12 @@ export default function ModernHeader() {
                 <a
                     href="#"
                     onClick={(e) => scrollToSection(e, "body")}
-                    className="text-xl font-black tracking-tighter text-white flex items-center gap-2.5"
+                    className="text-xl font-black tracking-tighter text-zinc-900 dark:text-white flex items-center gap-2.5"
                 >
                     <div className="bg-brand-gradient h-8 w-8 rounded-lg flex items-center justify-center text-white font-black text-sm shadow-md">
                         AR
                     </div>
-                    <span className="hidden sm:block bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">Alamin Rafi</span>
+                    <span className="hidden sm:block bg-gradient-to-r from-violet-600 to-cyan-500 dark:from-violet-400 dark:to-cyan-400 bg-clip-text text-transparent">Alamin Rafi</span>
                 </a>
 
                 {/* Desktop Navigation */}
@@ -75,10 +75,10 @@ export default function ModernHeader() {
                                     href={link.href}
                                     onClick={(e) => scrollToSection(e, link.href)}
                                     className={cn(
-                                        "px-4 py-2 text-sm font-medium transition-all rounded-full hover:bg-white/[0.08]",
+                                        "px-4 py-2 text-sm font-medium transition-all rounded-full hover:bg-zinc-100 dark:hover:bg-white/[0.08]",
                                         activeSection === link.href.substring(1)
-                                            ? "text-violet-400 bg-violet-500/10"
-                                            : "text-white/60 hover:text-white"
+                                            ? "text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-500/10"
+                                            : "text-zinc-500 dark:text-white/60 hover:text-zinc-900 dark:hover:text-white"
                                     )}
                                 >
                                     {link.label}
@@ -116,7 +116,7 @@ export default function ModernHeader() {
 
             {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="lg:hidden absolute top-full left-0 right-0 bg-[#0d0b1f]/95 backdrop-blur-xl border-b border-white/[0.08] shadow-2xl">
+                <div className="lg:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-[#0d0b1f]/95 backdrop-blur-xl border-b border-zinc-200 dark:border-white/[0.08] shadow-2xl">
                     <nav className="flex flex-col p-6 space-y-1">
                         {navLinks.map((link) => (
                             <a
@@ -126,8 +126,8 @@ export default function ModernHeader() {
                                 className={cn(
                                     "px-4 py-3 rounded-xl text-base font-medium transition-colors",
                                     activeSection === link.href.substring(1)
-                                        ? "text-violet-400 bg-violet-500/10"
-                                        : "text-white/60 hover:text-white hover:bg-white/[0.06]"
+                                        ? "text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-500/10"
+                                        : "text-zinc-500 dark:text-white/60 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-white/[0.06]"
                                 )}
                             >
                                 {link.label}

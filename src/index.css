@@ -166,22 +166,32 @@
 .blob-delay-indigo { animation-delay: 1.8s; }
 
 /* Grid texture background */
-.hero-grid-texture {
+.dark .hero-grid-texture {
   background-image:
     linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
   background-size: 80px 80px;
 }
+.hero-grid-texture {
+  background-image:
+    linear-gradient(rgba(139, 92, 246, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.02) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
 
 /* Noise / film-grain texture */
-.hero-noise-texture {
+.dark .hero-noise-texture {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 256px 256px;
 }
 
 /* Watermark name text */
-.hero-watermark-text {
+.dark .hero-watermark-text {
   -webkit-text-stroke: 1px rgba(139, 92, 246, 0.10);
+  text-shadow: none;
+}
+.hero-watermark-text {
+  -webkit-text-stroke: 1px rgba(139, 92, 246, 0.05);
   text-shadow: none;
 }
 
@@ -196,38 +206,48 @@
   animation: spin-slow 25s linear infinite reverse;
 }
 
-/* Radial spotlight behind image */
-.hero-spotlight {
+/* Radial spotlight behind image (Dark Mode Only) */
+.dark .hero-spotlight {
   background: radial-gradient(circle, rgba(139, 92, 246, 0.35) 0%, rgba(6, 182, 212, 0.15) 50%, transparent 75%);
   filter: blur(30px);
 }
 
-/* Cyan accent glow under image */
-.hero-accent-glow {
+/* Cyan accent glow under image (Dark Mode Only) */
+.dark .hero-accent-glow {
   background: radial-gradient(ellipse, rgba(6, 182, 212, 0.3) 0%, transparent 70%);
   filter: blur(20px);
 }
 
-/* Glowing gradient border frame around photo */
-.hero-photo-frame {
+/* Photo Frame */
+.dark .hero-photo-frame {
   background: linear-gradient(135deg, rgba(139, 92, 246, 0.6) 0%, rgba(6, 182, 212, 0.4) 50%, rgba(139, 92, 246, 0.2) 100%);
   box-shadow: 0 0 60px rgba(139, 92, 246, 0.25), 0 0 120px rgba(6, 182, 212, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
+.hero-photo-frame {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(6, 182, 212, 0.1) 100%);
+  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+}
 
 /* Image blending on dark background */
-.hero-photo-img {
+.dark .hero-photo-img {
   mix-blend-mode: luminosity;
   filter: brightness(1.05) contrast(1.05);
 }
 
 /* Bottom gradient fade inside photo card */
-.hero-photo-fade {
+.dark .hero-photo-fade {
   background: linear-gradient(to top, #070711 0%, transparent 100%);
+}
+.hero-photo-fade {
+  background: linear-gradient(to top, #ffffff 0%, transparent 100%);
 }
 
 /* Full-section bottom fade to next section */
-.hero-section-fade {
+.dark .hero-section-fade {
   background: linear-gradient(to bottom, transparent, #070711);
+}
+.hero-section-fade {
+  background: linear-gradient(to bottom, transparent, #fafafa);
 }
 
 /* ─── Header / Nav ───────────────────────────────────────────────────── */
