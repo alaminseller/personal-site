@@ -162,42 +162,42 @@ export default function ModernHeroVisual() {
           </p>
 
           {/* Main headline */}
-          <h1 className="text-5xl sm:text-6xl lg:text-[clamp(3rem,5.5vw,4.5rem)] font-black text-zinc-900 dark:text-white leading-[1.05] tracking-tight mb-6 animate-slide-up anim-delay-300">
-            Web Developer{" "}
-            <span className="hero-shimmer-text block bg-gradient-to-r from-violet-600 to-cyan-500 dark:from-violet-400 dark:via-fuchsia-400 dark:to-cyan-400 bg-clip-text text-transparent">
-              &amp; Digital Creator.
+          <h1 className="text-5xl sm:text-6xl lg:text-[clamp(3rem,5.5vw,4.5rem)] font-black text-zinc-900 dark:text-white leading-[1.05] tracking-tight mb-4 sm:mb-6 animate-slide-up anim-delay-300">
+            Web Developer
+            <span className="hidden sm:inline hero-shimmer-text bg-gradient-to-r from-violet-600 to-cyan-500 dark:from-violet-400 dark:via-fuchsia-400 dark:to-cyan-400 bg-clip-text text-transparent">
+              {" "}&amp; Digital Creator.
             </span>
           </h1>
 
           {/* Description */}
-          <p className="text-zinc-600 dark:text-white/55 text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-10 animate-slide-up anim-delay-450">
-            I build modern, fast, and affordable websites that help businesses
-            grow online — from portfolio sites to full-stack web apps.
+          <p className="text-zinc-600 dark:text-white/55 text-[16px] sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-8 sm:mb-10 animate-slide-up anim-delay-450 font-medium sm:font-normal">
+            Helping Businesses Grow Online.<br className="sm:hidden" /> <span className="hidden sm:inline">I build modern, fast, and affordable websites that help businesses
+            grow online — from portfolio sites to full-stack web apps.</span>
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-12 animate-slide-up anim-delay-600">
+          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-4 mb-4 sm:mb-12 animate-slide-up anim-delay-600 w-full sm:w-auto">
             {/* Primary */}
             <a
               href="#contact"
-              className="group relative inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-semibold text-[15px] text-white
+              className="group relative inline-flex items-center justify-center gap-2.5 px-8 py-4 sm:py-3.5 w-full sm:w-auto rounded-full font-semibold text-[16px] sm:text-[15px] text-white
                 overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(139,92,246,0.5)]"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-violet-600 to-cyan-500 rounded-full" />
               <span className="absolute inset-0 bg-gradient-to-r from-violet-500 to-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <span className="relative">Let's Talk</span>
+              <span className="relative">Start Project</span>
               <ArrowRight className="relative w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
 
             {/* Secondary */}
             <a
               href="#projects"
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-semibold text-[15px] text-zinc-700 dark:text-white/80
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 sm:py-3.5 w-full sm:w-auto rounded-full font-semibold text-[16px] sm:text-[15px] text-zinc-700 dark:text-white/80
                 bg-white dark:bg-white/[0.06] hover:bg-zinc-50 dark:hover:bg-white/[0.12] border border-zinc-200 dark:border-white/[0.12] hover:border-zinc-300 dark:hover:border-white/[0.25]
                 transition-all duration-300 hover:scale-105 shadow-sm dark:shadow-none backdrop-blur-sm"
             >
               <Globe className="w-4 h-4" />
-              View Portfolio
+              View Work
             </a>
           </div>
 
@@ -211,25 +211,25 @@ export default function ModernHeroVisual() {
         </div>
 
         {/* ─── RIGHT: Image + Badges ──────────────────────────────── */}
-        <div className="relative flex items-center justify-center order-1 lg:order-2 h-[480px] sm:h-[560px] lg:h-[640px]">
+        <div className="relative flex items-center justify-center order-1 lg:order-2 h-[340px] sm:h-[560px] lg:h-[640px] mt-8 lg:mt-0">
 
           {/* Rotating decorative ring (outer) */}
-          <div className="absolute inset-0 m-auto w-[360px] h-[360px] sm:w-[420px] sm:h-[420px] rounded-full
-              border border-dashed border-violet-500/10 animate-spin-slow pointer-events-none" />
+          <div className="absolute inset-0 m-auto w-[280px] h-[280px] sm:w-[420px] sm:h-[420px] rounded-full
+              border border-dashed border-violet-500/10 animate-spin-slow pointer-events-none hidden sm:block" />
 
           {/* Counter-rotating ring (inner) */}
-          <div className="ring-counter-spin absolute inset-0 m-auto w-[300px] h-[300px] sm:w-[360px] sm:h-[360px] rounded-full
-              border border-dashed border-cyan-500/10 pointer-events-none" />
+          <div className="ring-counter-spin absolute inset-0 m-auto w-[240px] h-[240px] sm:w-[360px] sm:h-[360px] rounded-full
+              border border-dashed border-cyan-500/10 pointer-events-none hidden sm:block" />
 
           {/* Radial spotlight glow BEHIND image */}
-          <div className="hero-spotlight absolute inset-0 m-auto w-[320px] h-[320px] sm:w-[380px] sm:h-[380px] rounded-full
-              animate-glow-pulse pointer-events-none" />
+          <div className="hero-spotlight absolute inset-0 m-auto w-[260px] h-[260px] sm:w-[380px] sm:h-[380px] rounded-full
+              animate-glow-pulse pointer-events-none opacity-50 sm:opacity-100" />
 
           {/* Secondary accent glow */}
-          <div className="hero-accent-glow absolute bottom-[15%] left-1/2 -translate-x-1/2 w-[220px] h-[60px] rounded-full pointer-events-none" />
+          <div className="hero-accent-glow absolute bottom-[15%] left-1/2 -translate-x-1/2 w-[160px] sm:w-[220px] h-[40px] sm:h-[60px] rounded-full pointer-events-none" />
 
           {/* Photo container */}
-          <div className="relative z-20 w-[260px] sm:w-[310px] lg:w-[350px] xl:w-[380px] animate-scale-in anim-delay-400">
+          <div className="relative z-20 w-[220px] sm:w-[310px] lg:w-[350px] xl:w-[380px] animate-scale-in anim-delay-400">
             {/* Glowing border frame */}
             <div className="hero-photo-frame relative rounded-[32px] p-[2px]">
               <div className="rounded-[30px] overflow-hidden bg-white dark:bg-[#0e0b1e]">
@@ -250,7 +250,7 @@ export default function ModernHeroVisual() {
             icon={<Star className="w-4 h-4 text-amber-400" />}
             label="8+ Years Experience"
             sublabel="Web & Digital"
-            className="top-[8%] -left-2 sm:left-4 animate-float"
+            className="top-[8%] -left-2 sm:left-4 animate-float hidden sm:flex"
             delayClass="anim-delay-900"
           />
 
@@ -258,7 +258,7 @@ export default function ModernHeroVisual() {
             icon={<Briefcase className="w-4 h-4 text-violet-400" />}
             label={`${projectCount}+ Projects`}
             sublabel="Live & Running"
-            className="bottom-[20%] -left-4 sm:left-0 animate-float-delayed"
+            className="bottom-[20%] -left-4 sm:left-0 animate-float-delayed hidden sm:flex"
             delayClass="anim-delay-1100"
           />
 
@@ -266,7 +266,7 @@ export default function ModernHeroVisual() {
             icon={<Clock className="w-4 h-4 text-cyan-400" />}
             label="Available Now"
             sublabel="Open to Work"
-            className="top-[30%] -right-2 sm:right-2 animate-float"
+            className="top-[10%] sm:top-[30%] -right-8 sm:right-2 animate-float scale-90 sm:scale-100"
             delayClass="anim-delay-1300"
           />
         </div>
@@ -282,6 +282,17 @@ export default function ModernHeroVisual() {
         <div className="w-5 h-8 rounded-full border border-zinc-300 dark:border-white/15 flex items-start justify-center pt-1.5">
           <div className="w-1 h-2 rounded-full bg-violet-500 dark:bg-violet-400 animate-bounce" />
         </div>
+      </div>
+      {/* ── Mobile Sticky Bottom CTA ── */}
+      <div className="fixed bottom-0 left-0 right-0 p-4 pb-6 border-t border-zinc-200 dark:border-white/10 bg-white/95 dark:bg-[#070711]/95 backdrop-blur-xl z-[60] sm:hidden animate-slide-up anim-delay-1000 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] dark:shadow-[0_-10px_40px_rgba(0,0,0,0.4)]">
+        <a
+          href="#contact"
+          className="relative flex items-center justify-center gap-2.5 px-8 py-4 w-full rounded-2xl font-semibold text-[16px] text-white overflow-hidden shadow-[0_4px_20px_rgba(139,92,246,0.4)] transition-transform active:scale-95"
+        >
+          <span className="absolute inset-0 bg-gradient-to-r from-violet-600 to-cyan-500" />
+          <span className="relative">Start Project</span>
+          <ArrowRight className="relative w-4 h-4" />
+        </a>
       </div>
     </section>
   );
