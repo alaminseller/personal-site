@@ -7,10 +7,9 @@ const skillGroups = [
         skills: [
             "Responsive Web Design",
             "Modern UI Implementation",
+            "Mobile-First Design",
+            "Cross-Device Compatibility",
             "Website Performance Optimization",
-            "HTML5 & CSS3",
-            "JavaScript (ES6+)",
-            "Mobile-First Development",
         ],
     },
     {
@@ -35,7 +34,7 @@ const skillGroups = [
             "Elementor / Page Builders",
             "Theme Customization",
             "Plugin Integration",
-            "WooCommerce Stores",
+            "WooCommerce Setup",
             "Website Management",
         ],
     },
@@ -47,7 +46,6 @@ const skillGroups = [
             "User Interface Design",
             "Wireframing & Prototyping",
             "Design Systems",
-            "Figma",
             "Visual Layout & Typography",
             "Brand-Consistent Design",
         ],
@@ -62,7 +60,6 @@ const skillGroups = [
             "Vercel / Netlify Deployment",
             "cPanel & Web Hosting",
             "Browser DevTools",
-            "Figma & Canva",
         ],
     },
     {
@@ -122,13 +119,13 @@ export default function ProfessionalSkills() {
                 </p>
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-16">
                     <h2 className="text-4xl font-bold text-zinc-900 dark:text-white max-w-lg leading-snug">
-                        Tools &amp; skills I bring{" "}
+                        Tools &amp; expertise we bring{" "}
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">
                             to every project
                         </span>
                     </h2>
                     <p className="text-zinc-500 dark:text-zinc-400 text-sm max-w-xs leading-relaxed sm:text-right">
-                        A focused set of skills refined through real client projects and hands-on delivery.
+                        We are a small, dedicated team focused on delivering modern, high-performing websites through practical experience and real client work.
                     </p>
                 </div>
 
@@ -172,9 +169,9 @@ export default function ProfessionalSkills() {
 
                 {/* Bottom note */}
                 <p className="text-center text-zinc-400 dark:text-zinc-500 text-sm mt-12">
-                    Always learning and expanding.{" "}
+                    Always improving and refining our process.{" "}
                     <a href="#contact" className="text-violet-600 dark:text-violet-400 hover:underline font-medium">
-                        Let's discuss your project →
+                        Let’s build something great together. →
                     </a>
                 </p>
             </div>
