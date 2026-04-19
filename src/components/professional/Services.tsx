@@ -56,34 +56,37 @@ const tagColorMap: Record<string, string> = {
 
 export default function ServicesSection() {
     return (
-        <section id="services" className="bg-white dark:bg-zinc-950 py-24 border-t border-zinc-100 dark:border-zinc-800">
+        <section id="services" className="bg-white dark:bg-zinc-950 py-16 sm:py-24 border-t border-zinc-100 dark:border-zinc-800">
             <div className="max-w-6xl mx-auto px-6">
                 <p className="text-sm font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3">Services</p>
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-                    <h2 className="text-4xl font-bold text-zinc-900 dark:text-white max-w-lg leading-snug">
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-10 sm:mb-16">
+                    <h2 className="text-2xl sm:text-4xl font-bold text-zinc-900 dark:text-white max-w-lg leading-snug">
                         What I can build <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">for you</span>
                     </h2>
-                    <p className="text-zinc-500 dark:text-zinc-400 max-w-sm text-[15px] leading-relaxed">
+                    <p className="hidden sm:block text-zinc-500 dark:text-zinc-400 max-w-sm text-[15px] leading-relaxed">
                         Affordable, scalable, and easy-to-manage digital solutions for businesses of all sizes.
                     </p>
                 </div>
 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                     {services.map((service, i) => (
                         <div
                             key={i}
-                            className="group bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-7 border border-zinc-100 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-600 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col"
+                            className={`group bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-5 sm:p-7 border border-zinc-100 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-600 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col${
+                                /* Hide the 5th card (Digital Marketing) on mobile */
+                                i === 4 ? " hidden sm:flex" : ""
+                            }`}
                         >
                             {/* Icon */}
-                            <div className={`h-14 w-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 ${colorMap[service.color]}`}>
+                            <div className={`h-12 w-12 sm:h-14 sm:w-14 rounded-2xl flex items-center justify-center mb-4 sm:mb-5 transition-all duration-300 ${colorMap[service.color]}`}>
                                 {service.icon}
                             </div>
 
-                            <h3 className="text-lg font-semibold text-zinc-900 dark:text-white mb-3">{service.title}</h3>
-                            <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed mb-5 flex-1">{service.description}</p>
+                            <h3 className="text-base sm:text-lg font-semibold text-zinc-900 dark:text-white mb-2 sm:mb-3">{service.title}</h3>
+                            <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed mb-4 sm:mb-5 flex-1">{service.description}</p>
 
-                            {/* Tags */}
-                            <div className="flex flex-wrap gap-2 mt-auto">
+                            {/* Tags — hidden on mobile to keep cards compact */}
+                            <div className="hidden sm:flex flex-wrap gap-2 mt-auto">
                                 {service.tags.map((tag, t) => (
                                     <span key={t} className={`px-2.5 py-1 text-xs font-medium rounded-lg ${tagColorMap[service.color]}`}>
                                         {tag}
@@ -93,8 +96,8 @@ export default function ServicesSection() {
                         </div>
                     ))}
 
-                    {/* CTA Card */}
-                    <div className="bg-gradient-to-br from-violet-600 to-cyan-500 rounded-2xl p-7 flex flex-col justify-between text-white">
+                    {/* CTA Card — desktop only */}
+                    <div className="hidden sm:flex bg-gradient-to-br from-violet-600 to-cyan-500 rounded-2xl p-7 flex-col justify-between text-white">
                         <div>
                             <p className="text-lg font-semibold mb-3">Have something in mind?</p>
                             <p className="text-violet-100 text-sm leading-relaxed">

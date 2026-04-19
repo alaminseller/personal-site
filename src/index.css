@@ -255,6 +255,33 @@
 /* Violet-to-cyan brand gradient — logo badge & Hire Me CTA */
 .bg-brand-gradient {
   background: linear-gradient(135deg, #7c3aed, #06b6d4);
+}/* ─── Mobile Performance & UX ────────────────────────────────────────── */
+
+@media (max-width: 639px) {
+  /* Speed up / simplify all animations on mobile */
+  *, *::before, *::after {
+    animation-duration: 0.2s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.15s !important;
+  }
+
+  /* Disable float animations (no infinite loops on mobile) */
+  .animate-float,
+  .animate-float-delayed,
+  .animate-blob,
+  .animate-spin-slow,
+  .ring-counter-spin {
+    animation: none !important;
+  }
+
+  /* Prevent any horizontal overflow */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Ensure tap targets are comfortably sized */
+  a, button {
+    min-height: 44px;
+  }
 }
-
-

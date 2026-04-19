@@ -145,8 +145,8 @@ export default function ModernHeroVisual() {
         {/* ─── LEFT: Text content ─────────────────────────────────── */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
 
-          {/* Available pill */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full
+          {/* Available pill — hidden on mobile to reduce clutter */}
+          <div className="hidden sm:inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full
               bg-white dark:bg-white/[0.06] border border-zinc-200 dark:border-white/[0.10] backdrop-blur-sm shadow-sm dark:shadow-none
               text-sm font-medium text-zinc-600 dark:text-white/80 animate-slide-right anim-delay-100">
             <span className="relative flex h-2 w-2">
@@ -156,23 +156,34 @@ export default function ModernHeroVisual() {
             Available for new projects
           </div>
 
-          {/* Hi label */}
-          <p className="text-violet-600 dark:text-violet-400 font-semibold text-lg mb-3 tracking-wide animate-slide-right anim-delay-200">
+          {/* Mobile-only: compact available badge */}
+          <div className="sm:hidden inline-flex items-center gap-2 px-3 py-1.5 mb-5 rounded-full bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+            </span>
+            Available for projects
+          </div>
+
+          {/* Hi label — desktop only */}
+          <p className="hidden sm:block text-violet-600 dark:text-violet-400 font-semibold text-lg mb-3 tracking-wide animate-slide-right anim-delay-200">
             Hi, I'm Alamin Rafi
           </p>
 
           {/* Main headline */}
-          <h1 className="text-5xl sm:text-6xl lg:text-[clamp(3rem,5.5vw,4.5rem)] font-black text-zinc-900 dark:text-white leading-[1.05] tracking-tight mb-4 sm:mb-6 animate-slide-up anim-delay-300">
-            Web Developer
-            <span className="hidden sm:inline hero-shimmer-text bg-gradient-to-r from-violet-600 to-cyan-500 dark:from-violet-400 dark:via-fuchsia-400 dark:to-cyan-400 bg-clip-text text-transparent">
-              {" "}&amp; Digital Creator.
+          <h1 className="text-3xl sm:text-6xl lg:text-[clamp(3rem,5.5vw,4.5rem)] font-black text-zinc-900 dark:text-white leading-[1.1] tracking-tight mb-3 sm:mb-6 animate-slide-up anim-delay-300">
+            <span className="sm:hidden">Alamin Rafi<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">Web Developer</span></span>
+            <span className="hidden sm:inline">Web Developer
+              <span className="hero-shimmer-text bg-gradient-to-r from-violet-600 to-cyan-500 dark:from-violet-400 dark:via-fuchsia-400 dark:to-cyan-400 bg-clip-text text-transparent">
+                {" "}&amp; Digital Creator.
+              </span>
             </span>
           </h1>
 
           {/* Description */}
-          <p className="text-zinc-600 dark:text-white/55 text-base sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-8 sm:mb-10 animate-slide-up anim-delay-450 font-medium sm:font-normal">
-            Helping businesses grow online.
-            <span className="hidden sm:inline"> I build modern, fast, and affordable websites that help businesses grow online — from portfolio sites to full-stack web apps.</span>
+          <p className="text-zinc-600 dark:text-white/55 text-sm sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-6 sm:mb-10 animate-slide-up anim-delay-450 sm:font-normal">
+            I build modern websites that help businesses grow online.
+            <span className="hidden sm:inline"> From portfolio sites to full-stack web apps — fast, affordable, and tailored to you.</span>
           </p>
 
           {/* CTA Buttons */}
