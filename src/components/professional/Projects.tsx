@@ -65,6 +65,14 @@ const projects: Project[] = [
         tags: ["Personal Portfolio", "Web Design", "Client Work"],
         image: "/projects/careerpro_portfolio.png",
     },
+    {
+        title: "MediCare Pro — Doctor Website",
+        description: "A professional medical portfolio website for a specialist physician with booking CTAs, experience timeline, and services section.",
+        category: "UI/UX Design",
+        tags: ["Medical Website", "Healthcare", "Client Work"],
+        image: "/projects/medico_doctor_website.png",
+        featured: true,
+    },
 ];
 
 const categories: Category[] = ["All", "UI/UX Design"];
