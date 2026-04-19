@@ -207,23 +207,142 @@ export default function PricingSection() {
 
             <div className="relative max-w-6xl mx-auto px-6">
                 {/* ─── Section Header ─── */}
-                <div className="text-center mb-16">
+                <div className="text-center mb-8 sm:mb-16">
                     <p className="text-sm font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3">
                         Pricing
                     </p>
-                    <h2 className="text-4xl sm:text-5xl font-black text-zinc-900 dark:text-white tracking-tight mb-4">
+                    <h2 className="text-2xl sm:text-5xl font-black text-zinc-900 dark:text-white tracking-tight mb-3 sm:mb-4">
                         Simple, Transparent{" "}
                         <span className="bg-gradient-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent">
                             Pricing
                         </span>
                     </h2>
-                    <p className="text-zinc-500 dark:text-zinc-400 text-lg max-w-xl mx-auto leading-relaxed">
+                    <p className="text-zinc-500 dark:text-zinc-400 text-sm sm:text-lg max-w-xl mx-auto leading-relaxed">
                         Choose a package, pick your extras. Custom pricing available for unique requirements.
                     </p>
                 </div>
 
-                {/* ─── Pricing Cards ─── */}
-                <div className="grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch mb-16">
+                {/* ════════════════════════════════════════
+                    MOBILE: Horizontal swipe carousel
+                ════════════════════════════════════════ */}
+                <div className="md:hidden relative mb-10">
+                    {/* Swipe hint */}
+                    <div className="flex items-center justify-between mb-3">
+                        <span className="text-xs text-zinc-400 dark:text-zinc-500 font-medium">
+                            {plans.length} packages
+                        </span>
+                        <span className="flex items-center gap-1 text-xs font-semibold text-violet-500 dark:text-violet-400">
+                            Swipe to compare
+                            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+
+                    {/* Scroll track */}
+                    <div
+                        className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory"
+                        style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
+                    >
+                        {plans.map((plan) => {
+                            const isSelected = selectedPlan === plan.id;
+                            return (
+                                <button
+                                    key={`mob-${plan.id}`}
+                                    onClick={() => setSelectedPlan(plan.id)}
+                                    className={`
+                                        shrink-0 snap-center relative flex flex-col rounded-3xl overflow-hidden text-left
+                                        transition-all duration-300 cursor-pointer
+                                        ${isSelected
+                                            ? plan.highlighted
+                                                ? "ring-2 ring-violet-500 dark:ring-violet-400 shadow-2xl shadow-violet-500/20"
+                                                : "ring-2 ring-violet-500/50 dark:ring-violet-400/50 shadow-xl"
+                                            : plan.highlighted
+                                                ? "ring-2 ring-violet-500 dark:ring-violet-400 shadow-xl shadow-violet-500/10 opacity-90"
+                                                : "ring-1 ring-zinc-200 dark:ring-white/[0.08] opacity-85"
+                                        }
+                                        bg-white dark:bg-zinc-900/80 backdrop-blur-sm
+                                    `}
+                                    style={{ width: "87vw" }}
+                                >
+                                    {/* Selected checkmark */}
+                                    {isSelected && (
+                                        <span className="absolute top-4 right-4 w-6 h-6 rounded-full bg-violet-500 flex items-center justify-center z-20">
+                                            <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
+                                        </span>
+                                    )}
+
+                                    {/* Popular badge */}
+                                    {plan.badge && (
+                                        <div className="absolute top-0 inset-x-0 flex justify-center">
+                                            <span className="bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white text-[11px] font-bold uppercase tracking-wider px-5 py-1 rounded-b-xl shadow-lg">
+                                                {plan.badge}
+                                            </span>
+                                        </div>
+                                    )}
+
+                                    {/* Gradient top bar */}
+                                    <div className={`h-1 w-full bg-gradient-to-r ${plan.accentFrom} ${plan.accentTo}`} />
+
+                                    <div className="flex flex-col grow p-6 pt-8">
+                                        {/* Icon + Name */}
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${plan.iconBg}`}>
+                                                {plan.icon}
+                                            </div>
+                                            <h3 className="text-xl font-bold text-zinc-900 dark:text-white">{plan.name}</h3>
+                                        </div>
+
+                                        {/* Price */}
+                                        <div className="mb-1">
+                                            <p className="text-[11px] font-medium uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-0.5">
+                                                {plan.priceNote}
+                                            </p>
+                                            <p className={`text-4xl font-black bg-gradient-to-r ${plan.accentFrom} ${plan.accentTo} bg-clip-text text-transparent`}>
+                                                {plan.priceLabel}
+                                            </p>
+                                        </div>
+
+                                        {/* Delivery */}
+                                        <div className="flex items-center gap-1.5 mt-3 mb-5">
+                                            <Clock className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+                                            <span className="text-sm text-zinc-500 dark:text-zinc-400 font-medium">
+                                                Delivery: {plan.delivery}
+                                            </span>
+                                        </div>
+
+                                        <div className="border-t border-zinc-100 dark:border-white/[0.06] mb-5" />
+
+                                        {/* Features */}
+                                        <ul className="space-y-3">
+                                            {plan.features.map((f, i) => (
+                                                <li key={i} className="flex items-start gap-2.5">
+                                                    <span className={`mt-0.5 w-4 h-4 shrink-0 rounded-full flex items-center justify-center bg-gradient-to-br ${plan.accentFrom} ${plan.accentTo}`}>
+                                                        <Check className="w-2.5 h-2.5 text-white" strokeWidth={3} />
+                                                    </span>
+                                                    <span className="text-sm text-zinc-600 dark:text-zinc-300 leading-snug">{f}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+
+                                        {/* Tap hint */}
+                                        <p className="mt-5 text-center text-xs font-semibold text-violet-500 dark:text-violet-400">
+                                            {isSelected ? "✓ Selected" : "Tap to select"}
+                                        </p>
+                                    </div>
+                                </button>
+                            );
+                        })}
+                    </div>
+
+                    {/* Right fade gradient */}
+                    <div className="pointer-events-none absolute right-0 top-8 bottom-4 w-10 bg-gradient-to-l from-white dark:from-[#070711] to-transparent" />
+                </div>
+
+                {/* ════════════════════════════════════════
+                    DESKTOP: Standard 3-column grid
+                ════════════════════════════════════════ */}
+                <div className="hidden md:grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch mb-16">
                     {plans.map((plan) => {
                         const isSelected = selectedPlan === plan.id;
                         return (

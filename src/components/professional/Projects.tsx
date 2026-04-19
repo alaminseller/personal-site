@@ -181,11 +181,10 @@ export default function ProjectsSection() {
                         <button
                             key={cat}
                             onClick={() => { setActiveCategory(cat); setShowAll(false); }}
-                            className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                                activeCategory === cat
+                            className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${activeCategory === cat
                                     ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-sm"
                                     : "bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700"
-                            }`}
+                                }`}
                         >
                             {cat === "UI/UX Design" ? "🎨 UI/UX Design" : "✦ All"}
                         </button>
@@ -240,7 +239,7 @@ export default function ProjectsSection() {
                 {/* Right-side fade gradient — indicates more cards to the right */}
                 <div className="pointer-events-none absolute right-0 top-8 bottom-5 w-16 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent" />
             </div>
-
+            (packages)
             {/* ══════════════════════════════════════════════════
                 DESKTOP: Standard grid with See More
             ══════════════════════════════════════════════════ */}
