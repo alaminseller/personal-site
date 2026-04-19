@@ -133,8 +133,8 @@ export default function ModernHeroVisual() {
       <div className="hero-noise-texture pointer-events-none absolute inset-0 z-0 opacity-[0.015] dark:opacity-[0.025]" />
 
       {/* ── BIG background name text ── */}
-      <div className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center overflow-hidden select-none">
-        <span className="hero-watermark-text text-[min(14vw,160px)] font-black tracking-tighter text-transparent leading-none whitespace-nowrap opacity-30 sm:opacity-100">
+      <div className="pointer-events-none absolute inset-0 z-[1] hidden sm:flex items-center justify-center overflow-hidden select-none">
+        <span className="hero-watermark-text text-[min(14vw,160px)] font-black tracking-tighter text-transparent leading-none whitespace-nowrap opacity-100">
           ALAMIN RAFI
         </span>
       </div>
@@ -170,9 +170,9 @@ export default function ModernHeroVisual() {
           </h1>
 
           {/* Description */}
-          <p className="text-zinc-600 dark:text-white/55 text-[16px] sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-8 sm:mb-10 animate-slide-up anim-delay-450 font-medium sm:font-normal">
-            Helping Businesses Grow Online.<br className="sm:hidden" /> <span className="hidden sm:inline">I build modern, fast, and affordable websites that help businesses
-            grow online — from portfolio sites to full-stack web apps.</span>
+          <p className="text-zinc-600 dark:text-white/55 text-base sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-8 sm:mb-10 animate-slide-up anim-delay-450 font-medium sm:font-normal">
+            Helping businesses grow online.
+            <span className="hidden sm:inline"> I build modern, fast, and affordable websites that help businesses grow online — from portfolio sites to full-stack web apps.</span>
           </p>
 
           {/* CTA Buttons */}
@@ -222,17 +222,17 @@ export default function ModernHeroVisual() {
               border border-dashed border-cyan-500/10 pointer-events-none hidden sm:block" />
 
           {/* Radial spotlight glow BEHIND image */}
-          <div className="hero-spotlight absolute inset-0 m-auto w-[260px] h-[260px] sm:w-[380px] sm:h-[380px] rounded-full
-              animate-glow-pulse pointer-events-none opacity-50 sm:opacity-100" />
+          <div className="hidden sm:block hero-spotlight absolute inset-0 m-auto w-[380px] h-[380px] rounded-full
+              animate-glow-pulse pointer-events-none opacity-100" />
 
           {/* Secondary accent glow */}
-          <div className="hero-accent-glow absolute bottom-[15%] left-1/2 -translate-x-1/2 w-[160px] sm:w-[220px] h-[40px] sm:h-[60px] rounded-full pointer-events-none" />
+          <div className="hidden sm:block hero-accent-glow absolute bottom-[15%] left-1/2 -translate-x-1/2 w-[220px] h-[60px] rounded-full pointer-events-none" />
 
           {/* Photo container */}
-          <div className="relative z-20 w-[220px] sm:w-[310px] lg:w-[350px] xl:w-[380px] animate-scale-in anim-delay-400">
-            {/* Glowing border frame */}
-            <div className="hero-photo-frame relative rounded-[32px] p-[2px]">
-              <div className="rounded-[30px] overflow-hidden bg-white dark:bg-[#0e0b1e]">
+          <div className="relative z-20 w-[180px] sm:w-[310px] lg:w-[350px] xl:w-[380px] animate-scale-in anim-delay-400 mx-auto">
+            {/* Glowing border frame - removed on mobile via transparent border */}
+            <div className="hero-photo-frame relative rounded-full sm:rounded-[32px] p-[2px] sm:p-[2px]">
+              <div className="rounded-full sm:rounded-[30px] overflow-hidden bg-white dark:bg-[#0e0b1e] aspect-square sm:aspect-auto">
                 <img
                   src="/Alamin.png"
                   alt="Alamin Rafi — Web Developer & Digital Creator"
@@ -266,7 +266,7 @@ export default function ModernHeroVisual() {
             icon={<Clock className="w-4 h-4 text-cyan-400" />}
             label="Available Now"
             sublabel="Open to Work"
-            className="top-[10%] sm:top-[30%] right-2 sm:right-2 animate-float scale-90 sm:scale-100"
+            className="top-[5%] sm:top-[30%] right-0 sm:right-2 animate-float scale-75 sm:scale-100 hidden sm:flex"
             delayClass="anim-delay-1300"
           />
         </div>

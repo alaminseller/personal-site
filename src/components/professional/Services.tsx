@@ -4,40 +4,35 @@ const services = [
     {
         icon: <Globe className="h-7 w-7" />,
         title: "Website Design & Development",
-        description:
-            "Custom, fully responsive websites built from scratch. Clean code, fast load times, and optimized for all devices — delivering a premium experience that represents your brand.",
+        description: "Custom, fully responsive websites. Clean code and fast load times.",
         tags: ["HTML/CSS/JS", "React", "Responsive", "SEO-Ready"],
         color: "violet",
     },
     {
         icon: <Code2 className="h-7 w-7" />,
         title: "WordPress Website",
-        description:
-            "Professional WordPress sites that are easy to manage yourself. From business websites to blogs and e-commerce stores — fully customized to your needs.",
+        description: "Professional WordPress sites perfectly customized to your business needs.",
         tags: ["WordPress", "WooCommerce", "Elementor", "Custom Theme"],
         color: "cyan",
     },
     {
         icon: <Layout className="h-7 w-7" />,
         title: "Landing Page Design",
-        description:
-            "High-converting landing pages designed to capture leads, drive sales, and grow your business. Optimized for speed, clarity, and user experience.",
+        description: "High-converting landing pages designed to capture leads and drive sales.",
         tags: ["Conversion-Focused", "A/B Ready", "Fast", "Mobile-First"],
         color: "indigo",
     },
     {
         icon: <Figma className="h-7 w-7" />,
-        title: "UI/UX Design (Demo Included)",
-        description:
-            "Beautiful, intuitive interface designs with interactive prototypes. I provide working demos so you can experience the product before a single line of code is written.",
+        title: "UI/UX Design",
+        description: "Intuitive interface designs with prototypes before writing code.",
         tags: ["Figma", "Wireframes", "Prototype", "Design System"],
         color: "pink",
     },
     {
         icon: <BarChart3 className="h-7 w-7" />,
-        title: "Digital Marketing Support",
-        description:
-            "Grow your online presence with strategic SEO, social media management, content marketing, and performance analytics tailored to your business goals.",
+        title: "Digital Marketing",
+        description: "Grow your online presence with targeted SEO and social media strategies.",
         tags: ["SEO", "Social Media", "Analytics", "Content"],
         color: "emerald",
     },
