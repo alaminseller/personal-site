@@ -76,7 +76,6 @@ const projects: Project[] = [
 ];
 
 const INITIAL_VISIBLE = 6;
-
 const categories: Category[] = ["All", "UI/UX Design"];
 
 const websiteTypes = [
@@ -89,6 +88,53 @@ const websiteTypes = [
     "Agency Websites",
 ];
 
+/* ── Shared card component used by both layouts ── */
+function ProjectCard({ project }: { project: Project }) {
+    return (
+        <div className="group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+            {/* Preview Image */}
+            <div className="h-44 sm:h-56 relative overflow-hidden shrink-0 bg-zinc-100 dark:bg-zinc-800">
+                <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                {project.featured && (
+                    <span className="absolute top-3 right-3 bg-white/90 dark:bg-black/70 backdrop-blur-md text-zinc-900 dark:text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-black/5 dark:border-white/10 shadow-sm">
+                        Featured
+                    </span>
+                )}
+                <span className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full">
+                    {project.category}
+                </span>
+            </div>
+
+            {/* Content */}
+            <div className="p-4 sm:p-6 flex flex-col grow">
+                <h3 className="text-base sm:text-xl font-bold text-zinc-900 dark:text-white leading-snug mb-1.5 sm:mb-2">{project.title}</h3>
+                <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4 grow">{project.description}</p>
+
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                    {project.tags.map((tag, t) => (
+                        <span key={t} className="px-2 py-0.5 text-[10px] sm:text-[11px] font-medium rounded-md bg-zinc-100 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700/50 flex items-center gap-1">
+                            {tag.toLowerCase().includes("figma") ? <Figma className="w-2.5 h-2.5" /> : null}
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+
+                <a
+                    href="#view-project"
+                    className="inline-flex items-center justify-center gap-2 w-full py-2 px-4 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 text-xs sm:text-sm font-semibold text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors group/btn"
+                >
+                    View Project
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" />
+                </a>
+            </div>
+        </div>
+    );
+}
+
 export default function ProjectsSection() {
     const [activeCategory, setActiveCategory] = useState<Category>("All");
     const [showAll, setShowAll] = useState(false);
@@ -98,15 +144,14 @@ export default function ProjectsSection() {
     const hasMore = filtered.length > INITIAL_VISIBLE;
 
     return (
-        <section id="projects" className="bg-zinc-50 dark:bg-zinc-900/50 py-24 border-t border-zinc-100 dark:border-zinc-800">
-            <div className="max-w-6xl mx-auto px-6">
+        <section id="projects" className="bg-zinc-50 dark:bg-zinc-900/50 py-16 sm:py-24 border-t border-zinc-100 dark:border-zinc-800">
 
-                {/* Section Label */}
+            {/* ── Section header (shared) ── */}
+            <div className="max-w-6xl mx-auto px-5 sm:px-6">
                 <p className="text-sm font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3">Portfolio</p>
 
-                {/* Title row */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-5">
-                    <h2 className="text-4xl font-bold text-zinc-900 dark:text-white max-w-lg leading-snug">
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-4 sm:mb-5">
+                    <h2 className="text-2xl sm:text-4xl font-bold text-zinc-900 dark:text-white max-w-lg leading-snug">
                         Selected Work &{" "}
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">
                             Case Studies
@@ -114,25 +159,24 @@ export default function ProjectsSection() {
                     </h2>
                 </div>
 
-                {/* Intro text */}
-                <p className="text-zinc-500 dark:text-zinc-400 text-base mb-6 max-w-2xl leading-relaxed">
+                <p className="text-zinc-500 dark:text-zinc-400 text-sm sm:text-base mb-5 sm:mb-6 max-w-2xl leading-relaxed">
                     I design and build modern, high-quality websites tailored to different business needs.
                 </p>
 
-                {/* Website type category pills */}
-                <div className="flex flex-wrap gap-2 mb-10">
+                {/* Website type pills — horizontal scroll on mobile */}
+                <div className="flex gap-2 mb-6 sm:mb-10 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible scrollbar-none">
                     {websiteTypes.map((type, i) => (
                         <span
                             key={i}
-                            className="px-3.5 py-1.5 text-xs font-medium rounded-full bg-white dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 shadow-sm"
+                            className="shrink-0 px-3 py-1.5 text-xs font-medium rounded-full bg-white dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 shadow-sm"
                         >
                             {type}
                         </span>
                     ))}
                 </div>
 
-                {/* Filter Tabs */}
-                <div className="flex flex-wrap gap-2 mb-10">
+                {/* Filter tabs — desktop only */}
+                <div className="hidden sm:flex flex-wrap gap-2 mb-10">
                     {categories.map(cat => (
                         <button
                             key={cat}
@@ -147,62 +191,75 @@ export default function ProjectsSection() {
                         </button>
                     ))}
                 </div>
+            </div>
 
-                {/* Project Grid */}
-                <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* ══════════════════════════════════════════════════
+                MOBILE: Horizontal scroll carousel
+            ══════════════════════════════════════════════════ */}
+            <div className="sm:hidden relative">
+                {/* Swipe hint row */}
+                <div className="flex items-center justify-between px-5 mb-3">
+                    <span className="text-xs text-zinc-400 dark:text-zinc-500 font-medium">
+                        {filtered.length} projects
+                    </span>
+                    <span className="flex items-center gap-1 text-xs font-semibold text-violet-500 dark:text-violet-400">
+                        Swipe
+                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </span>
+                </div>
+
+                {/* Scroll container */}
+                <div
+                    className="flex gap-4 overflow-x-auto px-5 pb-5 snap-x snap-mandatory"
+                    style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
+                >
+                    {filtered.map((project, i) => (
+                        <div
+                            key={`mobile-${activeCategory}-${i}`}
+                            className="shrink-0 snap-start"
+                            style={{ width: "82vw" }}
+                        >
+                            <ProjectCard project={project} />
+                        </div>
+                    ))}
+
+                    {/* End spacer card — indicates more content is coming */}
+                    <div
+                        className="shrink-0 flex flex-col items-center justify-center rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900/50 gap-3 snap-start"
+                        style={{ width: "60vw", minHeight: "300px" }}
+                    >
+                        <span className="text-3xl">✦</span>
+                        <p className="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4 leading-relaxed">
+                            More projects<br />available on request
+                        </p>
+                    </div>
+                </div>
+
+                {/* Right-side fade gradient — indicates more cards to the right */}
+                <div className="pointer-events-none absolute right-0 top-8 bottom-5 w-16 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent" />
+            </div>
+
+            {/* ══════════════════════════════════════════════════
+                DESKTOP: Standard grid with See More
+            ══════════════════════════════════════════════════ */}
+            <div className="hidden sm:block max-w-6xl mx-auto px-6">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {visible.map((project, i) => (
                         <div
-                            key={`${activeCategory}-${i}`}
-                            className="group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                            key={`desktop-${activeCategory}-${i}`}
                             style={{
                                 animation: `fadeSlideUp 0.35s ease both`,
                                 animationDelay: `${(i % INITIAL_VISIBLE) * 60}ms`,
                             }}
                         >
-                            {/* Preview Image */}
-                            <div className="h-56 relative overflow-hidden shrink-0 bg-zinc-100 dark:bg-zinc-800">
-                                <img
-                                    src={project.image}
-                                    alt={project.title}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                />
-                                {project.featured && (
-                                    <span className="absolute top-4 right-4 bg-white/90 dark:bg-black/70 backdrop-blur-md text-zinc-900 dark:text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border border-black/5 dark:border-white/10 shadow-sm">
-                                        Featured
-                                    </span>
-                                )}
-                                <span className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full">
-                                    {project.category}
-                                </span>
-                            </div>
-
-                            {/* Content */}
-                            <div className="p-6 flex flex-col grow">
-                                <h3 className="text-xl font-bold text-zinc-900 dark:text-white leading-snug mb-2">{project.title}</h3>
-                                <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6 grow">{project.description}</p>
-
-                                <div className="flex flex-wrap gap-2 mb-6">
-                                    {project.tags.map((tag, t) => (
-                                        <span key={t} className="px-2.5 py-1 text-[11px] font-medium rounded-md bg-zinc-100 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700/50 flex items-center gap-1.5">
-                                            {tag.toLowerCase().includes("figma") ? <Figma className="w-3 h-3" /> : null}
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-
-                                <a
-                                    href="#view-project"
-                                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 text-sm font-semibold text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors group/btn"
-                                >
-                                    View Project
-                                    <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                                </a>
-                            </div>
+                            <ProjectCard project={project} />
                         </div>
                     ))}
                 </div>
 
-                {/* See More / Show Less button */}
+                {/* See More / Show Less */}
                 {hasMore && (
                     <div className="flex flex-col items-center gap-3 mt-12">
                         <button
@@ -210,13 +267,9 @@ export default function ProjectsSection() {
                             className="inline-flex items-center gap-2 px-7 py-3 rounded-full text-sm font-semibold bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-700 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
                         >
                             {showAll ? (
-                                <>
-                                    Show Less <ChevronUp className="w-4 h-4" />
-                                </>
+                                <>Show Less <ChevronUp className="w-4 h-4" /></>
                             ) : (
-                                <>
-                                    See More Projects <ChevronDown className="w-4 h-4" />
-                                </>
+                                <>See More Projects <ChevronDown className="w-4 h-4" /></>
                             )}
                         </button>
                         {!showAll && (
@@ -233,12 +286,13 @@ export default function ProjectsSection() {
                 </p>
             </div>
 
-            {/* Fade-slide-up keyframe */}
+            {/* Keyframe */}
             <style>{`
                 @keyframes fadeSlideUp {
                     from { opacity: 0; transform: translateY(18px); }
                     to   { opacity: 1; transform: translateY(0); }
                 }
+                .scrollbar-none::-webkit-scrollbar { display: none; }
             `}</style>
         </section>
     );
