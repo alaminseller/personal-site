@@ -149,7 +149,7 @@ export default function ProjectsSection() {
                 </div>
 
                 {/* Project Grid */}
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
+                <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {visible.map((project, i) => (
                         <div
                             key={`${activeCategory}-${i}`}

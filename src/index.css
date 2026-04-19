@@ -79,21 +79,15 @@
 @layer base {
   * {
     @apply border-border;
-    box-sizing: border-box;
   }
 
   html {
     scroll-behavior: smooth;
-    /* Prevent horizontal scroll on any screen size */
-    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-feature-settings: "cv11", "ss01";
-    overflow-x: hidden;
-    /* Fluid base font: ~13px at 320px wide, 16px at 1280px+ */
-    font-size: clamp(0.8125rem, 0.75rem + 0.5vw, 1rem);
   }
 
   h1, h2, h3, h4, h5, h6 {

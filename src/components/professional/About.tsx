@@ -19,7 +19,7 @@ export default function ProfessionalAbout() {
                     Passionate about building websites that <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">actually work.</span>
                 </h2>
 
-                <div className="grid grid-cols-2 gap-8 lg:gap-16 items-start">
+                <div className="grid lg:grid-cols-2 gap-16 items-start">
                     {/* Left – Bio */}
                     <div className="space-y-5 text-zinc-600 dark:text-zinc-300 leading-relaxed text-[17px]">
                         <p>
