@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useAuth } from "@/context/AuthContext";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -17,6 +19,8 @@ export default function ModernHeader() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("");
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -88,14 +92,41 @@ export default function ModernHeader() {
                         ))}
                     </ul>
 
-                    {/* CTA */}
-                    <a
-                        href="#contact"
-                        onClick={(e) => scrollToSection(e, "#contact")}
-                        className="bg-brand-gradient px-5 py-2 text-sm font-semibold rounded-full text-white transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] mr-3"
-                    >
-                        Hire Me
-                    </a>
+                    {/* Auth / CTA area */}
+                    {user ? (
+                        <div className="flex items-center gap-2 mr-3">
+                            <Link
+                                to="/dashboard"
+                                className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-500/10 hover:bg-violet-100 dark:hover:bg-violet-500/20 transition-colors"
+                            >
+                                <User className="w-4 h-4" />
+                                {user.name.split(" ")[0]}
+                            </Link>
+                            <button
+                                onClick={() => { logout(); navigate("/"); }}
+                                title="Logout"
+                                className="p-2 rounded-full text-zinc-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors"
+                            >
+                                <LogOut className="w-4 h-4" />
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="flex items-center gap-2 mr-3">
+                            <Link
+                                to="/login"
+                                className="px-4 py-2 text-sm font-semibold text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                            >
+                                Login
+                            </Link>
+                            <a
+                                href="#contact"
+                                onClick={(e) => scrollToSection(e, "#contact")}
+                                className="bg-brand-gradient px-5 py-2 text-sm font-semibold rounded-full text-white transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(139,92,246,0.5)]"
+                            >
+                                Hire Me
+                            </a>
+                        </div>
+                    )}
 
                     <div className="pl-3 border-l border-zinc-200 dark:border-zinc-800">
                         <ThemeToggle />
@@ -134,13 +165,40 @@ export default function ModernHeader() {
                                 {link.label}
                             </a>
                         ))}
-                        <a
-                            href="#contact"
-                            onClick={(e) => scrollToSection(e, "#contact")}
-                            className="bg-brand-gradient mt-2 px-4 py-3 rounded-xl text-base font-semibold text-white text-center"
-                        >
-                            Hire Me
-                        </a>
+                        {user ? (
+                            <>
+                                <Link
+                                    to="/dashboard"
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="flex items-center gap-2 px-4 py-3 rounded-xl text-base font-semibold text-violet-600 dark:text-violet-400"
+                                >
+                                    <User className="w-4 h-4" /> My Dashboard
+                                </Link>
+                                <button
+                                    onClick={() => { logout(); navigate("/"); setIsMenuOpen(false); }}
+                                    className="flex items-center gap-2 px-4 py-3 rounded-xl text-base font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 w-full transition-colors"
+                                >
+                                    <LogOut className="w-4 h-4" /> Logout
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <Link
+                                    to="/login"
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="px-4 py-3 rounded-xl text-base font-semibold text-zinc-700 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-white/[0.06] transition-colors"
+                                >
+                                    Login
+                                </Link>
+                                <a
+                                    href="#contact"
+                                    onClick={(e) => scrollToSection(e, "#contact")}
+                                    className="bg-brand-gradient mt-2 px-4 py-3 rounded-xl text-base font-semibold text-white text-center"
+                                >
+                                    Hire Me
+                                </a>
+                            </>
+                        )}
                     </nav>
                 </div>
             )}
