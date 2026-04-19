@@ -4,6 +4,7 @@ import ProfessionalAbout from "@/components/professional/About";
 import ServicesSection from "@/components/professional/Services";
 import PricingSection from "@/components/professional/Pricing";
 import ProjectsSection from "@/components/professional/Projects";
+import WhatIBuild from "@/components/professional/WhatIBuild";
 import ProfessionalExperience from "@/components/professional/Experience";
 import ProfessionalSkills from "@/components/professional/Skills";
 import ProfessionalAchievements from "@/components/professional/Achievements";
@@ -20,6 +21,7 @@ export default function ModernPage() {
                 <div id="about"><ProfessionalAbout /></div>
                 <div id="services"><ServicesSection /></div>
                 <div id="pricing"><PricingSection /></div>
+                <WhatIBuild />
                 <div id="projects"><ProjectsSection /></div>
                 <div id="experience"><ProfessionalExperience /></div>
                 <div id="skills"><ProfessionalSkills /></div>
