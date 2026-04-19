@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Figma, ArrowRight } from "lucide-react";
+import { Figma, ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
 
 type Category = "All" | "UI/UX Design";
 
@@ -75,21 +75,60 @@ const projects: Project[] = [
     },
 ];
 
+const INITIAL_VISIBLE = 6;
+
 const categories: Category[] = ["All", "UI/UX Design"];
+
+const websiteTypes = [
+    "Business Websites",
+    "E-commerce Stores",
+    "Portfolio Websites",
+    "Landing Pages",
+    "Booking & Service Websites",
+    "Education & Course Websites",
+    "Agency Websites",
+];
 
 export default function ProjectsSection() {
     const [activeCategory, setActiveCategory] = useState<Category>("All");
+    const [showAll, setShowAll] = useState(false);
 
     const filtered = activeCategory === "All" ? projects : projects.filter(p => p.category === activeCategory);
+    const visible = showAll ? filtered : filtered.slice(0, INITIAL_VISIBLE);
+    const hasMore = filtered.length > INITIAL_VISIBLE;
 
     return (
         <section id="projects" className="bg-zinc-50 dark:bg-zinc-900/50 py-24 border-t border-zinc-100 dark:border-zinc-800">
             <div className="max-w-6xl mx-auto px-6">
+
+                {/* Section Label */}
                 <p className="text-sm font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3">Portfolio</p>
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+
+                {/* Title row */}
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-5">
                     <h2 className="text-4xl font-bold text-zinc-900 dark:text-white max-w-lg leading-snug">
-                        Selected Work & <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">Case Studies</span>
+                        Selected Work &{" "}
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">
+                            Case Studies
+                        </span>
                     </h2>
+                </div>
+
+                {/* Intro text */}
+                <p className="text-zinc-500 dark:text-zinc-400 text-base mb-6 max-w-2xl leading-relaxed">
+                    I design and build modern, high-quality websites tailored to different business needs.
+                </p>
+
+                {/* Website type category pills */}
+                <div className="flex flex-wrap gap-2 mb-10">
+                    {websiteTypes.map((type, i) => (
+                        <span
+                            key={i}
+                            className="px-3.5 py-1.5 text-xs font-medium rounded-full bg-white dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 shadow-sm"
+                        >
+                            {type}
+                        </span>
+                    ))}
                 </div>
 
                 {/* Filter Tabs */}
@@ -97,7 +136,7 @@ export default function ProjectsSection() {
                     {categories.map(cat => (
                         <button
                             key={cat}
-                            onClick={() => setActiveCategory(cat)}
+                            onClick={() => { setActiveCategory(cat); setShowAll(false); }}
                             className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                                 activeCategory === cat
                                     ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-sm"
@@ -111,16 +150,20 @@ export default function ProjectsSection() {
 
                 {/* Project Grid */}
                 <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filtered.map((project, i) => (
+                    {visible.map((project, i) => (
                         <div
-                            key={i}
+                            key={`${activeCategory}-${i}`}
                             className="group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                            style={{
+                                animation: `fadeSlideUp 0.35s ease both`,
+                                animationDelay: `${(i % INITIAL_VISIBLE) * 60}ms`,
+                            }}
                         >
                             {/* Preview Image */}
                             <div className="h-56 relative overflow-hidden shrink-0 bg-zinc-100 dark:bg-zinc-800">
-                                <img 
-                                    src={project.image} 
-                                    alt={project.title} 
+                                <img
+                                    src={project.image}
+                                    alt={project.title}
                                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
                                 {project.featured && (
@@ -137,17 +180,20 @@ export default function ProjectsSection() {
                             <div className="p-6 flex flex-col grow">
                                 <h3 className="text-xl font-bold text-zinc-900 dark:text-white leading-snug mb-2">{project.title}</h3>
                                 <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6 grow">{project.description}</p>
-                                
+
                                 <div className="flex flex-wrap gap-2 mb-6">
                                     {project.tags.map((tag, t) => (
                                         <span key={t} className="px-2.5 py-1 text-[11px] font-medium rounded-md bg-zinc-100 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700/50 flex items-center gap-1.5">
-                                            {tag.toLowerCase().includes('figma') ? <Figma className="w-3 h-3" /> : null}
+                                            {tag.toLowerCase().includes("figma") ? <Figma className="w-3 h-3" /> : null}
                                             {tag}
                                         </span>
                                     ))}
                                 </div>
-                                
-                                <a href="#view-project" className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 text-sm font-semibold text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors group/btn">
+
+                                <a
+                                    href="#view-project"
+                                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 text-sm font-semibold text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors group/btn"
+                                >
                                     View Project
                                     <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                                 </a>
@@ -156,11 +202,44 @@ export default function ProjectsSection() {
                     ))}
                 </div>
 
+                {/* See More / Show Less button */}
+                {hasMore && (
+                    <div className="flex flex-col items-center gap-3 mt-12">
+                        <button
+                            onClick={() => setShowAll(prev => !prev)}
+                            className="inline-flex items-center gap-2 px-7 py-3 rounded-full text-sm font-semibold bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-700 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+                        >
+                            {showAll ? (
+                                <>
+                                    Show Less <ChevronUp className="w-4 h-4" />
+                                </>
+                            ) : (
+                                <>
+                                    See More Projects <ChevronDown className="w-4 h-4" />
+                                </>
+                            )}
+                        </button>
+                        {!showAll && (
+                            <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                                More demo projects available on request
+                            </p>
+                        )}
+                    </div>
+                )}
+
                 {/* Bottom note */}
-                <p className="text-center text-zinc-400 dark:text-zinc-500 text-sm mt-16">
+                <p className="text-center text-zinc-400 dark:text-zinc-500 text-sm mt-14">
                     Selected works created for diverse clients across multiple industries.
                 </p>
             </div>
+
+            {/* Fade-slide-up keyframe */}
+            <style>{`
+                @keyframes fadeSlideUp {
+                    from { opacity: 0; transform: translateY(18px); }
+                    to   { opacity: 1; transform: translateY(0); }
+                }
+            `}</style>
         </section>
     );
 }
