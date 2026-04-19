@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Figma, Layers } from "lucide-react";
+import { Figma, ArrowRight } from "lucide-react";
 
 type Category = "All" | "UI/UX Design";
 
@@ -8,61 +8,54 @@ interface Project {
     description: string;
     category: Exclude<Category, "All">;
     tags: string[];
-    gradient: string;
-    emoji: string;
+    image: string;
     featured?: boolean;
 }
 
 const projects: Project[] = [
     {
-        title: "Task Management SaaS Dashboard",
-        description: "A modern UI/UX concept design created to demonstrate layout, usability, and visual hierarchy for a SaaS productivity app.",
+        title: "NovaTech Analytics",
+        description: "A modern SaaS analytics dashboard with dark mode and sleek data visualizations.",
         category: "UI/UX Design",
-        tags: ["Figma", "SaaS Dashboard", "UI Concept"],
-        gradient: "from-blue-500 to-indigo-600",
-        emoji: "📊",
+        tags: ["SaaS Dashboard", "Dark Mode", "React"],
+        image: "/projects/novatech_saas.png",
         featured: true,
     },
     {
-        title: "Fintech Mobile Wallet App",
-        description: "An intuitive mobile wallet UI exploration focusing on clean transactions, easy navigation, and financial data visualization.",
+        title: "UrbanShop E-Commerce",
+        description: "A minimalist fashion storefront featuring large lifestyle imagery and seamless checkout.",
         category: "UI/UX Design",
-        tags: ["Figma", "Mobile UI", "Fintech Concept"],
-        gradient: "from-green-500 to-teal-600",
-        emoji: "💳",
+        tags: ["E-Commerce", "Web Design", "Minimalist"],
+        image: "/projects/urbanshop_ecommerce.png",
         featured: true,
     },
     {
-        title: "E-Commerce Storefront Concept",
-        description: "A conceptual e-commerce design with a focus on product discovery, seamless checkout flow, and a minimalist aesthetic.",
+        title: "ZenHealth Booking",
+        description: "A clean, accessible healthcare booking system interface for patients and doctors.",
         category: "UI/UX Design",
-        tags: ["UI Concept", "E-Commerce", "Web Design"],
-        gradient: "from-pink-500 to-rose-600",
-        emoji: "🛍️",
+        tags: ["Healthcare", "UI Concept", "Accessible"],
+        image: "/projects/zenhealth_medical.png",
     },
     {
-        title: "Real Estate Property Finder",
-        description: "A structured layout design demo showcasing property listings, interactive map interfaces, and advanced search filter systems.",
+        title: "EstatePro Real Estate",
+        description: "A premium property finder with high-end listings and an interactive map UI.",
         category: "UI/UX Design",
-        tags: ["Web App UI", "Design Demo", "Wireframing"],
-        gradient: "from-amber-500 to-orange-600",
-        emoji: "🏢",
+        tags: ["Web App", "Real Estate", "Luxury"],
+        image: "/projects/estatepro_realestate.png",
     },
     {
-        title: "Healthcare Doctor Booking UI",
-        description: "A clean, accessible UI concept for a patient booking system, emphasizing trust, typography, and clear call-to-actions.",
+        title: "FinFlow Mobile Banking",
+        description: "A fintech app dashboard showing clean financial data visualization and transactions.",
         category: "UI/UX Design",
-        tags: ["UI Exploration", "Healthcare", "Clean UI"],
-        gradient: "from-cyan-500 to-blue-500",
-        emoji: "🏥",
+        tags: ["Fintech", "Mobile UI", "App Design"],
+        image: "/projects/finflow_fintech.png",
     },
     {
-        title: "Modern Portfolio UI Kit",
-        description: "A scalable UI kit and template concept demonstrating cohesive component structure, light/dark mode foundations, and Figma auto-layout.",
+        title: "CreativStudio Agency",
+        description: "A vibrant creative agency portfolio featuring bold typography and dynamic layouts.",
         category: "UI/UX Design",
-        tags: ["UI Kit", "Design System", "Figma"],
-        gradient: "from-violet-500 to-purple-600",
-        emoji: "🎨",
+        tags: ["Agency", "Portfolio", "Awwwards Style"],
+        image: "/projects/creativstudio_agency.png",
         featured: true,
     },
 ];
@@ -80,7 +73,7 @@ export default function ProjectsSection() {
                 <p className="text-sm font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3">Portfolio</p>
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
                     <h2 className="text-4xl font-bold text-zinc-900 dark:text-white max-w-lg leading-snug">
-                        Design <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">Showcase</span>
+                        Selected Work & <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">Case Studies</span>
                     </h2>
                 </div>
 
@@ -102,48 +95,55 @@ export default function ProjectsSection() {
                 </div>
 
                 {/* Project Grid */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filtered.map((project, i) => (
                         <div
                             key={i}
-                            className="group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                            className="group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
                         >
-                            {/* Preview banner */}
-                            <div className={`h-44 bg-gradient-to-br ${project.gradient} flex items-center justify-center relative overflow-hidden shrink-0`}>
-                                <span className="text-6xl filter drop-shadow-lg z-10">{project.emoji}</span>
-                                <div className="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,transparent,transparent_20px,rgba(255,255,255,0.1)_20px,rgba(255,255,255,0.1)_40px)]" />
+                            {/* Preview Image */}
+                            <div className="h-56 relative overflow-hidden shrink-0 bg-zinc-100 dark:bg-zinc-800">
+                                <img 
+                                    src={project.image} 
+                                    alt={project.title} 
+                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                />
                                 {project.featured && (
-                                    <span className="absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border border-white/30">
+                                    <span className="absolute top-4 right-4 bg-white/90 dark:bg-black/70 backdrop-blur-md text-zinc-900 dark:text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border border-black/5 dark:border-white/10 shadow-sm">
                                         Featured
                                     </span>
                                 )}
-                                <span className="absolute bottom-3 left-3 bg-black/30 backdrop-blur-sm text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full">
+                                <span className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full">
                                     {project.category}
                                 </span>
                             </div>
 
                             {/* Content */}
                             <div className="p-6 flex flex-col grow">
-                                <div className="flex items-start justify-between gap-3 mb-3">
-                                    <h3 className="text-[17px] font-semibold text-zinc-900 dark:text-white leading-snug">{project.title}</h3>
-                                </div>
-                                <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-5 grow">{project.description}</p>
-                                <div className="flex flex-wrap gap-1.5 mt-auto">
+                                <h3 className="text-xl font-bold text-zinc-900 dark:text-white leading-snug mb-2">{project.title}</h3>
+                                <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6 grow">{project.description}</p>
+                                
+                                <div className="flex flex-wrap gap-2 mb-6">
                                     {project.tags.map((tag, t) => (
-                                        <span key={t} className="px-2.5 py-1 text-[11px] font-medium rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 flex items-center gap-1.5">
+                                        <span key={t} className="px-2.5 py-1 text-[11px] font-medium rounded-md bg-zinc-100 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700/50 flex items-center gap-1.5">
                                             {tag.toLowerCase().includes('figma') ? <Figma className="w-3 h-3" /> : null}
                                             {tag}
                                         </span>
                                     ))}
                                 </div>
+                                
+                                <a href="#view-project" className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 text-sm font-semibold text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors group/btn">
+                                    View Project
+                                    <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                                </a>
                             </div>
                         </div>
                     ))}
                 </div>
 
                 {/* Bottom note */}
-                <p className="text-center text-zinc-400 dark:text-zinc-500 text-sm mt-12">
-                    Design samples created for demonstration and portfolio purposes.
+                <p className="text-center text-zinc-400 dark:text-zinc-500 text-sm mt-16">
+                    Selected works created for diverse clients across multiple industries.
                 </p>
             </div>
         </section>
