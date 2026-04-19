@@ -58,6 +58,13 @@ const projects: Project[] = [
         image: "/projects/creativstudio_agency.png",
         featured: true,
     },
+    {
+        title: "CareerPro — Portfolio Website",
+        description: "A clean personal portfolio & professional profile site built for a real client, featuring skills, education, and contact sections.",
+        category: "UI/UX Design",
+        tags: ["Personal Portfolio", "Web Design", "Client Work"],
+        image: "/projects/careerpro_portfolio.png",
+    },
 ];
 
 const categories: Category[] = ["All", "UI/UX Design"];
