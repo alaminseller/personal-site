@@ -239,7 +239,6 @@ export default function ProjectsSection() {
                 {/* Right-side fade gradient — indicates more cards to the right */}
                 <div className="pointer-events-none absolute right-0 top-8 bottom-5 w-16 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent" />
             </div>
-            (packages)
             {/* ══════════════════════════════════════════════════
                 DESKTOP: Standard grid with See More
             ══════════════════════════════════════════════════ */}
