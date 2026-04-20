@@ -3,48 +3,92 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <!-- Primary Meta Tags -->
-  <title>Alamin Rafi - Digital Marketing & Content Specialist</title>
-  <meta name="title" content="Alamin Rafi - Digital Marketing & Content Specialist" />
+  <title>Alamin Rafi — Website & Digital Services</title>
+  <meta name="title" content="Alamin Rafi — Website & Digital Services" />
   <meta name="description"
-    content="Results-driven digital marketing professional with expertise in SEO, content strategy, and digital operations. Proven track record of optimizing online presence and delivering measurable business outcomes." />
+    content="Modern, affordable websites for businesses. Web design, development, WordPress, UI/UX — all in one place." />
   <meta name="keywords"
-    content="Digital Marketing, SEO Specialist, Content Strategy, Digital Operations, Content Manager, SEO Expert, Bangladesh" />
+    content="Web Developer, Website Design, WordPress, UI/UX, Digital Services, Bangladesh, Alamin Rafi" />
   <meta name="author" content="Alamin Rafi" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://alaminrafi.com/" />
-  <meta property="og:title" content="Alamin Rafi - Digital Marketing & Content Specialist" />
+  <meta property="og:title" content="Alamin Rafi — Website & Digital Services" />
   <meta property="og:description"
-    content="Results-driven digital marketing professional with expertise in SEO, content strategy, and digital operations." />
+    content="Modern, affordable websites for businesses. Web design, development, WordPress, UI/UX." />
   <meta property="og:site_name" content="Alamin Rafi" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content="https://alaminrafi.com/" />
-  <meta property="twitter:title" content="Alamin Rafi - Digital Marketing & Content Specialist" />
+  <meta property="twitter:title" content="Alamin Rafi — Website & Digital Services" />
   <meta property="twitter:description"
-    content="Results-driven digital marketing professional with expertise in SEO, content strategy, and digital operations." />
+    content="Modern, affordable websites for businesses. Web design, development, WordPress, UI/UX." />
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://alaminrafi.com" />
 
+  <!-- ── PWA: Manifest ── -->
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+  <!-- ── PWA: Theme & Status Bar ── -->
+  <meta name="theme-color" content="#7c3aed" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- ── PWA: iOS specific ── -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Alamin Rafi" />
+  <link rel="apple-touch-icon" href="/icon-192.png" />
+
+  <!-- ── PWA: MS Tile ── -->
+  <meta name="msapplication-TileColor" content="#7c3aed" />
+  <meta name="msapplication-TileImage" content="/icon-192.png" />
+
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
 
   <!-- Google Fonts - Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet" />
+
+  <!-- ── PWA: Safe Area CSS for notched phones ── -->
+  <style>
+    :root {
+      --sat: env(safe-area-inset-top);
+      --sar: env(safe-area-inset-right);
+      --sab: env(safe-area-inset-bottom);
+      --sal: env(safe-area-inset-left);
+    }
+    body {
+      /* Prevent rubber-band overscroll on iOS */
+      overscroll-behavior: none;
+    }
+  </style>
 </head>
 
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
+
+  <!-- ── PWA: Service Worker Registration ── -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register('/sw.js', { scope: '/' })
+          .then(reg => console.log('[PWA] SW registered:', reg.scope))
+          .catch(err => console.warn('[PWA] SW registration failed:', err));
+      });
+    }
+  </script>
 </body>
 
 </html>

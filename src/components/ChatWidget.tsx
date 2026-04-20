@@ -108,10 +108,21 @@ export const ChatWidget = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end">
+    <div
+      className="chat-widget-root fixed right-4 sm:right-6 z-[9999] flex flex-col items-end"
+      style={{
+        /* Mobile: sit above the floating bottom nav (~80px tall at bottom-5) */
+        bottom: "calc(88px + env(safe-area-inset-bottom, 0px))",
+      }}
+    >
+      <style>{`
+        @media (min-width: 640px) {
+          .chat-widget-root { bottom: 24px !important; }
+        }
+      `}</style>
       {/* Chat Popup */}
       {isOpen && (
-        <div className="mb-4 w-[340px] sm:w-[380px] h-[500px] bg-white dark:bg-zinc-950 rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-zinc-100 dark:border-zinc-800 animate-in fade-in slide-in-from-bottom-4 duration-300">
+        <div className="mb-4 w-[calc(100vw-2rem)] max-w-[340px] sm:w-[380px] h-[480px] sm:h-[500px] bg-white dark:bg-zinc-950 rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-zinc-100 dark:border-zinc-800 animate-in fade-in slide-in-from-bottom-4 duration-300">
 
           {/* Header */}
           <div className="px-4 py-3.5 bg-gradient-to-r from-violet-600 to-cyan-500 flex items-center justify-between shrink-0">
@@ -238,9 +249,11 @@ export const ChatWidget = () => {
         onClick={handleToggle}
         title={isOpen ? "Close chat" : "Chat with Alamin's AI"}
         aria-label={isOpen ? "Close chat" : "Chat with Alamin's AI"}
-        className={`w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 ${
+        className={`w-13 h-13 sm:w-14 sm:h-14 rounded-full flex items-center justify-center
+          shadow-[0_4px_20px_rgba(139,92,246,0.35)] hover:shadow-[0_8px_28px_rgba(139,92,246,0.45)]
+          transition-all duration-200 hover:-translate-y-1 active:scale-95 ${
           isOpen
-            ? "bg-zinc-800 dark:bg-zinc-200 text-white dark:text-zinc-900 rotate-0"
+            ? "bg-zinc-800 dark:bg-zinc-200 text-white dark:text-zinc-900"
             : "bg-gradient-to-br from-violet-600 to-cyan-500 text-white"
         }`}
       >

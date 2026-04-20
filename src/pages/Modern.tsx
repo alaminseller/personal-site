@@ -11,6 +11,7 @@ import ProfessionalAchievements from "@/components/professional/Achievements";
 import ProfessionalContact from "@/components/professional/Contact";
 import ProfessionalFooter from "@/components/professional/Footer";
 import MobileBottomNav from "@/components/professional/MobileNav";
+import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 
 
 export default function ModernPage() {
@@ -31,6 +32,7 @@ export default function ModernPage() {
             </main>
             <ProfessionalFooter />
             <MobileBottomNav />
+            <PWAInstallPrompt />
         </div>
     );
 }

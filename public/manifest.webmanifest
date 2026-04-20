@@ -1,0 +1,42 @@
+{
+  "name": "Alamin Rafi — Web & Digital Services",
+  "short_name": "Alamin Rafi",
+  "description": "Modern, affordable websites for businesses. Digital Service Provider.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f0f1a",
+  "theme_color": "#7c3aed",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Start a Project",
+      "short_name": "Start Project",
+      "description": "Get in touch to start a new project",
+      "url": "/#contact",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Track My Project",
+      "short_name": "My Project",
+      "description": "View your project status",
+      "url": "/admin/projects",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
