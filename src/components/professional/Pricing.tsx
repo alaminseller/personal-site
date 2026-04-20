@@ -197,7 +197,7 @@ export default function PricingSection() {
     return (
         <section
             id="pricing"
-            className="py-24 bg-white dark:bg-[#070711] border-t border-zinc-100 dark:border-white/[0.05] relative overflow-hidden"
+            className="py-14 sm:py-24 bg-white dark:bg-[#070711] border-t border-zinc-100 dark:border-white/[0.05] relative overflow-hidden"
         >
             {/* Background blobs — dark mode only */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden hidden dark:block">
@@ -325,9 +325,9 @@ export default function PricingSection() {
                                             ))}
                                         </ul>
 
-                                        {/* Tap hint */}
-                                        <p className="mt-5 text-center text-xs font-semibold text-violet-500 dark:text-violet-400">
-                                            {isSelected ? "✓ Selected" : "Tap to select"}
+                                        {/* Choose plan hint */}
+                                        <p className="mt-4 text-center text-xs font-medium text-violet-500 dark:text-violet-400">
+                                            {isSelected ? "✓ Selected" : "Choose Plan"}
                                         </p>
                                     </div>
                                 </button>
@@ -429,17 +429,79 @@ export default function PricingSection() {
                 </div>
 
                 {/* ─── Add-ons ─── */}
-                <div className="mb-12">
-                    <div className="text-center mb-8">
-                        <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-2">
+                <div className="mb-10 sm:mb-12">
+                    <div className="text-center mb-5 sm:mb-8 px-5 sm:px-0">
+                        <h3 className="text-xl sm:text-2xl font-semibold text-zinc-900 dark:text-white mb-1.5 sm:mb-2">
                             Optional Add-ons
                         </h3>
-                        <p className="text-zinc-500 dark:text-zinc-400 text-sm">
-                            Enhance your project with extras — select any that apply
+                        <p className="text-zinc-500 dark:text-zinc-400 text-xs sm:text-sm">
+                            Select any extras to enhance your project
                         </p>
                     </div>
 
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {/* ════ MOBILE: Horizontal scroll ════ */}
+                    <div className="sm:hidden relative">
+                        {/* Swipe hint */}
+                        <div className="flex items-center justify-between px-5 mb-3">
+                            <span className="text-xs text-zinc-400 dark:text-zinc-500 font-medium">
+                                {addons.length} add-ons
+                            </span>
+                            <span className="flex items-center gap-1 text-xs font-semibold text-violet-500 dark:text-violet-400">
+                                Swipe
+                                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </span>
+                        </div>
+
+                        <div
+                            className="flex gap-3 overflow-x-auto px-5 pb-4 snap-x snap-mandatory"
+                            style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
+                        >
+                            {addons.map((addon) => {
+                                const isChecked = selectedAddons.has(addon.id);
+                                return (
+                                    <button
+                                        key={`mob-addon-${addon.id}`}
+                                        onClick={() => toggleAddon(addon.id)}
+                                        className={`
+                                            shrink-0 snap-start flex flex-col p-4 rounded-2xl text-left
+                                            border transition-all duration-200
+                                            ${isChecked
+                                                ? "border-violet-500 dark:border-violet-400 bg-violet-50 dark:bg-violet-500/10 shadow-md shadow-violet-500/10"
+                                                : "border-zinc-200 dark:border-white/[0.08] bg-white dark:bg-zinc-900/50"
+                                            }
+                                        `}
+                                        style={{ width: "70vw" }}
+                                    >
+                                        {/* Icon row */}
+                                        <div className="flex items-center gap-2.5 mb-2">
+                                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${addon.iconBg}`}>
+                                                {addon.icon}
+                                            </div>
+                                            <span className={`w-4 h-4 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ml-auto ${
+                                                isChecked ? "bg-violet-500 border-violet-500" : "border-zinc-300 dark:border-zinc-600"
+                                            }`}>
+                                                {isChecked && <Check className="w-2.5 h-2.5 text-white" strokeWidth={3} />}
+                                            </span>
+                                        </div>
+                                        <p className="font-semibold text-xs text-zinc-900 dark:text-white leading-snug mb-1">
+                                            {addon.name}
+                                        </p>
+                                        <span className="text-xs font-bold text-violet-600 dark:text-violet-400">
+                                            {addon.priceLabel}
+                                        </span>
+                                    </button>
+                                );
+                            })}
+                        </div>
+
+                        {/* Right fade */}
+                        <div className="pointer-events-none absolute right-0 top-8 bottom-4 w-10 bg-gradient-to-l from-white dark:from-[#070711] to-transparent" />
+                    </div>
+
+                    {/* ════ DESKTOP: Grid ════ */}
+                    <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {addons.map((addon) => {
                             const isChecked = selectedAddons.has(addon.id);
                             return (

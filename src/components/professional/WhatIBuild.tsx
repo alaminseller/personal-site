@@ -1,55 +1,43 @@
 const websiteTypes = [
-    { label: "Business Websites",          icon: "🏢" },
-    { label: "E-commerce Stores",          icon: "🛍️" },
-    { label: "Portfolio Websites",         icon: "🎨" },
-    { label: "Landing Pages",              icon: "🚀" },
-    { label: "Booking & Service Websites", icon: "📅" },
-    { label: "Education & Course Websites",icon: "🎓" },
-    { label: "Agency Websites",            icon: "💼" },
+    { label: "Business",    icon: "🏢" },
+    { label: "E-commerce",  icon: "🛍️" },
+    { label: "Portfolio",   icon: "🎨" },
+    { label: "Landing Page",icon: "🚀" },
+    { label: "Booking",     icon: "📅" },
+    { label: "Education",   icon: "🎓" },
+    { label: "Agency",      icon: "💼" },
 ];
 
 export default function WhatIBuild() {
     return (
-        <section className="bg-white dark:bg-zinc-950 py-20 border-t border-zinc-100 dark:border-zinc-800">
-            <div className="max-w-5xl mx-auto px-6 text-center">
+        <section className="bg-white dark:bg-zinc-950 py-14 sm:py-20 border-t border-zinc-100 dark:border-zinc-800">
+            <div className="max-w-5xl mx-auto px-5 sm:px-6">
 
-                {/* Label */}
-                <p className="text-sm font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-4">
+                {/* Label + Headline */}
+                <p className="text-sm font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3 text-center sm:text-left">
                     What I Build
                 </p>
-
-                {/* Headline */}
-                <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white leading-snug mb-4">
-                    I build{" "}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">
-                        modern websites
-                    </span>{" "}
-                    for different business needs
+                <h2 className="text-2xl sm:text-3xl font-semibold text-zinc-900 dark:text-white leading-snug mb-2 text-center sm:text-left">
+                    Websites for every type of business
                 </h2>
-
-                {/* Supporting line */}
-                <p className="text-zinc-500 dark:text-zinc-400 text-base mb-10 max-w-xl mx-auto">
+                <p className="text-zinc-500 dark:text-zinc-400 text-sm mb-7 sm:mb-8 text-center sm:text-left">
                     Custom solutions available based on your needs.
                 </p>
 
-                {/* Category badges */}
-                <div className="flex flex-wrap justify-center gap-3">
+                {/* Pills — horizontal scroll on mobile, wrap on desktop */}
+                <div
+                    className="flex gap-2.5 overflow-x-auto pb-2 sm:flex-wrap sm:overflow-visible sm:pb-0"
+                    style={{ scrollbarWidth: "none" }}
+                >
                     {websiteTypes.map(({ label, icon }, i) => (
                         <span
                             key={i}
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-zinc-50 dark:bg-zinc-800/80 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 shadow-sm hover:border-violet-400 dark:hover:border-violet-500 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default"
+                            className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-zinc-50 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 hover:border-violet-400 dark:hover:border-violet-500 transition-colors duration-150 cursor-default"
                         >
-                            <span className="text-base leading-none">{icon}</span>
+                            <span className="text-sm leading-none">{icon}</span>
                             {label}
                         </span>
                     ))}
-                </div>
-
-                {/* Divider accent */}
-                <div className="mt-12 flex items-center justify-center gap-3 text-zinc-300 dark:text-zinc-700 text-xs font-medium tracking-widest uppercase select-none">
-                    <span className="h-px w-16 bg-zinc-200 dark:bg-zinc-700" />
-                    Every project is unique — crafted to match your brand
-                    <span className="h-px w-16 bg-zinc-200 dark:bg-zinc-700" />
                 </div>
 
             </div>

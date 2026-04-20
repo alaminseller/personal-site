@@ -110,26 +110,87 @@ const borderAccent: Record<Accent, string> = {
 /* ─── Component ──────────────────────────────────────────────────────── */
 export default function ProfessionalSkills() {
     return (
-        <section className="bg-zinc-50 dark:bg-zinc-900/50 py-24 border-t border-zinc-100 dark:border-zinc-800">
-            <div className="max-w-6xl mx-auto px-6">
+        <section className="bg-zinc-50 dark:bg-zinc-900/50 py-16 sm:py-24 border-t border-zinc-100 dark:border-zinc-800">
 
-                {/* Section header */}
+            {/* Section header */}
+            <div className="max-w-6xl mx-auto px-5 sm:px-6">
                 <p className="text-sm font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3">
                     Skills
                 </p>
-                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-16">
-                    <h2 className="text-4xl font-bold text-zinc-900 dark:text-white max-w-lg leading-snug">
-                        Tools &amp; expertise we bring{" "}
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-16">
+                    <h2 className="text-2xl sm:text-4xl font-bold text-zinc-900 dark:text-white max-w-lg leading-snug">
+                        Tools &amp; expertise{" "}
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">
-                            to every project
+                            in every project
                         </span>
                     </h2>
-                    <p className="text-zinc-500 dark:text-zinc-400 text-sm max-w-xs leading-relaxed sm:text-right">
-                        We are a small, dedicated team focused on delivering modern, high-performing websites through practical experience and real client work.
+                    <p className="hidden sm:block text-zinc-500 dark:text-zinc-400 text-sm max-w-xs leading-relaxed sm:text-right">
+                        A small, dedicated team focused on modern, high-performing websites.
                     </p>
                 </div>
+            </div>
 
-                {/* Skills grid */}
+            {/* ════════════════════════════════════════
+                MOBILE: Horizontal swipe carousel
+            ════════════════════════════════════════ */}
+            <div className="sm:hidden relative">
+                {/* Swipe hint */}
+                <div className="flex items-center justify-between px-5 mb-3">
+                    <span className="text-xs text-zinc-400 dark:text-zinc-500 font-medium">
+                        {skillGroups.length} skill areas
+                    </span>
+                    <span className="flex items-center gap-1 text-xs font-semibold text-violet-500 dark:text-violet-400">
+                        Swipe
+                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </span>
+                </div>
+
+                {/* Scroll track */}
+                <div
+                    className="flex gap-3 overflow-x-auto px-5 pb-5 snap-x snap-mandatory"
+                    style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
+                >
+                    {skillGroups.map((group, index) => (
+                        <div
+                            key={index}
+                            className="shrink-0 snap-start bg-white dark:bg-zinc-900 rounded-2xl p-4 border border-zinc-100 dark:border-zinc-800 flex flex-col"
+                            style={{ width: "78vw" }}
+                        >
+                            {/* Card header */}
+                            <div className="flex items-center gap-2.5 mb-3">
+                                <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-base shrink-0 ${iconBg[group.accent]}`}>
+                                    {group.icon}
+                                </div>
+                                <h3 className="text-sm font-semibold text-zinc-900 dark:text-white leading-tight">
+                                    {group.category}
+                                </h3>
+                            </div>
+
+                            {/* Skill badges */}
+                            <div className="flex flex-wrap gap-1.5">
+                                {group.skills.map((skill, idx) => (
+                                    <span
+                                        key={idx}
+                                        className="px-2.5 py-0.5 text-[11px] font-medium rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
+                                    >
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Right fade */}
+                <div className="pointer-events-none absolute right-0 top-8 bottom-5 w-12 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent" />
+            </div>
+
+            {/* ════════════════════════════════════════
+                DESKTOP: Original grid layout
+            ════════════════════════════════════════ */}
+            <div className="hidden sm:block max-w-6xl mx-auto px-6">
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {skillGroups.map((group, index) => (
                         <div
@@ -171,7 +232,7 @@ export default function ProfessionalSkills() {
                 <p className="text-center text-zinc-400 dark:text-zinc-500 text-sm mt-12">
                     Always improving and refining our process.{" "}
                     <a href="#contact" className="text-violet-600 dark:text-violet-400 hover:underline font-medium">
-                        Let’s build something great together. →
+                        Let's build something great together. →
                     </a>
                 </p>
             </div>

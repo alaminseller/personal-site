@@ -1,82 +1,82 @@
 const currentYear = new Date().getFullYear();
 
 const links = [
-    { href: "#about", label: "About" },
+    { href: "#about",    label: "About" },
     { href: "#services", label: "Services" },
     { href: "#projects", label: "Projects" },
-    { href: "#experience", label: "Experience" },
-    { href: "#skills", label: "Skills" },
-    { href: "#contact", label: "Contact" },
+    { href: "#pricing",  label: "Pricing" },
+    { href: "#contact",  label: "Contact" },
 ];
 
 const socials = [
-    { href: "https://linkedin.com/in/alaminrafi", label: "LinkedIn" },
-    { href: "https://github.com/alaminseller", label: "GitHub" },
-    { href: "https://wa.me/8801917443161", label: "WhatsApp" },
-    { href: "mailto:hello@alaminrafi.com", label: "Email" },
+    { href: "https://linkedin.com/in/alaminrafi",   label: "LinkedIn" },
+    { href: "https://github.com/alaminseller",       label: "GitHub" },
+    { href: "https://wa.me/8801917443161",           label: "WhatsApp" },
+    { href: "mailto:hello@alaminrafi.com",           label: "Email" },
 ];
 
 export default function ProfessionalFooter() {
     return (
-        <footer className="bg-zinc-900 dark:bg-zinc-950 text-zinc-300 py-16 border-t border-zinc-800">
-            <div className="max-w-6xl mx-auto px-6">
-                {/* Top Row */}
-                <div className="grid md:grid-cols-3 gap-10 mb-12">
+        <footer className="bg-zinc-900 dark:bg-zinc-950 text-zinc-300 py-10 sm:py-14 border-t border-zinc-800">
+            <div className="max-w-6xl mx-auto px-5 sm:px-6">
+
+                {/* Main row */}
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-8 mb-8">
+
                     {/* Brand */}
-                    <div>
-                        <div className="flex items-center gap-2.5 mb-4">
-                            <div className="h-8 w-8 bg-gradient-to-br from-violet-600 to-cyan-500 rounded-lg flex items-center justify-center text-white font-black text-sm shadow-md">
+                    <div className="max-w-xs">
+                        <div className="flex items-center gap-2 mb-2.5">
+                            <div className="h-7 w-7 bg-gradient-to-br from-violet-600 to-cyan-500 rounded-md flex items-center justify-center text-white font-bold text-xs">
                                 AR
                             </div>
-                            <span className="text-white font-bold text-lg">Alamin Rafi</span>
+                            <span className="text-white font-semibold">Alamin Rafi</span>
                         </div>
-                        <p className="text-zinc-400 text-sm leading-relaxed">
-                            Web Developer & Digital Service Provider. Building modern, affordable, and scalable websites for businesses worldwide.
+                        <p className="text-zinc-400 text-xs leading-relaxed">
+                            Digital Service Provider. Modern, affordable websites for businesses.
                         </p>
                     </div>
 
-                    {/* Navigation */}
-                    <div>
-                        <p className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Navigation</p>
-                        <ul className="space-y-2">
-                            {links.map(link => (
-                                <li key={link.href}>
-                                    <a href={link.href} className="text-sm text-zinc-400 hover:text-white transition-colors">
-                                        {link.label}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                    {/* Nav + Contact side by side */}
+                    <div className="flex gap-10 sm:gap-16">
+                        {/* Navigation */}
+                        <div>
+                            <p className="text-zinc-500 text-[11px] font-semibold uppercase tracking-wider mb-3">Pages</p>
+                            <ul className="space-y-1.5">
+                                {links.map(link => (
+                                    <li key={link.href}>
+                                        <a href={link.href} className="text-xs text-zinc-400 hover:text-white transition-colors">
+                                            {link.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
 
-                    {/* Connect */}
-                    <div>
-                        <p className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Connect</p>
-                        <ul className="space-y-2">
-                            {socials.map(social => (
-                                <li key={social.href}>
-                                    <a
-                                        href={social.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-sm text-zinc-400 hover:text-violet-400 transition-colors"
-                                    >
-                                        {social.label}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
+                        {/* Contact */}
+                        <div>
+                            <p className="text-zinc-500 text-[11px] font-semibold uppercase tracking-wider mb-3">Contact</p>
+                            <ul className="space-y-1.5">
+                                {socials.map(social => (
+                                    <li key={social.href}>
+                                        <a
+                                            href={social.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-xs text-zinc-400 hover:text-violet-400 transition-colors"
+                                        >
+                                            {social.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                {/* Bottom Row */}
-                <div className="pt-8 border-t border-zinc-800 flex flex-col sm:flex-row justify-between items-center gap-4">
-                    <p className="text-sm text-zinc-500">
-                        © {currentYear} Alamin Rafi. All rights reserved.
-                    </p>
-                    <p className="text-sm text-zinc-500">
-                        Built with ❤️ — Modern · Affordable · Scalable
-                    </p>
+                {/* Bottom */}
+                <div className="pt-6 border-t border-zinc-800 flex flex-col sm:flex-row justify-between items-center gap-2">
+                    <p className="text-xs text-zinc-500">© {currentYear} Alamin Rafi. All rights reserved.</p>
+                    <p className="text-xs text-zinc-600">Modern · Affordable · Scalable</p>
                 </div>
             </div>
         </footer>
