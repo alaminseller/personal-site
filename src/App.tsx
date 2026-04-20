@@ -9,6 +9,8 @@ import Index from "./pages/Index";
 import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
 import DashboardPage from "./pages/Dashboard";
+import ProjectTrackerPage from "./pages/ProjectTracker";
+import AdminProjectsPage from "./pages/AdminProjects";
 import NotFound from "./pages/NotFound";
 import { ChatWidget } from "@/components/ChatWidget";
 
@@ -27,6 +29,8 @@ const App = () => (
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/project/:id" element={<ProjectTrackerPage />} />
+              <Route path="/admin/projects" element={<AdminProjectsPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

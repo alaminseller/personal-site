@@ -46,12 +46,9 @@ export default function MobileBottomNav() {
         },
         {
             id: "projects",
-            label: "Projects",
+            label: "My Project",
             icon: <FolderOpen className="w-5 h-5" />,
-            action: () => {
-                const el = document.querySelector("#projects");
-                el?.scrollIntoView({ behavior: "smooth" });
-            },
+            action: () => window.location.href = "/admin/projects",
         },
     ];
 
