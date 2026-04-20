@@ -10,6 +10,7 @@ import ProfessionalSkills from "@/components/professional/Skills";
 import ProfessionalAchievements from "@/components/professional/Achievements";
 import ProfessionalContact from "@/components/professional/Contact";
 import ProfessionalFooter from "@/components/professional/Footer";
+import MobileBottomNav from "@/components/professional/MobileNav";
 
 
 export default function ModernPage() {
@@ -29,7 +30,7 @@ export default function ModernPage() {
                 <div id="contact"><ProfessionalContact /></div>
             </main>
             <ProfessionalFooter />
-
+            <MobileBottomNav />
         </div>
     );
 }

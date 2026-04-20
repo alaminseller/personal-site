@@ -294,17 +294,6 @@ export default function ModernHeroVisual() {
           <div className="w-1 h-2 rounded-full bg-violet-500 dark:bg-violet-400 animate-bounce" />
         </div>
       </div>
-      {/* ── Mobile Sticky Bottom CTA ── */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 pb-6 border-t border-zinc-200 dark:border-white/10 bg-white/95 dark:bg-[#070711]/95 backdrop-blur-xl z-[60] sm:hidden animate-slide-up anim-delay-1000 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] dark:shadow-[0_-10px_40px_rgba(0,0,0,0.4)]">
-        <a
-          href="#contact"
-          className="relative flex items-center justify-center gap-2.5 px-8 py-4 w-full rounded-2xl font-semibold text-[16px] text-white overflow-hidden shadow-[0_4px_20px_rgba(139,92,246,0.4)] transition-transform active:scale-95"
-        >
-          <span className="absolute inset-0 bg-gradient-to-r from-violet-600 to-cyan-500" />
-          <span className="relative">Start Project</span>
-          <ArrowRight className="relative w-4 h-4" />
-        </a>
-      </div>
     </section>
   );
 }
