@@ -15,15 +15,15 @@ function FloatingBadge({ icon, label, sublabel, className = "", delayClass = "" 
   return (
     <div
       className={`absolute z-30 flex items-center gap-2.5 px-4 py-2.5 rounded-2xl
-        bg-white/90 dark:bg-white/[0.08] backdrop-blur-xl border border-zinc-200 dark:border-white/[0.12]
-        shadow-lg dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] animate-badge-pop ${delayClass} ${className}`}
+        bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200 dark:border-zinc-800
+        shadow-sm animate-badge-pop ${delayClass} ${className}`}
     >
-      <div className="w-9 h-9 rounded-xl bg-violet-50 dark:bg-gradient-to-br dark:from-violet-500/20 dark:to-cyan-500/20 border border-violet-100 dark:border-white/10 flex items-center justify-center shrink-0">
+      <div className="w-9 h-9 rounded-xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center shrink-0">
         {icon}
       </div>
       <div>
-        <p className="text-zinc-900 dark:text-white font-semibold text-[13px] leading-tight">{label}</p>
-        <p className="text-zinc-500 dark:text-white/60 text-[10px] font-medium leading-tight mt-0.5">{sublabel}</p>
+        <p className="text-zinc-900 dark:text-zinc-100 font-bold text-[13px] leading-tight">{label}</p>
+        <p className="text-zinc-500 dark:text-zinc-400 text-[10px] font-medium leading-tight mt-0.5">{sublabel}</p>
       </div>
     </div>
   );
@@ -34,10 +34,9 @@ interface SocialLinkProps {
   href: string;
   label: string;
   icon: React.ReactNode;
-  delayClass?: string;
 }
 
-function SocialLink({ href, label, icon, delayClass = "" }: SocialLinkProps) {
+function SocialLink({ href, label, icon }: SocialLinkProps) {
   return (
     <a
       href={href}
@@ -45,10 +44,9 @@ function SocialLink({ href, label, icon, delayClass = "" }: SocialLinkProps) {
       rel="noopener noreferrer"
       aria-label={label}
       title={label}
-      className={`group w-10 h-10 rounded-xl bg-white dark:bg-white/[0.06] hover:bg-zinc-50 dark:hover:bg-white/[0.14] border border-zinc-200 dark:border-white/[0.10] hover:border-violet-300 dark:hover:border-violet-500/50
-        flex items-center justify-center text-zinc-400 dark:text-white/50 hover:text-violet-600 dark:hover:text-white
-        transition-all duration-300 hover:scale-110 shadow-sm dark:shadow-none dark:hover:shadow-[0_0_20px_rgba(139,92,246,0.35)]
-        animate-fade-in ${delayClass}`}
+      className="w-10 h-10 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800
+        flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-violet-600 dark:hover:text-violet-400
+        transition-all duration-300 hover:scale-110 shadow-sm"
     >
       {icon}
     </a>
@@ -57,16 +55,16 @@ function SocialLink({ href, label, icon, delayClass = "" }: SocialLinkProps) {
 
 /* ─── Main Hero ─────────────────────────────────────────────────────── */
 export default function ModernHeroVisual() {
-  const glowRef = useRef<HTMLDivElement>(null);
   const [projectCount, setProjectCount] = useState(0);
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 30 });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 40 });
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const heroImages = [
-    { src: "/Alamin.png", alt: "Alamin Rafi Portrait" },
-    { src: "/focused-1.png", alt: "Focused on work" },
-    { src: "/portrait-1.png", alt: "Professional portrait" },
-    { src: "/workplace-1.png", alt: "Modern workplace" },
+    { src: "/hero-1.png", alt: "Transforming Ideas Into Reality" },
+    { src: "/hero-2.png", alt: "Professional Developer Workplace" },
+    { src: "/hero-3.png", alt: "Focused Developer at Work" },
+    { src: "/hero-4.png", alt: "Software Development in Action" },
+    { src: "/hero-5.png", alt: "Collaborative Development Session" },
   ];
 
   const scrollNext = useCallback(() => {
@@ -75,18 +73,12 @@ export default function ModernHeroVisual() {
 
   useEffect(() => {
     if (!emblaApi) return;
-    
-    const intervalId = setInterval(scrollNext, 4000);
-    
-    emblaApi.on("select", () => {
-      setCurrentIndex(emblaApi.selectedScrollSnap());
-    });
-
+    const intervalId = setInterval(scrollNext, 5000);
+    emblaApi.on("select", () => setCurrentIndex(emblaApi.selectedScrollSnap()));
     return () => clearInterval(intervalId);
   }, [emblaApi, scrollNext]);
 
   useEffect(() => {
-    // Dynamic project count
     const today = new Date();
     const dateStr = today.toISOString().split('T')[0];
     let hash = 0;
@@ -94,173 +86,125 @@ export default function ModernHeroVisual() {
         hash = ((hash << 5) - hash) + dateStr.charCodeAt(i);
         hash |= 0;
     }
-    const targetCount = 14 + (Math.abs(hash) % 5);
-
-    const duration = 1200;
-    const fps = 60;
-    const totalFrames = (duration / 1000) * fps;
-    let currentFrame = 0;
-    const easeOutCubic = (x: number): number => 1 - Math.pow(1 - x, 3);
-
-    const animationInterval = setInterval(() => {
-      currentFrame++;
-      const progress = currentFrame / totalFrames;
-      setProjectCount(Math.floor(targetCount * easeOutCubic(progress)));
-      if (currentFrame >= totalFrames) {
-        setProjectCount(targetCount);
-        clearInterval(animationInterval);
-      }
-    }, 1000 / fps);
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (glowRef.current) {
-        glowRef.current.style.background = `radial-gradient(800px circle at ${e.clientX}px ${e.clientY}px, rgba(139,92,246,0.06), transparent 60%)`;
-      }
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      clearInterval(animationInterval);
-    };
+    const targetCount = 14 + (Math.abs(hash) % 10);
+    let start = 0;
+    const animation = setInterval(() => {
+      start += 1;
+      setProjectCount(start);
+      if (start >= targetCount) clearInterval(animation);
+    }, 100);
+    return () => clearInterval(animation);
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-white dark:bg-[#070711] transition-colors duration-500">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-white dark:bg-zinc-950 transition-colors duration-500">
+      
+      {/* Background Texture */}
+      <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none hero-grid-texture" />
 
-      {/* ── Mouse-tracking glow layer ── */}
-      <div ref={glowRef} className="pointer-events-none absolute inset-0 z-0 transition-all duration-500 hidden dark:block" />
-
-      {/* ── Background decoration ── */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-40 dark:opacity-100">
-        <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-violet-100/30 dark:bg-violet-900/10 blur-[120px] rounded-full" />
-        <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-cyan-100/20 dark:bg-cyan-900/10 blur-[100px] rounded-full" />
-      </div>
-
-      <div className="hero-grid-texture pointer-events-none absolute inset-0 z-0 opacity-[0.4] dark:opacity-100" />
-
-      {/* ── BIG background name text ── */}
-      <div className="pointer-events-none absolute inset-0 z-[1] hidden lg:flex items-center justify-center overflow-hidden select-none">
-        <span className="hero-watermark-text text-[min(12vw,140px)] font-black tracking-tighter text-zinc-100 dark:text-white/[0.02] leading-none whitespace-nowrap opacity-100">
-          ALAMIN RAFI
-        </span>
-      </div>
-
-      {/* ── Main content grid ── */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-24 pb-16 grid lg:grid-cols-2 gap-12 items-center min-h-screen">
+      {/* Main content grid */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-24 pb-16 grid lg:grid-cols-2 gap-12 items-center">
 
         {/* ─── LEFT: Text content ─────────────────────────────────── */}
-        <div className="flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
-
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full
-              bg-white dark:bg-white/[0.06] border border-zinc-200 dark:border-white/[0.10] shadow-sm
-              text-sm font-medium text-zinc-600 dark:text-white/80 animate-slide-right">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
-            </span>
-            Available for new projects
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+          <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-sm font-bold text-zinc-600 dark:text-zinc-300">
+            <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+            Available for Hire
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-[clamp(3rem,5vw,4.5rem)] font-black text-zinc-900 dark:text-white leading-[1.1] tracking-tight mb-6 animate-slide-up">
-            Web Developer
-            <span className="bg-gradient-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent">
-              {" "}&amp; Creator.
+          <h1 className="text-4xl sm:text-6xl lg:text-[4.5rem] font-black text-zinc-900 dark:text-white leading-[1.1] tracking-tight mb-6">
+            Building Digital
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">
+              Experiences.
             </span>
           </h1>
 
-          <p className="text-zinc-600 dark:text-white/60 text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-10 animate-slide-up anim-delay-200">
-            I build sharp, modern websites that help businesses stand out. 
-            Focused on performance, realism, and clean code.
+          <p className="text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-10">
+            I specialize in creating sharp, high-performance websites using the latest technologies. 
+            Real-world solutions for real-world businesses.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 animate-slide-up anim-delay-400 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
             <a
               href="#contact"
-              className="group relative inline-flex items-center justify-center gap-2.5 px-8 py-4 w-full sm:w-auto rounded-full font-bold text-white
-                overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_40px_rgba(139,92,246,0.3)]"
+              className="px-8 py-4 w-full sm:w-auto rounded-full font-bold text-white bg-gradient-to-r from-violet-600 to-cyan-500 hover:scale-105 transition-transform text-center"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-violet-600 to-cyan-500" />
-              <span className="relative">Start Project</span>
-              <ArrowRight className="relative w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              Start Project
             </a>
-
             <a
               href="#projects"
-              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 w-full sm:w-auto rounded-full font-bold text-zinc-700 dark:text-white
-                bg-white dark:bg-white/[0.06] hover:bg-zinc-50 dark:hover:bg-white/[0.12] border border-zinc-200 dark:border-white/[0.12]
-                transition-all duration-300 hover:scale-105"
+              className="px-8 py-4 w-full sm:w-auto rounded-full font-bold text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors text-center"
             >
-              View Work
+              View My Work
             </a>
           </div>
 
-          <div className="mt-12 flex items-center gap-4 animate-fade-in anim-delay-600">
+          <div className="mt-12 flex items-center gap-4">
             <SocialLink href="https://github.com" label="GitHub" icon={<Github className="w-5 h-5" />} />
             <SocialLink href="https://linkedin.com" label="LinkedIn" icon={<Linkedin className="w-5 h-5" />} />
             <SocialLink href="https://twitter.com" label="Twitter" icon={<Twitter className="w-5 h-5" />} />
           </div>
         </div>
 
-        {/* ─── RIGHT: Sharp Image Slider ────────────────────────── */}
-        <div className="relative flex items-center justify-center order-1 lg:order-2 h-[400px] sm:h-[600px]">
+        {/* ─── RIGHT: Clean Image Slider ────────────────────────── */}
+        <div className="relative flex items-center justify-center">
           
-          {/* Main Photo Frame */}
-          <div className="relative z-20 w-[280px] sm:w-[420px] lg:w-[460px] animate-scale-in">
-            <div className="relative rounded-[40px] sm:rounded-[60px] p-2 bg-white dark:bg-zinc-900 shadow-2xl border border-zinc-100 dark:border-white/10 overflow-hidden">
+          <div className="relative z-20 w-full max-w-[500px] lg:max-w-none">
+            {/* Slider Container */}
+            <div className="relative bg-white dark:bg-zinc-900 p-1 sm:p-2 rounded-[2rem] sm:rounded-[3rem] shadow-xl border border-zinc-100 dark:border-zinc-800 overflow-hidden">
               
-              {/* Embla Slider */}
-              <div className="overflow-hidden rounded-[32px] sm:rounded-[52px]" ref={emblaRef}>
+              <div className="overflow-hidden rounded-[1.8rem] sm:rounded-[2.8rem]" ref={emblaRef}>
                 <div className="flex">
                   {heroImages.map((img, index) => (
-                    <div key={index} className="flex-[0_0_100%] min-w-0 relative aspect-[4/5] sm:aspect-square">
-                      <img
-                        src={img.src}
-                        alt={img.alt}
-                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                      />
+                    <div key={index} className="flex-[0_0_100%] min-w-0">
+                      <div className="aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3] w-full overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+                        <img
+                          src={img.src}
+                          alt={img.alt}
+                          className="w-full h-full object-cover"
+                          loading={index === 0 ? "eager" : "lazy"}
+                        />
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Slider Dots */}
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-30">
+              {/* Minimal Navigation Dots */}
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5 z-30">
                 {heroImages.map((_, i) => (
-                  <div
+                  <button
                     key={i}
+                    onClick={() => emblaApi?.scrollTo(i)}
                     className={`h-1.5 rounded-full transition-all duration-300 ${
-                      currentIndex === i ? "w-6 bg-white" : "w-1.5 bg-white/40"
+                      currentIndex === i ? "w-6 bg-white" : "w-1.5 bg-white/50"
                     }`}
+                    aria-label={`Go to slide ${i + 1}`}
                   />
                 ))}
               </div>
             </div>
 
-            {/* Badges */}
+            {/* Floating Info Badges - Simplified */}
             <FloatingBadge
-              icon={<Star className="w-4 h-4 text-amber-400" />}
-              label="8+ Years"
-              sublabel="Experience"
-              className="-top-4 -left-4 animate-float"
+              icon={<Star className="w-4 h-4 text-amber-500" />}
+              label="Expertise"
+              sublabel="Full Stack Dev"
+              className="-top-4 -left-4 hidden sm:flex"
             />
             <FloatingBadge
-              icon={<Briefcase className="w-4 h-4 text-violet-400" />}
-              label={`${projectCount}+ Done`}
-              sublabel="Successful Projects"
-              className="bottom-12 -right-4 animate-float-delayed"
+              icon={<Briefcase className="w-4 h-4 text-blue-500" />}
+              label={`${projectCount}+ Projects`}
+              sublabel="Completed"
+              className="bottom-12 -right-4 hidden sm:flex"
             />
           </div>
-
-          {/* Minimal shadow / decoration */}
-          <div className="absolute inset-0 m-auto w-[320px] h-[320px] sm:w-[500px] sm:h-[500px] rounded-full border border-zinc-100 dark:border-white/5 pointer-events-none" />
         </div>
       </div>
 
-      {/* ── Scroll indicator ── */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 hidden sm:flex flex-col items-center gap-2 opacity-40">
-        <span className="text-[10px] uppercase tracking-widest font-bold dark:text-white">Scroll</span>
-        <div className="w-1 h-8 bg-gradient-to-b from-violet-500 to-transparent rounded-full animate-bounce" />
+      {/* Scroll indicator - Simple */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:block opacity-50">
+        <div className="w-px h-12 bg-gradient-to-b from-zinc-300 dark:from-zinc-700 to-transparent" />
       </div>
     </section>
   );
