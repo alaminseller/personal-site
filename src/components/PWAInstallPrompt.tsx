@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { X, Download } from "lucide-react";
+import { Download } from "lucide-react";
 
 interface BeforeInstallPromptEvent extends Event {
     prompt: () => Promise<void>;
@@ -18,7 +18,13 @@ export default function PWAInstallPrompt() {
             (window.navigator as Navigator & { standalone?: boolean }).standalone === true;
         if (isStandalone) return;
 
-        /* Detect iOS (Safari doesn't support beforeinstallprompt) */
+        /* Check if dismissed recently */
+        const dismissed = localStorage.getItem("pwa-dismissed");
+        if (dismissed && Date.now() - Number(dismissed) < 7 * 24 * 60 * 60 * 1000) {
+            return;
+        }
+
+        /* Detect iOS */
         const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) && !(window as Window & { MSStream?: unknown }).MSStream;
         setIsIOS(ios);
 
@@ -29,17 +35,23 @@ export default function PWAInstallPrompt() {
         };
         window.addEventListener("beforeinstallprompt", handler);
 
-        /* Show after 3s if on mobile */
-        const isMobile = window.innerWidth < 640;
-        if (isMobile) {
-            const t = setTimeout(() => setShow(true), 3000);
-            return () => {
-                clearTimeout(t);
-                window.removeEventListener("beforeinstallprompt", handler);
-            };
-        }
+        /* Show after 5s or on scroll */
+        const showPrompt = () => setShow(true);
+        const t = setTimeout(showPrompt, 5000);
+        
+        const scrollHandler = () => {
+            if (window.scrollY > 150) {
+                showPrompt();
+                window.removeEventListener("scroll", scrollHandler);
+            }
+        };
+        window.addEventListener("scroll", scrollHandler, { passive: true });
 
-        return () => window.removeEventListener("beforeinstallprompt", handler);
+        return () => {
+            clearTimeout(t);
+            window.removeEventListener("beforeinstallprompt", handler);
+            window.removeEventListener("scroll", scrollHandler);
+        };
     }, []);
 
     const handleInstall = async () => {
@@ -48,6 +60,13 @@ export default function PWAInstallPrompt() {
             const { outcome } = await deferredPrompt.userChoice;
             if (outcome === "accepted") setShow(false);
             setDeferredPrompt(null);
+        } else if (isIOS) {
+            alert('Tap "Share" in Safari, then "Add to Home Screen" to install.');
+            setShow(false);
+        } else {
+            // Fallback for browsers that don't support beforeinstallprompt
+            alert('To install, use your browser\\'s menu and select "Install" or "Add to Home Screen".');
+            setShow(false);
         }
     };
 
@@ -57,57 +76,43 @@ export default function PWAInstallPrompt() {
         localStorage.setItem("pwa-dismissed", String(Date.now()));
     };
 
-    /* Check if dismissed recently */
-    useEffect(() => {
-        const dismissed = localStorage.getItem("pwa-dismissed");
-        if (dismissed && Date.now() - Number(dismissed) < 7 * 24 * 60 * 60 * 1000) {
-            setShow(false);
-        }
-    }, []);
-
     if (!show) return null;
 
     return (
-        <div className="sm:hidden fixed bottom-[100px] left-4 right-4 z-[80] animate-in slide-in-from-bottom-4 duration-300">
-            <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-4 flex items-start gap-3">
-                {/* Icon */}
-                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center shrink-0">
-                    <span className="text-white font-bold text-sm">AR</span>
+        <div className="sm:hidden fixed bottom-[90px] left-4 right-4 z-[80] animate-in slide-in-from-bottom-4 duration-300">
+            <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-4 flex flex-col gap-3">
+                <div className="flex items-start gap-3">
+                    {/* Icon */}
+                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center shrink-0">
+                        <span className="text-white font-bold text-sm">AR</span>
+                    </div>
+
+                    {/* Text */}
+                    <div className="flex-1 min-w-0 flex flex-col justify-center">
+                        <p className="text-base font-semibold text-zinc-900 dark:text-white leading-snug mb-0.5">
+                            Install App
+                        </p>
+                        <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                            Get faster access and better experience
+                        </p>
+                    </div>
                 </div>
 
-                {/* Text */}
-                <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-zinc-900 dark:text-white leading-snug mb-0.5">
-                        Add to Home Screen
-                    </p>
-                    {isIOS ? (
-                        <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                            Tap <span className="font-medium">Share</span> then <span className="font-medium">"Add to Home Screen"</span> for app-like experience.
-                        </p>
-                    ) : (
-                        <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                            Install for faster access and offline support.
-                        </p>
-                    )}
-
-                    {!isIOS && deferredPrompt && (
-                        <button
-                            onClick={handleInstall}
-                            className="mt-2 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 text-white text-xs font-semibold hover:opacity-90 transition-opacity"
-                        >
-                            <Download className="w-3 h-3" /> Install App
-                        </button>
-                    )}
+                {/* Buttons */}
+                <div className="flex items-center gap-2 mt-1">
+                    <button
+                        onClick={handleInstall}
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white text-sm font-semibold hover:opacity-90 transition-opacity"
+                    >
+                        <Download className="w-4 h-4" /> Install
+                    </button>
+                    <button
+                        onClick={dismiss}
+                        className="flex-1 px-4 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 text-sm font-medium hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+                    >
+                        Later
+                    </button>
                 </div>
-
-                {/* Dismiss */}
-                <button
-                    onClick={dismiss}
-                    className="shrink-0 text-zinc-300 dark:text-zinc-600 hover:text-zinc-500 dark:hover:text-zinc-400 transition-colors mt-0.5"
-                    aria-label="Dismiss"
-                >
-                    <X className="w-4 h-4" />
-                </button>
             </div>
         </div>
     );
