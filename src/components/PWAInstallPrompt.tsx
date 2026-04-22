@@ -65,7 +65,7 @@ export default function PWAInstallPrompt() {
             setShow(false);
         } else {
             // Fallback for browsers that don't support beforeinstallprompt
-            alert('To install, use your browser\\'s menu and select "Install" or "Add to Home Screen".');
+            alert("To install, use your browser's menu and select 'Install' or 'Add to Home Screen'.");
             setShow(false);
         }
     };
