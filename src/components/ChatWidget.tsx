@@ -109,15 +109,14 @@ export const ChatWidget = () => {
 
   return (
     <div
-      className="chat-widget-root fixed right-4 sm:right-6 z-[9999] flex flex-col items-end"
+      className="floating-chat-btn fixed right-4 sm:right-6 z-[9999] flex flex-col items-end"
       style={{
-        /* Mobile: sit above the floating bottom nav (~80px tall at bottom-5) */
-        bottom: "calc(88px + env(safe-area-inset-bottom, 0px))",
+        bottom: "90px",
       }}
     >
       <style>{`
         @media (min-width: 640px) {
-          .chat-widget-root { bottom: 24px !important; }
+          .floating-chat-btn { bottom: 24px !important; }
         }
       `}</style>
       {/* Chat Popup */}
