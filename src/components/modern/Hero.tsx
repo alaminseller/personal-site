@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState, useCallback } from "react";
-import { ArrowRight, Github, Linkedin, Twitter, Globe, Briefcase, Star, Clock } from "lucide-react";
-import useEmblaCarousel from "embla-carousel-react";
+import { useEffect, useState } from "react";
+import { ArrowRight, Github, Linkedin, Twitter, Briefcase, Star } from "lucide-react";
 
 /* ─── Floating Badge ────────────────────────────────────────────────── */
 interface BadgeProps {
@@ -8,15 +7,14 @@ interface BadgeProps {
   label: string;
   sublabel: string;
   className?: string;
-  delayClass?: string;
 }
 
-function FloatingBadge({ icon, label, sublabel, className = "", delayClass = "" }: BadgeProps) {
+function FloatingBadge({ icon, label, sublabel, className = "" }: BadgeProps) {
   return (
     <div
       className={`absolute z-30 flex items-center gap-2.5 px-4 py-2.5 rounded-2xl
         bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200 dark:border-zinc-800
-        shadow-sm animate-badge-pop ${delayClass} ${className}`}
+        shadow-lg animate-fade-in ${className}`}
     >
       <div className="w-9 h-9 rounded-xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center shrink-0">
         {icon}
@@ -55,28 +53,7 @@ function SocialLink({ href, label, icon }: SocialLinkProps) {
 
 /* ─── Main Hero ─────────────────────────────────────────────────────── */
 export default function ModernHeroVisual() {
-  const [projectCount, setProjectCount] = useState(0);
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 40 });
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const heroImages = [
-    { src: "/hero-1.png", alt: "Transforming Ideas Into Reality" },
-    { src: "/hero-2.png", alt: "Professional Developer Workplace" },
-    { src: "/hero-3.png", alt: "Focused Developer at Work" },
-    { src: "/hero-4.png", alt: "Software Development in Action" },
-    { src: "/hero-5.png", alt: "Collaborative Development Session" },
-  ];
-
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    const intervalId = setInterval(scrollNext, 5000);
-    emblaApi.on("select", () => setCurrentIndex(emblaApi.selectedScrollSnap()));
-    return () => clearInterval(intervalId);
-  }, [emblaApi, scrollNext]);
+  const [projectCount, setProjectCount] = useState(14);
 
   useEffect(() => {
     const today = new Date();
@@ -87,47 +64,41 @@ export default function ModernHeroVisual() {
         hash |= 0;
     }
     const targetCount = 14 + (Math.abs(hash) % 10);
-    let start = 0;
-    const animation = setInterval(() => {
-      start += 1;
-      setProjectCount(start);
-      if (start >= targetCount) clearInterval(animation);
-    }, 100);
-    return () => clearInterval(animation);
+    setProjectCount(targetCount);
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-white dark:bg-zinc-950 transition-colors duration-500">
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-white dark:bg-zinc-950 transition-colors duration-500">
       
-      {/* Background Texture */}
-      <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none hero-grid-texture" />
+      {/* Subtle Background Texture */}
+      <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.04] pointer-events-none hero-grid-texture" />
 
-      {/* Main content grid */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-24 pb-16 grid lg:grid-cols-2 gap-12 items-center">
+      {/* Main content container */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-20 pb-16 grid lg:grid-cols-2 gap-12 items-center">
 
         {/* ─── LEFT: Text content ─────────────────────────────────── */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
           <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-sm font-bold text-zinc-600 dark:text-zinc-300">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            Available for Hire
+            <span className="flex h-2 w-2 rounded-full bg-emerald-500" />
+            Available for New Projects
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-[4.5rem] font-black text-zinc-900 dark:text-white leading-[1.1] tracking-tight mb-6">
-            Building Digital
+            Building High-End
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">
-              Experiences.
+              Web Solutions.
             </span>
           </h1>
 
           <p className="text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-10">
-            I specialize in creating sharp, high-performance websites using the latest technologies. 
-            Real-world solutions for real-world businesses.
+            I craft fast, modern, and high-performance websites. 
+            Focused on clean code and professional design that drives results.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
             <a
               href="#contact"
-              className="px-8 py-4 w-full sm:w-auto rounded-full font-bold text-white bg-gradient-to-r from-violet-600 to-cyan-500 hover:scale-105 transition-transform text-center"
+              className="px-8 py-4 w-full sm:w-auto rounded-full font-bold text-white bg-gradient-to-r from-violet-600 to-cyan-500 hover:opacity-90 transition-opacity text-center shadow-lg shadow-violet-500/20"
             >
               Start Project
             </a>
@@ -146,65 +117,36 @@ export default function ModernHeroVisual() {
           </div>
         </div>
 
-        {/* ─── RIGHT: Clean Image Slider ────────────────────────── */}
+        {/* ─── RIGHT: Single Sharp Image ────────────────────────── */}
         <div className="relative flex items-center justify-center">
-          
-          <div className="relative z-20 w-full max-w-[500px] lg:max-w-none">
-            {/* Slider Container */}
-            <div className="relative bg-white dark:bg-zinc-900 p-1 sm:p-2 rounded-[2rem] sm:rounded-[3rem] shadow-xl border border-zinc-100 dark:border-zinc-800 overflow-hidden">
-              
-              <div className="overflow-hidden rounded-[1.8rem] sm:rounded-[2.8rem]" ref={emblaRef}>
-                <div className="flex">
-                  {heroImages.map((img, index) => (
-                    <div key={index} className="flex-[0_0_100%] min-w-0">
-                      <div className="aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3] w-full overflow-hidden bg-zinc-100 dark:bg-zinc-800">
-                        <img
-                          src={img.src}
-                          alt={img.alt}
-                          className="w-full h-full object-cover"
-                          loading={index === 0 ? "eager" : "lazy"}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Minimal Navigation Dots */}
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5 z-30">
-                {heroImages.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => emblaApi?.scrollTo(i)}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      currentIndex === i ? "w-6 bg-white" : "w-1.5 bg-white/50"
-                    }`}
-                    aria-label={`Go to slide ${i + 1}`}
-                  />
-                ))}
+          <div className="relative z-20 w-full max-w-[480px]">
+            {/* Image Frame */}
+            <div className="relative bg-white dark:bg-zinc-900 p-1.5 sm:p-2 rounded-[2.5rem] shadow-xl border border-zinc-100 dark:border-zinc-800">
+              <div className="overflow-hidden rounded-[2rem]">
+                <img
+                  src="/hero-2.png"
+                  alt="Alamin Rafi - Professional Web Developer"
+                  className="w-full h-auto object-cover max-h-[550px]"
+                  loading="eager"
+                />
               </div>
             </div>
 
-            {/* Floating Info Badges - Simplified */}
+            {/* Badges */}
             <FloatingBadge
               icon={<Star className="w-4 h-4 text-amber-500" />}
               label="Expertise"
-              sublabel="Full Stack Dev"
+              sublabel="Full Stack Developer"
               className="-top-4 -left-4 hidden sm:flex"
             />
             <FloatingBadge
               icon={<Briefcase className="w-4 h-4 text-blue-500" />}
               label={`${projectCount}+ Projects`}
-              sublabel="Completed"
+              sublabel="Delivered Successfully"
               className="bottom-12 -right-4 hidden sm:flex"
             />
           </div>
         </div>
-      </div>
-
-      {/* Scroll indicator - Simple */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:block opacity-50">
-        <div className="w-px h-12 bg-gradient-to-b from-zinc-300 dark:from-zinc-700 to-transparent" />
       </div>
     </section>
   );
