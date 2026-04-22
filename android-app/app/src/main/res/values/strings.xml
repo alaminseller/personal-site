@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Alamin Rafi Digital Hub</string>
+    <string name="error_loading">Failed to load. Please check your internet connection.</string>
+</resources>
