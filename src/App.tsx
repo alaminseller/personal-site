@@ -13,6 +13,7 @@ import ProjectTrackerPage from "./pages/ProjectTracker";
 import AdminProjectsPage from "./pages/AdminProjects";
 import GalleryPage from "./pages/Gallery";
 import NotFound from "./pages/NotFound";
+import AboutMe from "./pages/AboutMe";
 import { ChatWidget } from "@/components/ChatWidget";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => (
               <Route path="/project/:id" element={<ProjectTrackerPage />} />
               <Route path="/admin/projects" element={<AdminProjectsPage />} />
               <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/about-me" element={<AboutMe />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

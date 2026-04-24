@@ -6,14 +6,12 @@ import { useAuth } from "@/context/AuthContext";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-    { href: "#about", label: "About" },
-    { href: "#services", label: "Services" },
-    { href: "#pricing", label: "Pricing" },
+    { href: "/#services", label: "Services" },
+    { href: "/#pricing", label: "Pricing" },
     { href: "/#projects", label: "Projects" },
-    { href: "/#experience", label: "Experience" },
-    { href: "/#skills", label: "Skills" },
-    { href: "/#contact", label: "Contact" },
+    { href: "/about-me", label: "CV / About" },
     { href: "/gallery", label: "Gallery" },
+    { href: "/#contact", label: "Contact" },
 ];
 
 export default function ModernHeader() {
@@ -55,16 +53,17 @@ export default function ModernHeader() {
             const offsetPosition = element.getBoundingClientRect().top + window.pageYOffset - 80;
             window.scrollTo({ top: offsetPosition, behavior: "smooth" });
             setIsMenuOpen(false);
-            if (window.location.pathname !== "/") {
-                navigate("/");
-                setTimeout(() => {
-                    const el = document.getElementById(targetId);
-                    if (el) {
-                        const offset = el.getBoundingClientRect().top + window.pageYOffset - 80;
-                        window.scrollTo({ top: offset, behavior: "smooth" });
-                    }
-                }, 100);
-            }
+        } else if (window.location.pathname !== "/") {
+            e.preventDefault();
+            navigate("/");
+            setIsMenuOpen(false);
+            setTimeout(() => {
+                const el = document.getElementById(targetId);
+                if (el) {
+                    const offset = el.getBoundingClientRect().top + window.pageYOffset - 80;
+                    window.scrollTo({ top: offset, behavior: "smooth" });
+                }
+            }, 100);
         }
     };
 
