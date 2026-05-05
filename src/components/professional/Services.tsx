@@ -88,14 +88,12 @@ export default function ServicesSection() {
 
                 {/* Scroll track */}
                 <div
-                    className="flex gap-3 overflow-x-auto px-5 pb-5 snap-x snap-mandatory"
-                    style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
+                    className="flex gap-3 overflow-x-auto px-5 pb-5 snap-x snap-mandatory scrollbar-none [scrollbar-width:none] [-webkit-overflow-scrolling:touch]"
                 >
                     {services.map((service, i) => (
                         <div
                             key={i}
-                            className="shrink-0 snap-start bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-4 border border-zinc-100 dark:border-zinc-800 flex flex-col"
-                            style={{ width: "78vw" }}
+                            className="shrink-0 snap-start bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-4 border border-zinc-100 dark:border-zinc-800 flex flex-col w-[78vw]"
                         >
                             {/* Icon */}
                             <div className={`h-11 w-11 rounded-xl flex items-center justify-center mb-3 ${colorMap[service.color]}`}>
@@ -109,8 +107,7 @@ export default function ServicesSection() {
 
                     {/* End spacer */}
                     <div
-                        className="shrink-0 flex flex-col items-center justify-center rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900/50 gap-2 snap-start px-4"
-                        style={{ width: "52vw", minHeight: "140px" }}
+                        className="shrink-0 flex flex-col items-center justify-center rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900/50 gap-2 snap-start px-4 w-[52vw] min-h-[140px]"
                     >
                         <span className="text-2xl">✦</span>
                         <p className="text-[11px] font-semibold text-zinc-400 dark:text-zinc-500 text-center leading-relaxed">

@@ -96,7 +96,7 @@ export const ChatWidget = () => {
           <div className="px-4 py-4 bg-gradient-to-r from-violet-600 to-cyan-500 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center text-white font-bold text-sm border border-white/30">
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-sm border border-white/30">
                   AR
                 </div>
                 <div className="absolute right-0 bottom-0 w-3 h-3 bg-green-400 border-2 border-white dark:border-zinc-950 rounded-full" />

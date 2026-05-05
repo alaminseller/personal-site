@@ -55,7 +55,7 @@ export default function MobileBottomNav() {
     return (
         /* Mobile only — hidden on sm+ */
         <div className="sm:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-[70]">
-            <div className="flex items-center gap-1 px-3 py-2.5 rounded-[24px] bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border border-zinc-200/80 dark:border-zinc-700/60 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+            <div className="flex items-center gap-1 px-3 py-2.5 rounded-[24px] bg-white/95 dark:bg-zinc-900/95 border border-zinc-200/80 dark:border-zinc-700/60 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
                 {navItems.map((item) => {
                     const isActive = active === item.id;
                     const isTapped = tapped === item.id;
@@ -81,15 +81,10 @@ export default function MobileBottomNav() {
                                 className={`
                                     transition-colors duration-200
                                     ${isActive
-                                        ? "text-transparent [&>*]:fill-none"
+                                        ? "text-transparent [&>*]:fill-none bg-gradient-to-br from-violet-600 to-cyan-500 bg-clip-text"
                                         : "text-zinc-400 dark:text-zinc-500"
                                     }
                                 `}
-                                style={isActive ? {
-                                    background: "linear-gradient(135deg, #7c3aed, #06b6d4)",
-                                    WebkitBackgroundClip: "text",
-                                    WebkitTextFillColor: "transparent",
-                                } : undefined}
                             >
                                 {/* Wrap in a div to apply gradient to SVG stroke icons */}
                                 <span className={isActive

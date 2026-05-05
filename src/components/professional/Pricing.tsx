@@ -199,11 +199,7 @@ export default function PricingSection() {
             id="pricing"
             className="py-14 sm:py-24 bg-white dark:bg-[#070711] border-t border-zinc-100 dark:border-white/[0.05] relative overflow-hidden"
         >
-            {/* Background blobs — dark mode only */}
-            <div className="pointer-events-none absolute inset-0 overflow-hidden hidden dark:block">
-                <div className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full bg-gradient-radial from-violet-700/10 to-transparent blur-[100px]" />
-                <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-gradient-radial from-cyan-700/10 to-transparent blur-[80px]" />
-            </div>
+            {/* Background blobs removed for performance */}
 
             <div className="relative max-w-6xl mx-auto px-6">
                 {/* ─── Section Header ─── */}
@@ -241,8 +237,7 @@ export default function PricingSection() {
 
                     {/* Scroll track */}
                     <div
-                        className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory"
-                        style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
+                        className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-none [scrollbar-width:none] [-webkit-overflow-scrolling:touch]"
                     >
                         {plans.map((plan) => {
                             const isSelected = selectedPlan === plan.id;
@@ -261,9 +256,8 @@ export default function PricingSection() {
                                                 ? "ring-2 ring-violet-500 dark:ring-violet-400 shadow-xl shadow-violet-500/10 opacity-90"
                                                 : "ring-1 ring-zinc-200 dark:ring-white/[0.08] opacity-85"
                                         }
-                                        bg-white dark:bg-zinc-900/80 backdrop-blur-sm
+                                        bg-white dark:bg-zinc-900/90 w-[87vw]
                                     `}
-                                    style={{ width: "87vw" }}
                                 >
                                     {/* Selected checkmark */}
                                     {isSelected && (
@@ -360,7 +354,7 @@ export default function PricingSection() {
                                             ? "ring-2 ring-violet-500 dark:ring-violet-400 shadow-xl shadow-violet-500/10 scale-[1.01] md:scale-[1.03] z-10 opacity-80"
                                             : "ring-1 ring-zinc-200 dark:ring-white/[0.08] hover:shadow-xl hover:-translate-y-1 opacity-80"
                                     }
-                                    bg-white dark:bg-zinc-900/80 backdrop-blur-sm
+                                    bg-white dark:bg-zinc-900/90
                                 `}
                             >
                                 {/* Selected checkmark */}
@@ -455,8 +449,7 @@ export default function PricingSection() {
                         </div>
 
                         <div
-                            className="flex gap-3 overflow-x-auto px-5 pb-4 snap-x snap-mandatory"
-                            style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
+                            className="flex gap-3 overflow-x-auto px-5 pb-4 snap-x snap-mandatory scrollbar-none [scrollbar-width:none] [-webkit-overflow-scrolling:touch]"
                         >
                             {addons.map((addon) => {
                                 const isChecked = selectedAddons.has(addon.id);
@@ -470,9 +463,8 @@ export default function PricingSection() {
                                             ${isChecked
                                                 ? "border-violet-500 dark:border-violet-400 bg-violet-50 dark:bg-violet-500/10 shadow-md shadow-violet-500/10"
                                                 : "border-zinc-200 dark:border-white/[0.08] bg-white dark:bg-zinc-900/50"
-                                            }
+                                            } w-[70vw]
                                         `}
-                                        style={{ width: "70vw" }}
                                     >
                                         {/* Icon row */}
                                         <div className="flex items-center gap-2.5 mb-2">
@@ -552,7 +544,7 @@ export default function PricingSection() {
                 </div>
 
                 {/* ─── Summary Bar ─── */}
-                <div className="rounded-3xl border border-zinc-200 dark:border-white/[0.08] bg-white dark:bg-zinc-900/80 backdrop-blur-sm p-6 sm:p-8">
+                <div className="rounded-3xl border border-zinc-200 dark:border-white/[0.08] bg-white dark:bg-zinc-900/90 p-6 sm:p-8">
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
                         {/* Left: breakdown */}
                         <div className="flex-1 min-w-0">
@@ -598,7 +590,7 @@ export default function PricingSection() {
                                 href="#contact"
                                 onClick={scrollToContact}
                                 className="group relative flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl font-semibold text-[15px] text-white w-full sm:w-auto
-                                    overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(139,92,246,0.4)]"
+                                    overflow-hidden transition-all duration-300 hover:scale-105"
                             >
                                 <span className="absolute inset-0 bg-gradient-to-r from-violet-600 to-fuchsia-500" />
                                 <span className="relative">Start Project</span>

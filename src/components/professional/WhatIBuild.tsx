@@ -26,8 +26,7 @@ export default function WhatIBuild() {
 
                 {/* Pills — horizontal scroll on mobile, wrap on desktop */}
                 <div
-                    className="flex gap-2.5 overflow-x-auto pb-2 sm:flex-wrap sm:overflow-visible sm:pb-0"
-                    style={{ scrollbarWidth: "none" }}
+                    className="flex gap-2.5 overflow-x-auto pb-2 sm:flex-wrap sm:overflow-visible sm:pb-0 scrollbar-none [scrollbar-width:none]"
                 >
                     {websiteTypes.map(({ label, icon }, i) => (
                         <span

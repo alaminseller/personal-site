@@ -72,7 +72,7 @@ export default function ModernHeader() {
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
                 isScrolled
-                    ? "py-3 bg-white/90 dark:bg-[#070711]/80 backdrop-blur-xl border-b border-zinc-200 dark:border-white/[0.06] shadow-sm dark:shadow-[0_1px_40px_rgba(0,0,0,0.6)]"
+                    ? "py-3 bg-white/95 dark:bg-[#070711]/95 border-b border-zinc-200 dark:border-white/[0.06] shadow-sm"
                     : "py-5 bg-transparent"
             )}
         >
@@ -139,7 +139,7 @@ export default function ModernHeader() {
                             <a
                                 href="#contact"
                                 onClick={(e) => scrollToSection(e, "#contact")}
-                                className="bg-brand-gradient px-5 py-2 text-sm font-semibold rounded-full text-white transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(139,92,246,0.5)]"
+                                className="bg-brand-gradient px-5 py-2 text-sm font-semibold rounded-full text-white transition-all hover:scale-105"
                             >
                                 Hire Me
                             </a>
@@ -166,7 +166,7 @@ export default function ModernHeader() {
 
             {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="lg:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-[#0d0b1f]/95 backdrop-blur-xl border-b border-zinc-200 dark:border-white/[0.08] shadow-2xl">
+                <div className="lg:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-[#0d0b1f]/95 border-b border-zinc-200 dark:border-white/[0.08] shadow-lg">
                     <nav className="flex flex-col p-6 space-y-1">
                         {navLinks.map((link) => (
                             <Link

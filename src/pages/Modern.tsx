@@ -3,7 +3,7 @@ import ModernHeroVisual from "@/components/modern/Hero";
 import ServicesSection from "@/components/professional/Services";
 import PricingSection from "@/components/professional/Pricing";
 import ProjectsSection from "@/components/professional/Projects";
-import WhatIBuild from "@/components/professional/WhatIBuild";
+
 import ProfessionalContact from "@/components/professional/Contact";
 import ProfessionalFooter from "@/components/professional/Footer";
 import MobileBottomNav from "@/components/professional/MobileNav";
@@ -18,7 +18,7 @@ export default function ModernPage() {
                 <ModernHeroVisual />
                 <div id="services"><ServicesSection /></div>
                 <div id="pricing"><PricingSection /></div>
-                <WhatIBuild />
+
                 <div id="projects"><ProjectsSection /></div>
                 <div id="contact"><ProfessionalContact /></div>
             </main>

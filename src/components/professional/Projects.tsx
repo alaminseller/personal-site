@@ -75,7 +75,7 @@ const projects: Project[] = [
     },
 ];
 
-const INITIAL_VISIBLE = 6;
+const INITIAL_VISIBLE = 3;
 const categories: Category[] = ["All", "UI/UX Design"];
 
 const websiteTypes = [
@@ -98,13 +98,14 @@ function ProjectCard({ project }: { project: Project }) {
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
                 />
                 {project.featured && (
-                    <span className="absolute top-3 right-3 bg-white/90 dark:bg-black/70 backdrop-blur-md text-zinc-900 dark:text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-black/5 dark:border-white/10 shadow-sm">
+                    <span className="absolute top-3 right-3 bg-white/95 dark:bg-black/90 text-zinc-900 dark:text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-black/5 dark:border-white/10 shadow-sm">
                         Featured
                     </span>
                 )}
-                <span className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full">
+                <span className="absolute bottom-3 left-3 bg-black/80 text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full">
                     {project.category}
                 </span>
             </div>
@@ -211,14 +212,12 @@ export default function ProjectsSection() {
 
                 {/* Scroll container */}
                 <div
-                    className="flex gap-4 overflow-x-auto px-5 pb-5 snap-x snap-mandatory"
-                    style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
+                    className="flex gap-4 overflow-x-auto px-5 pb-5 snap-x snap-mandatory scrollbar-none [scrollbar-width:none] [-webkit-overflow-scrolling:touch]"
                 >
                     {filtered.map((project, i) => (
                         <div
                             key={`mobile-${activeCategory}-${i}`}
-                            className="shrink-0 snap-start"
-                            style={{ width: "82vw" }}
+                            className="shrink-0 snap-start w-[82vw]"
                         >
                             <ProjectCard project={project} />
                         </div>
@@ -226,8 +225,7 @@ export default function ProjectsSection() {
 
                     {/* End spacer card — indicates more content is coming */}
                     <div
-                        className="shrink-0 flex flex-col items-center justify-center rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900/50 gap-3 snap-start"
-                        style={{ width: "60vw", minHeight: "300px" }}
+                        className="shrink-0 flex flex-col items-center justify-center rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900/50 gap-3 snap-start w-[60vw] min-h-[300px]"
                     >
                         <span className="text-3xl">✦</span>
                         <p className="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4 leading-relaxed">
@@ -247,10 +245,6 @@ export default function ProjectsSection() {
                     {visible.map((project, i) => (
                         <div
                             key={`desktop-${activeCategory}-${i}`}
-                            style={{
-                                animation: `fadeSlideUp 0.35s ease both`,
-                                animationDelay: `${(i % INITIAL_VISIBLE) * 60}ms`,
-                            }}
                         >
                             <ProjectCard project={project} />
                         </div>
@@ -284,12 +278,8 @@ export default function ProjectsSection() {
                 </p>
             </div>
 
-            {/* Keyframe */}
+            {/* Scrollbar hide */}
             <style>{`
-                @keyframes fadeSlideUp {
-                    from { opacity: 0; transform: translateY(18px); }
-                    to   { opacity: 1; transform: translateY(0); }
-                }
                 .scrollbar-none::-webkit-scrollbar { display: none; }
             `}</style>
         </section>

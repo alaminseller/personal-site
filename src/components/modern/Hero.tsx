@@ -27,10 +27,10 @@ function SocialLink({ href, label, icon }: SocialLinkProps) {
 /* ─── Main Hero ─────────────────────────────────────────────────────── */
 export default function ModernHeroVisual() {
   return (
-    <section className="relative min-h-[90vh] flex items-center bg-white dark:bg-zinc-950">
+    <section className="relative w-full pt-20 lg:pt-28 pb-10 bg-white dark:bg-zinc-950">
       
       {/* Main content container */}
-      <div className="w-full max-w-7xl mx-auto px-6 py-20 lg:py-24 grid lg:grid-cols-2 gap-12 items-center">
+      <div className="w-full max-w-7xl mx-auto px-6 py-10 lg:py-12 grid lg:grid-cols-2 gap-10 items-center">
 
         {/* ─── LEFT: Text content ─────────────────────────────────── */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left order-last lg:order-first">

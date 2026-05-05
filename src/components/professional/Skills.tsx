@@ -149,14 +149,12 @@ export default function ProfessionalSkills() {
 
                 {/* Scroll track */}
                 <div
-                    className="flex gap-3 overflow-x-auto px-5 pb-5 snap-x snap-mandatory"
-                    style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
+                    className="flex gap-3 overflow-x-auto px-5 pb-5 snap-x snap-mandatory scrollbar-none [scrollbar-width:none] [-webkit-overflow-scrolling:touch]"
                 >
                     {skillGroups.map((group, index) => (
                         <div
                             key={index}
-                            className="shrink-0 snap-start bg-white dark:bg-zinc-900 rounded-2xl p-4 border border-zinc-100 dark:border-zinc-800 flex flex-col"
-                            style={{ width: "78vw" }}
+                            className="shrink-0 snap-start bg-white dark:bg-zinc-900 rounded-2xl p-4 border border-zinc-100 dark:border-zinc-800 flex flex-col w-[78vw]"
                         >
                             {/* Card header */}
                             <div className="flex items-center gap-2.5 mb-3">
