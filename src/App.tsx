@@ -14,7 +14,7 @@ import AdminProjectsPage from "./pages/AdminProjects";
 import GalleryPage from "./pages/Gallery";
 import NotFound from "./pages/NotFound";
 import AboutMe from "./pages/AboutMe";
-import { ChatWidget } from "@/components/ChatWidget";
+
 
 const queryClient = new QueryClient();
 
@@ -39,7 +39,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
-          <ChatWidget />
+
         </TooltipProvider>
       </AuthProvider>
     </ThemeProvider>

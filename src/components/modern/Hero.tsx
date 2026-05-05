@@ -42,7 +42,7 @@ export default function ModernHeroVisual() {
             I'm Alamin Rafi
           </h1>
 
-          <h2 className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500 mb-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-violet-600 dark:text-violet-400 mb-6">
             Digital Service Provider
           </h2>
 
@@ -53,7 +53,7 @@ export default function ModernHeroVisual() {
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
             <a
               href="#contact"
-              className="px-8 py-4 w-full sm:w-auto rounded-full font-bold text-white bg-gradient-to-r from-violet-600 to-cyan-500 hover:opacity-90 transition-opacity text-center shadow-sm"
+              className="px-8 py-4 w-full sm:w-auto rounded-full font-bold text-white bg-violet-600 hover:bg-violet-700 transition-colors text-center shadow-sm"
             >
               Start Project
             </a>
@@ -74,11 +74,11 @@ export default function ModernHeroVisual() {
 
         {/* ─── RIGHT: Single Sharp Image ────────────────────────── */}
         <div className="flex items-center justify-center order-first lg:order-last">
-          <div className="w-full max-w-[400px]">
+          <div className="w-full max-w-[280px] lg:max-w-[320px]">
             <img
-              src="/Alamin.png"
+              src="/Alamin.webp"
               alt="Alamin Rafi - Digital Service Provider"
-              className="w-full h-auto object-cover rounded-full shadow-md border-4 border-zinc-50 dark:border-zinc-900"
+              className="w-full h-auto object-cover rounded-full shadow-sm border-2 border-zinc-100 dark:border-zinc-800"
               loading="eager"
             />
           </div>
