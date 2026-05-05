@@ -20,14 +20,7 @@ interface PricingPlan {
     iconBg: string;
 }
 
-interface Addon {
-    id: string;
-    name: string;
-    description: string;
-    icon: React.ReactNode;
-    priceMin: number;
-    priceMax: number | null;
-    /* ─── Data ───────────────────────────────────────────────────────── */
+/* ─── Data ───────────────────────────────────────────────────────── */
 const plans: PricingPlan[] = [
     {
         id: "basic",
