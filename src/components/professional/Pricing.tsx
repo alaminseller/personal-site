@@ -230,11 +230,11 @@ export default function PricingSection() {
                                     transition-all duration-300 cursor-pointer group
                                     ${isSelected
                                         ? plan.highlighted
-                                            ? "ring-2 ring-violet-500 dark:ring-violet-400 shadow-2xl shadow-violet-500/20 dark:shadow-violet-400/10 scale-[1.02] md:scale-105 z-10"
-                                            : "ring-2 ring-violet-500/50 dark:ring-violet-400/50 shadow-xl -translate-y-1"
+                                            ? "ring-2 ring-violet-500 dark:ring-violet-400 shadow-md shadow-violet-500/20 dark:shadow-violet-400/10 scale-[1.02] md:scale-105 z-10"
+                                            : "ring-2 ring-violet-500/50 dark:ring-violet-400/50 shadow-md -translate-y-1"
                                         : plan.highlighted
-                                            ? "ring-2 ring-violet-500 dark:ring-violet-400 shadow-xl shadow-violet-500/10 scale-[1.01] md:scale-[1.03] z-10 opacity-80"
-                                            : "ring-1 ring-zinc-200 dark:ring-white/[0.08] hover:shadow-xl hover:-translate-y-1 opacity-80"
+                                            ? "ring-2 ring-violet-500 dark:ring-violet-400 shadow-md shadow-violet-500/10 scale-[1.01] md:scale-[1.03] z-10 opacity-80"
+                                            : "ring-1 ring-zinc-200 dark:ring-white/[0.08] hover:shadow-md hover:-translate-y-1 opacity-80"
                                     }
                                     bg-white dark:bg-zinc-900/90
                                 `}

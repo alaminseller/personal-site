@@ -74,7 +74,7 @@ export default function ServicesSection() {
                     {services.map((service, i) => (
                         <div
                             key={i}
-                            className={`group bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-5 sm:p-7 border border-zinc-100 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-600 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col${
+                            className={`group bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-5 sm:p-7 border border-zinc-100 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-600 hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col${
                                 i === 4 ? " hidden sm:flex" : ""
                             }`}
                         >

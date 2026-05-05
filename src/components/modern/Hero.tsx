@@ -79,7 +79,7 @@ export default function ModernHeroVisual() {
               src="/Alamin.webp"
               alt="Alamin Rafi - Digital Service Provider"
               className="w-full h-auto object-cover rounded-full shadow-sm border-2 border-zinc-100 dark:border-zinc-800"
-              loading="eager"
+              loading="lazy"
             />
           </div>
         </div>

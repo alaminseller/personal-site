@@ -91,7 +91,7 @@ const websiteTypes = [
 /* ── Shared card component used by both layouts ── */
 function ProjectCard({ project }: { project: Project }) {
     return (
-        <div className="group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+        <div className="group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
             {/* Preview Image */}
             <div className="h-44 sm:h-56 relative overflow-hidden shrink-0 bg-zinc-100 dark:bg-zinc-800">
                 <img
