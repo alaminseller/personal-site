@@ -1,93 +1,12 @@
-import { useState } from "react";
-import { Check, Clock, Zap, Star, Crown, Package, Palette, ShoppingCart, Calendar, FilePlus, Rocket, ArrowRight } from "lucide-react";
+import { Check, Zap, Star, Crown } from "lucide-react";
+import { plans, addons, maintenanceOption, PricingPlan } from "@/data/pricingData";
 
-/* ─── Types ─────────────────────────────────────────────────────── */
-interface PricingPlan {
-    id: string;
-    name: string;
-    icon: React.ReactNode;
-    priceMin: number;
-    priceMax: number | null;
-    priceLabel: string;
-    priceNote: string;
-    delivery: string;
-    features: string[];
-    ctaLabel: string;
-    highlighted: boolean;
-    badge?: string;
-    accentFrom: string;
-    accentTo: string;
-    iconBg: string;
-}
+const iconMap = {
+    Zap: <Zap className="w-5 h-5" />,
+    Star: <Star className="w-5 h-5" />,
+    Crown: <Crown className="w-5 h-5" />,
+};
 
-/* ─── Data ───────────────────────────────────────────────────────── */
-const plans: PricingPlan[] = [
-    {
-        id: "basic",
-        name: "Basic",
-        icon: <Zap className="w-5 h-5" />,
-        priceMin: 250,
-        priceMax: null,
-        priceLabel: "$250",
-        priceNote: "Personal / Small Site",
-        delivery: "5–7 days",
-        highlighted: false,
-        accentFrom: "from-blue-500",
-        accentTo: "to-cyan-500",
-        iconBg: "bg-blue-50/50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400",
-        ctaLabel: "Start Basic",
-        features: [
-            "1–3 pages website",
-            "Responsive design",
-            "Contact form",
-            "Standard SEO",
-        ],
-    },
-    {
-        id: "standard",
-        name: "Standard",
-        icon: <Star className="w-5 h-5" />,
-        priceMin: 400,
-        priceMax: 600,
-        priceLabel: "$400–$600",
-        priceNote: "Business Site",
-        delivery: "7–10 days",
-        highlighted: true,
-        accentFrom: "from-violet-500",
-        accentTo: "to-fuchsia-500",
-        iconBg: "bg-violet-50/50 text-violet-600 dark:bg-violet-500/10 dark:text-violet-400",
-        ctaLabel: "Start Standard",
-        features: [
-            "4–7 pages website",
-            "SEO setup",
-            "Speed optimization",
-            "Social integration",
-        ],
-    },
-    {
-        id: "premium",
-        name: "Premium",
-        icon: <Crown className="w-5 h-5" />,
-        priceMin: 700,
-        priceMax: 1000,
-        priceLabel: "$700–$1000",
-        priceNote: "Advanced Solutions",
-        delivery: "10–14 days",
-        highlighted: false,
-        accentFrom: "from-amber-500",
-        accentTo: "to-orange-500",
-        iconBg: "bg-amber-50/50 text-amber-600 dark:bg-amber-500/10 dark:text-amber-400",
-        ctaLabel: "Start Premium",
-        features: [
-            "8+ pages website",
-            "Custom design",
-            "Advanced features",
-            "Priority support",
-        ],
-    },
-];
-
-/* ─── Component ───────────────────────────────────────────────────── */
 export default function PricingSection() {
     const scrollToContact = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -111,7 +30,7 @@ export default function PricingSection() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-                    {plans.map((plan) => {
+                    {plans.map((plan: PricingPlan) => {
                         return (
                             <div
                                 key={plan.id}
@@ -127,7 +46,7 @@ export default function PricingSection() {
                                 {/* Icon + Name */}
                                 <div className="flex items-center gap-3 mb-6">
                                     <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${plan.iconBg}`}>
-                                        {plan.icon}
+                                        {iconMap[plan.iconName]}
                                     </div>
                                     <h3 className="text-lg font-bold text-zinc-900 dark:text-white">{plan.name}</h3>
                                 </div>
@@ -172,16 +91,44 @@ export default function PricingSection() {
                     })}
                 </div>
 
+                {/* ─── Add-ons Section ─── */}
+                <div className="mt-16">
+                    <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-6">Available Add-ons</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {addons.map((addon) => (
+                            <div 
+                                key={addon.id}
+                                className="p-4 rounded-xl border border-zinc-100 dark:border-white/[0.05] bg-zinc-50/50 dark:bg-zinc-900/40 flex justify-between items-center"
+                            >
+                                <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{addon.name}</span>
+                                <span className="text-xs font-bold text-violet-600 dark:text-violet-400">{addon.priceLabel}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* ─── Maintenance Option ─── */}
+                <div className="mt-8 p-6 rounded-xl border border-dashed border-zinc-200 dark:border-zinc-800 bg-zinc-50/30 dark:bg-zinc-900/20 text-center">
+                    <h3 className="text-sm font-bold text-zinc-900 dark:text-white mb-2">{maintenanceOption.name}</h3>
+                    <a 
+                        href="#contact" 
+                        onClick={scrollToContact}
+                        className="text-violet-600 dark:text-violet-400 font-bold text-sm hover:underline"
+                    >
+                        {maintenanceOption.priceLabel} →
+                    </a>
+                </div>
+
                 {/* Custom note */}
-                <div className="mt-10 pt-6 border-t border-zinc-100 dark:border-white/[0.05] text-center">
+                <div className="mt-12 pt-8 border-t border-zinc-100 dark:border-white/[0.05] text-center">
                     <p className="text-zinc-500 dark:text-zinc-400 text-sm">
-                        Need a custom solution?{" "}
+                        Need a fully custom solution?{" "}
                         <a
                             href="#contact"
                             onClick={scrollToContact}
                             className="text-violet-600 dark:text-violet-400 hover:underline font-bold"
                         >
-                            Let's discuss →
+                            Let's discuss your project →
                         </a>
                     </p>
                 </div>

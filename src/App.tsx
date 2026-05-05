@@ -10,9 +10,12 @@ import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
 import DashboardPage from "./pages/Dashboard";
 import ProjectTrackerPage from "./pages/ProjectTracker";
-import AdminProjectsPage from "./pages/AdminProjects";
-import GalleryPage from "./pages/Gallery";
+import BlogPage from "./pages/Blog";
+import BlogPostPage from "./pages/BlogPost";
 import PortfolioPage from "./pages/Portfolio";
+import AdminDashboard from "./pages/admin/Dashboard";
+import AdminBlog from "./pages/admin/AdminBlog";
+import AdminPricing from "./pages/admin/AdminPricing";
 import NotFound from "./pages/NotFound";
 import AboutMe from "./pages/AboutMe";
 
@@ -33,9 +36,12 @@ const App = () => (
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/project/:id" element={<ProjectTrackerPage />} />
-              <Route path="/admin/projects" element={<AdminProjectsPage />} />
-              <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route path="/admin/blog" element={<AdminBlog />} />
+              <Route path="/admin/pricing" element={<AdminPricing />} />
               <Route path="/portfolio" element={<PortfolioPage />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/blog/:slug" element={<BlogPostPage />} />
               <Route path="/about-me" element={<AboutMe />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
