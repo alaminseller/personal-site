@@ -69,61 +69,7 @@ export default function ServicesSection() {
                 </div>
             </div>
 
-            {/* ════════════════════════════════════════
-                MOBILE: Horizontal swipe carousel
-            ════════════════════════════════════════ */}
-            <div className="md:hidden relative">
-                {/* Swipe hint */}
-                <div className="flex items-center justify-between px-5 mb-3">
-                    <span className="text-xs text-zinc-400 dark:text-zinc-500 font-medium">
-                        {services.length} services
-                    </span>
-                    <span className="flex items-center gap-1 text-xs font-semibold text-violet-500 dark:text-violet-400">
-                        Swipe
-                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </span>
-                </div>
-
-                {/* Scroll track */}
-                <div
-                    className="flex gap-3 overflow-x-auto px-5 pb-5 snap-x snap-mandatory scrollbar-none [scrollbar-width:none] [-webkit-overflow-scrolling:touch]"
-                >
-                    {services.map((service, i) => (
-                        <div
-                            key={i}
-                            className="shrink-0 snap-start bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-4 border border-zinc-100 dark:border-zinc-800 flex flex-col w-[78vw]"
-                        >
-                            {/* Icon */}
-                            <div className={`h-11 w-11 rounded-xl flex items-center justify-center mb-3 ${colorMap[service.color]}`}>
-                                {service.icon}
-                            </div>
-
-                            <h3 className="text-sm font-semibold text-zinc-900 dark:text-white mb-1.5 leading-snug">{service.title}</h3>
-                            <p className="text-zinc-500 dark:text-zinc-400 text-xs leading-relaxed">{service.description}</p>
-                        </div>
-                    ))}
-
-                    {/* End spacer */}
-                    <div
-                        className="shrink-0 flex flex-col items-center justify-center rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900/50 gap-2 snap-start px-4 w-[52vw] min-h-[140px]"
-                    >
-                        <span className="text-2xl">✦</span>
-                        <p className="text-[11px] font-semibold text-zinc-400 dark:text-zinc-500 text-center leading-relaxed">
-                            Custom solutions available
-                        </p>
-                    </div>
-                </div>
-
-                {/* Right fade */}
-                <div className="pointer-events-none absolute right-0 top-8 bottom-5 w-12 bg-gradient-to-l from-white dark:from-zinc-950 to-transparent" />
-            </div>
-
-            {/* ════════════════════════════════════════
-                DESKTOP: Original grid layout
-            ════════════════════════════════════════ */}
-            <div className="hidden md:block max-w-6xl mx-auto px-6">
+            <div className="max-w-6xl mx-auto px-6">
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                     {services.map((service, i) => (
                         <div

@@ -193,55 +193,8 @@ export default function ProjectsSection() {
                 </div>
             </div>
 
-            {/* ══════════════════════════════════════════════════
-                MOBILE: Horizontal scroll carousel
-            ══════════════════════════════════════════════════ */}
-            <div className="sm:hidden relative">
-                {/* Swipe hint row */}
-                <div className="flex items-center justify-between px-5 mb-3">
-                    <span className="text-xs text-zinc-400 dark:text-zinc-500 font-medium">
-                        {filtered.length} projects
-                    </span>
-                    <span className="flex items-center gap-1 text-xs font-semibold text-violet-500 dark:text-violet-400">
-                        Swipe
-                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </span>
-                </div>
-
-                {/* Scroll container */}
-                <div
-                    className="flex gap-4 overflow-x-auto px-5 pb-5 snap-x snap-mandatory scrollbar-none [scrollbar-width:none] [-webkit-overflow-scrolling:touch]"
-                >
-                    {filtered.map((project, i) => (
-                        <div
-                            key={`mobile-${activeCategory}-${i}`}
-                            className="shrink-0 snap-start w-[82vw]"
-                        >
-                            <ProjectCard project={project} />
-                        </div>
-                    ))}
-
-                    {/* End spacer card — indicates more content is coming */}
-                    <div
-                        className="shrink-0 flex flex-col items-center justify-center rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900/50 gap-3 snap-start w-[60vw] min-h-[300px]"
-                    >
-                        <span className="text-3xl">✦</span>
-                        <p className="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4 leading-relaxed">
-                            More projects<br />available on request
-                        </p>
-                    </div>
-                </div>
-
-                {/* Right-side fade gradient — indicates more cards to the right */}
-                <div className="pointer-events-none absolute right-0 top-8 bottom-5 w-16 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent" />
-            </div>
-            {/* ══════════════════════════════════════════════════
-                DESKTOP: Standard grid with See More
-            ══════════════════════════════════════════════════ */}
-            <div className="hidden sm:block max-w-6xl mx-auto px-6">
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="max-w-6xl mx-auto px-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {visible.map((project, i) => (
                         <div
                             key={`desktop-${activeCategory}-${i}`}
