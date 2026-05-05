@@ -27,11 +27,7 @@ interface Addon {
     icon: React.ReactNode;
     priceMin: number;
     priceMax: number | null;
-    priceLabel: string;
-    iconBg: string;
-}
-
-/* ─── Data ───────────────────────────────────────────────────────── */
+    /* ─── Data ───────────────────────────────────────────────────────── */
 const plans: PricingPlan[] = [
     {
         id: "basic",
@@ -40,19 +36,18 @@ const plans: PricingPlan[] = [
         priceMin: 250,
         priceMax: null,
         priceLabel: "$250",
-        priceNote: "Starting from",
+        priceNote: "Personal / Small Site",
         delivery: "5–7 days",
         highlighted: false,
         accentFrom: "from-blue-500",
         accentTo: "to-cyan-500",
-        iconBg: "bg-blue-500/10 text-blue-500 dark:text-blue-400",
+        iconBg: "bg-blue-50/50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400",
         ctaLabel: "Start Basic",
         features: [
             "1–3 pages website",
             "Responsive design",
-            "Basic UI design included",
             "Contact form",
-            "Basic SEO setup",
+            "Standard SEO",
         ],
     },
     {
@@ -62,21 +57,18 @@ const plans: PricingPlan[] = [
         priceMin: 400,
         priceMax: 600,
         priceLabel: "$400–$600",
-        priceNote: "Most popular range",
+        priceNote: "Business Site",
         delivery: "7–10 days",
         highlighted: true,
-        badge: "Most Popular",
         accentFrom: "from-violet-500",
         accentTo: "to-fuchsia-500",
-        iconBg: "bg-violet-500/10 text-violet-500 dark:text-violet-400",
+        iconBg: "bg-violet-50/50 text-violet-600 dark:bg-violet-500/10 dark:text-violet-400",
         ctaLabel: "Start Standard",
         features: [
             "4–7 pages website",
-            "Modern UI/UX design",
+            "SEO setup",
             "Speed optimization",
-            "Full SEO setup",
-            "Social media integration",
-            "Google Analytics",
+            "Social integration",
         ],
     },
     {
@@ -86,109 +78,24 @@ const plans: PricingPlan[] = [
         priceMin: 700,
         priceMax: 1000,
         priceLabel: "$700–$1000",
-        priceNote: "Full-scale project",
+        priceNote: "Advanced Solutions",
         delivery: "10–14 days",
         highlighted: false,
         accentFrom: "from-amber-500",
         accentTo: "to-orange-500",
-        iconBg: "bg-amber-500/10 text-amber-500 dark:text-amber-400",
+        iconBg: "bg-amber-50/50 text-amber-600 dark:bg-amber-500/10 dark:text-amber-400",
         ctaLabel: "Start Premium",
         features: [
             "8+ pages website",
-            "Custom UI/UX design",
-            "Advanced functionality",
-            "CMS / Admin panel",
-            "Performance optimization",
+            "Custom design",
+            "Advanced features",
             "Priority support",
-            "Post-launch revisions",
         ],
-    },
-];
-
-const addons: Addon[] = [
-    {
-        id: "uiux",
-        name: "Custom UI/UX Design",
-        description: "Bespoke design system, wireframes & visual prototypes",
-        icon: <Palette className="w-5 h-5" />,
-        priceMin: 50,
-        priceMax: 150,
-        priceLabel: "+$50–$150",
-        iconBg: "bg-violet-500/10 text-violet-500 dark:text-violet-400",
-    },
-    {
-        id: "logo",
-        name: "Logo Design",
-        description: "Professional logo with multiple concepts & revisions",
-        icon: <Package className="w-5 h-5" />,
-        priceMin: 20,
-        priceMax: 80,
-        priceLabel: "+$20–$80",
-        iconBg: "bg-pink-500/10 text-pink-500 dark:text-pink-400",
-    },
-    {
-        id: "ecommerce",
-        name: "E-commerce Functionality",
-        description: "Product pages, cart, checkout & payment integration",
-        icon: <ShoppingCart className="w-5 h-5" />,
-        priceMin: 100,
-        priceMax: 300,
-        priceLabel: "+$100–$300",
-        iconBg: "bg-emerald-500/10 text-emerald-500 dark:text-emerald-400",
-    },
-    {
-        id: "booking",
-        name: "Booking System",
-        description: "Online appointment scheduling with calendar sync",
-        icon: <Calendar className="w-5 h-5" />,
-        priceMin: 50,
-        priceMax: 150,
-        priceLabel: "+$50–$150",
-        iconBg: "bg-cyan-500/10 text-cyan-500 dark:text-cyan-400",
-    },
-    {
-        id: "extrapage",
-        name: "Extra Pages",
-        description: "Additional pages beyond your package limit",
-        icon: <FilePlus className="w-5 h-5" />,
-        priceMin: 20,
-        priceMax: null,
-        priceLabel: "+$20/page",
-        iconBg: "bg-amber-500/10 text-amber-500 dark:text-amber-400",
-    },
-    {
-        id: "fastdelivery",
-        name: "Fast Delivery",
-        description: "Priority delivery — cut your timeline in half",
-        icon: <Rocket className="w-5 h-5" />,
-        priceMin: 50,
-        priceMax: null,
-        priceLabel: "+$50",
-        iconBg: "bg-red-500/10 text-red-500 dark:text-red-400",
     },
 ];
 
 /* ─── Component ───────────────────────────────────────────────────── */
 export default function PricingSection() {
-    const [selectedPlan, setSelectedPlan] = useState<string>("standard");
-    const [selectedAddons, setSelectedAddons] = useState<Set<string>>(new Set());
-
-    const toggleAddon = (id: string) => {
-        setSelectedAddons((prev) => {
-            const next = new Set(prev);
-            if (next.has(id)) next.delete(id);
-            else next.add(id);
-            return next;
-        });
-    };
-
-    const activePlan = plans.find((p) => p.id === selectedPlan)!;
-    const addonTotal = addons
-        .filter((a) => selectedAddons.has(a.id))
-        .reduce((sum, a) => sum + a.priceMin, 0);
-    const basePrice = activePlan.priceMin;
-    const estimatedTotal = basePrice + addonTotal;
-
     const scrollToContact = (e: React.MouseEvent) => {
         e.preventDefault();
         document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
@@ -197,245 +104,94 @@ export default function PricingSection() {
     return (
         <section
             id="pricing"
-            className="py-14 sm:py-24 bg-white dark:bg-[#070711] border-t border-zinc-100 dark:border-white/[0.05] relative overflow-hidden"
+            className="py-10 sm:py-14 bg-white dark:bg-[#070711] border-t border-zinc-100 dark:border-white/[0.05] relative overflow-hidden"
         >
-            {/* Background blobs removed for performance */}
-
-            <div className="relative max-w-6xl mx-auto px-6">
+            <div className="relative max-w-5xl mx-auto px-6">
                 {/* ─── Section Header ─── */}
-                <div className="text-center mb-8 sm:mb-16">
-                    <p className="text-sm font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3">
+                <div className="mb-10 sm:mb-12">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-2">
                         Pricing
                     </p>
-                    <h2 className="text-2xl sm:text-5xl font-black text-zinc-900 dark:text-white tracking-tight mb-3 sm:mb-4">
-                        Simple, Transparent{" "}
-                        <span className="bg-gradient-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent">
-                            Pricing
-                        </span>
+                    <h2 className="text-xl sm:text-2xl font-medium text-zinc-900 dark:text-white tracking-tight">
+                        Simple, Transparent <span className="text-zinc-400">Pricing</span>
                     </h2>
-                    <p className="text-zinc-500 dark:text-zinc-400 text-sm sm:text-lg max-w-xl mx-auto leading-relaxed">
-                        Choose a package, pick your extras. Custom pricing available for unique requirements.
-                    </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
                     {plans.map((plan) => {
-                        const isSelected = selectedPlan === plan.id;
                         return (
-                            <button
+                            <div
                                 key={plan.id}
-                                onClick={() => setSelectedPlan(plan.id)}
                                 className={`
-                                    relative flex flex-col rounded-3xl overflow-hidden text-left
-                                    transition-all duration-300 cursor-pointer group
-                                    ${isSelected
-                                        ? plan.highlighted
-                                            ? "ring-2 ring-violet-500 dark:ring-violet-400 shadow-md shadow-violet-500/20 dark:shadow-violet-400/10 scale-[1.02] md:scale-105 z-10"
-                                            : "ring-2 ring-violet-500/50 dark:ring-violet-400/50 shadow-md -translate-y-1"
-                                        : plan.highlighted
-                                            ? "ring-2 ring-violet-500 dark:ring-violet-400 shadow-md shadow-violet-500/10 scale-[1.01] md:scale-[1.03] z-10 opacity-80"
-                                            : "ring-1 ring-zinc-200 dark:ring-white/[0.08] hover:shadow-md hover:-translate-y-1 opacity-80"
+                                    relative flex flex-col rounded-2xl overflow-hidden text-left p-6
+                                    border transition-all duration-300
+                                    ${plan.highlighted
+                                        ? "border-violet-200 dark:border-violet-800/40 bg-violet-50/20 dark:bg-violet-900/10 shadow-sm"
+                                        : "border-zinc-100 dark:border-white/[0.05] bg-zinc-50/50 dark:bg-zinc-900/40"
                                     }
-                                    bg-white dark:bg-zinc-900/90
                                 `}
                             >
-                                {/* Selected checkmark */}
-                                {isSelected && (
-                                    <span className="absolute top-4 right-4 w-6 h-6 rounded-full bg-violet-500 flex items-center justify-center z-20">
-                                        <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
-                                    </span>
-                                )}
-
-                                {/* Popular badge */}
-                                {plan.badge && (
-                                    <div className="absolute top-0 inset-x-0 flex justify-center">
-                                        <span className="bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white text-[11px] font-bold uppercase tracking-wider px-5 py-1 rounded-b-xl shadow-lg">
-                                            {plan.badge}
-                                        </span>
+                                {/* Icon + Name */}
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${plan.iconBg}`}>
+                                        {plan.icon}
                                     </div>
-                                )}
-
-                                {/* Gradient top bar */}
-                                <div className={`h-1 w-full bg-gradient-to-r ${plan.accentFrom} ${plan.accentTo}`} />
-
-                                <div className="flex flex-col grow p-7 pt-8">
-                                    {/* Icon + Name */}
-                                    <div className="flex items-center gap-3 mb-5">
-                                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${plan.iconBg}`}>
-                                            {plan.icon}
-                                        </div>
-                                        <h3 className="text-xl font-bold text-zinc-900 dark:text-white">{plan.name}</h3>
-                                    </div>
-
-                                    {/* Price */}
-                                    <div className="mb-1">
-                                        <p className="text-[11px] font-medium uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-0.5">
-                                            {plan.priceNote}
-                                        </p>
-                                        <p className={`text-4xl font-black bg-gradient-to-r ${plan.accentFrom} ${plan.accentTo} bg-clip-text text-transparent`}>
-                                            {plan.priceLabel}
-                                        </p>
-                                    </div>
-
-                                    {/* Delivery */}
-                                    <div className="flex items-center gap-1.5 mt-3 mb-6">
-                                        <Clock className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
-                                        <span className="text-sm text-zinc-500 dark:text-zinc-400 font-medium">
-                                            Delivery: {plan.delivery}
-                                        </span>
-                                    </div>
-
-                                    <div className="border-t border-zinc-100 dark:border-white/[0.06] mb-6" />
-
-                                    {/* Features */}
-                                    <ul className="space-y-3 grow">
-                                        {plan.features.map((f, i) => (
-                                            <li key={i} className="flex items-start gap-2.5">
-                                                <span className={`mt-0.5 w-4 h-4 shrink-0 rounded-full flex items-center justify-center bg-gradient-to-br ${plan.accentFrom} ${plan.accentTo}`}>
-                                                    <Check className="w-2.5 h-2.5 text-white" strokeWidth={3} />
-                                                </span>
-                                                <span className="text-sm text-zinc-600 dark:text-zinc-300 leading-snug">{f}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <h3 className="text-lg font-bold text-zinc-900 dark:text-white">{plan.name}</h3>
                                 </div>
-                            </button>
+
+                                {/* Price */}
+                                <div className="mb-6">
+                                    <p className="text-3xl font-black text-zinc-900 dark:text-white">
+                                        {plan.priceLabel}
+                                    </p>
+                                    <p className="text-[11px] font-medium text-zinc-400 uppercase tracking-widest mt-1">
+                                        {plan.priceNote}
+                                    </p>
+                                </div>
+
+                                <div className="border-t border-zinc-100 dark:border-white/[0.06] mb-6" />
+
+                                {/* Features */}
+                                <ul className="space-y-3 mb-8 grow">
+                                    {plan.features.map((f, i) => (
+                                        <li key={i} className="flex items-center gap-2.5">
+                                            <Check className="w-3.5 h-3.5 text-violet-500" strokeWidth={3} />
+                                            <span className="text-sm text-zinc-600 dark:text-zinc-300">{f}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <a
+                                    href="#contact"
+                                    onClick={scrollToContact}
+                                    className={`
+                                        w-full py-3 rounded-xl font-bold text-sm text-center transition-all
+                                        ${plan.highlighted
+                                            ? "bg-violet-600 text-white shadow-lg shadow-violet-600/20 hover:bg-violet-700"
+                                            : "bg-zinc-900 dark:bg-zinc-800 text-white hover:bg-black dark:hover:bg-zinc-700"
+                                        }
+                                    `}
+                                >
+                                    {plan.ctaLabel}
+                                </a>
+                            </div>
                         );
                     })}
                 </div>
 
-                {/* ─── Add-ons ─── */}
-                <div className="mb-10 sm:mb-12">
-                    <div className="text-center mb-5 sm:mb-8 px-5 sm:px-0">
-                        <h3 className="text-xl sm:text-2xl font-semibold text-zinc-900 dark:text-white mb-1.5 sm:mb-2">
-                            Optional Add-ons
-                        </h3>
-                        <p className="text-zinc-500 dark:text-zinc-400 text-xs sm:text-sm">
-                            Select any extras to enhance your project
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {addons.map((addon) => {
-                            const isChecked = selectedAddons.has(addon.id);
-                            return (
-                                <button
-                                    key={addon.id}
-                                    onClick={() => toggleAddon(addon.id)}
-                                    className={`
-                                        relative flex items-start gap-4 p-5 rounded-2xl text-left w-full
-                                        border transition-all duration-200 group
-                                        ${isChecked
-                                            ? "border-violet-500 dark:border-violet-400 bg-violet-50 dark:bg-violet-500/10 shadow-md shadow-violet-500/10"
-                                            : "border-zinc-200 dark:border-white/[0.08] bg-white dark:bg-zinc-900/50 hover:border-violet-300 dark:hover:border-violet-500/40 hover:shadow-md"
-                                        }
-                                    `}
-                                >
-                                    {/* Checkbox */}
-                                    <span className={`
-                                        mt-0.5 w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all
-                                        ${isChecked
-                                            ? "bg-violet-500 border-violet-500"
-                                            : "border-zinc-300 dark:border-zinc-600 group-hover:border-violet-400"
-                                        }
-                                    `}>
-                                        {isChecked && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
-                                    </span>
-
-                                    {/* Icon */}
-                                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${addon.iconBg}`}>
-                                        {addon.icon}
-                                    </div>
-
-                                    {/* Text */}
-                                    <div className="min-w-0">
-                                        <p className="font-semibold text-sm text-zinc-900 dark:text-white leading-snug mb-0.5">
-                                            {addon.name}
-                                        </p>
-                                        <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-snug mb-1.5">
-                                            {addon.description}
-                                        </p>
-                                        <span className="text-xs font-bold text-violet-600 dark:text-violet-400">
-                                            {addon.priceLabel}
-                                        </span>
-                                    </div>
-                                </button>
-                            );
-                        })}
-                    </div>
-                </div>
-
-                {/* ─── Summary Bar ─── */}
-                <div className="rounded-3xl border border-zinc-200 dark:border-white/[0.08] bg-white dark:bg-zinc-900/90 p-6 sm:p-8">
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-                        {/* Left: breakdown */}
-                        <div className="flex-1 min-w-0">
-                            <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-3">
-                                Estimate Summary
-                            </p>
-                            <div className="space-y-1.5">
-                                <div className="flex items-center justify-between gap-4">
-                                    <span className="text-sm text-zinc-600 dark:text-zinc-300">
-                                        {activePlan.name} Package
-                                    </span>
-                                    <span className="text-sm font-semibold text-zinc-900 dark:text-white">
-                                        ${basePrice}+
-                                    </span>
-                                </div>
-                                {addons
-                                    .filter((a) => selectedAddons.has(a.id))
-                                    .map((a) => (
-                                        <div key={a.id} className="flex items-center justify-between gap-4">
-                                            <span className="text-sm text-zinc-500 dark:text-zinc-400 truncate">
-                                                + {a.name}
-                                            </span>
-                                            <span className="text-sm font-medium text-violet-600 dark:text-violet-400 shrink-0">
-                                                {a.priceLabel}
-                                            </span>
-                                        </div>
-                                    ))
-                                }
-                                <div className="border-t border-zinc-100 dark:border-white/[0.06] pt-2 mt-2 flex items-center justify-between gap-4">
-                                    <span className="text-sm font-bold text-zinc-900 dark:text-white">
-                                        Estimated Total
-                                    </span>
-                                    <span className="text-xl font-black bg-gradient-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent">
-                                        ${estimatedTotal}+
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Right: CTA */}
-                        <div className="w-full sm:w-auto shrink-0">
-                            <a
-                                href="#contact"
-                                onClick={scrollToContact}
-                                className="group relative flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl font-semibold text-[15px] text-white w-full sm:w-auto
-                                    overflow-hidden transition-all duration-300 hover:scale-105"
-                            >
-                                <span className="absolute inset-0 bg-gradient-to-r from-violet-600 to-fuchsia-500" />
-                                <span className="relative">Start Project</span>
-                                <ArrowRight className="relative w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                            </a>
-                            <p className="text-center text-[11px] text-zinc-400 dark:text-zinc-500 mt-2">
-                                No payment now — we'll discuss first
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
                 {/* Custom note */}
-                <p className="text-center text-zinc-400 dark:text-zinc-500 text-sm mt-8">
-                    Need something different?{" "}
-                    <a
-                        href="#contact"
-                        onClick={scrollToContact}
-                        className="text-violet-600 dark:text-violet-400 hover:underline font-medium"
-                    >
-                        Let's discuss custom pricing →
-                    </a>
-                </p>
+                <div className="mt-10 pt-6 border-t border-zinc-100 dark:border-white/[0.05] text-center">
+                    <p className="text-zinc-500 dark:text-zinc-400 text-sm">
+                        Need a custom solution?{" "}
+                        <a
+                            href="#contact"
+                            onClick={scrollToContact}
+                            className="text-violet-600 dark:text-violet-400 hover:underline font-bold"
+                        >
+                            Let's discuss →
+                        </a>
+                    </p>
+                </div>
             </div>
         </section>
     );
