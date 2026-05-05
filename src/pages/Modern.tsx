@@ -19,7 +19,6 @@ export default function ModernPage() {
                 <ModernHeroVisual />
                 <div id="about"><AboutSection /></div>
                 <div id="services"><ServicesSection /></div>
-                <div id="projects"><ProjectsSection isLanding={true} /></div>
                 <div id="pricing"><PricingSection /></div>
                 <div id="contact"><ProfessionalContact /></div>
             </main>
