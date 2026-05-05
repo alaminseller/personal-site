@@ -15,9 +15,9 @@ function SocialLink({ href, label, icon }: SocialLinkProps) {
       rel="noopener noreferrer"
       aria-label={label}
       title={label}
-      className="w-10 h-10 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800
-        flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-violet-600 dark:hover:text-violet-400
-        transition-colors"
+      className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md border border-white/20
+        flex items-center justify-center text-white hover:text-violet-400
+        transition-all hover:scale-110"
     >
       {icon}
     </a>
@@ -27,64 +27,62 @@ function SocialLink({ href, label, icon }: SocialLinkProps) {
 /* ─── Main Hero ─────────────────────────────────────────────────────── */
 export default function ModernHeroVisual() {
   return (
-    <section className="relative w-full pt-20 lg:pt-28 pb-10 bg-white dark:bg-zinc-950">
+    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20">
       
-      {/* Main content container */}
-      <div className="w-full max-w-7xl mx-auto px-6 py-10 lg:py-12 grid lg:grid-cols-2 gap-10 items-center">
+      {/* ─── Background Image with Overlay ─── */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/Alamin.webp"
+          alt="Alamin Rafi - Digital Service Provider"
+          className="w-full h-full object-cover object-center scale-105"
+          loading="lazy"
+        />
+        {/* Soft dark overlay (approx 30%) */}
+        <div className="absolute inset-0 bg-zinc-950/30 dark:bg-black/40" />
+      </div>
 
-        {/* ─── LEFT: Text content ─────────────────────────────────── */}
-        <div className="flex flex-col items-center lg:items-start text-center lg:text-left order-last lg:order-first">
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-sm font-bold text-zinc-600 dark:text-zinc-300">
-            Welcome
-          </div>
-
-          <h1 className="text-4xl sm:text-6xl lg:text-[4.5rem] font-black text-zinc-900 dark:text-white leading-[1.1] tracking-tight mb-4">
-            I'm Alamin Rafi
-          </h1>
-
-          <h2 className="text-2xl sm:text-3xl font-bold text-violet-600 dark:text-violet-400 mb-6">
-            Digital Service Provider
-          </h2>
-
-          <p className="text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-10">
-            I help businesses build modern, affordable, and high-converting websites.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-            <a
-              href="#contact"
-              className="px-8 py-4 w-full sm:w-auto rounded-full font-bold text-white bg-violet-600 hover:bg-violet-700 transition-colors text-center shadow-sm"
-            >
-              Start Project
-            </a>
-            <a
-              href="#projects"
-              className="px-8 py-4 w-full sm:w-auto rounded-full font-bold text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors text-center"
-            >
-              View Portfolio
-            </a>
-          </div>
-
-          <div className="mt-12 flex items-center gap-4">
-            <SocialLink href="https://github.com" label="GitHub" icon={<Github className="w-5 h-5" />} />
-            <SocialLink href="https://linkedin.com" label="LinkedIn" icon={<Linkedin className="w-5 h-5" />} />
-            <SocialLink href="https://twitter.com" label="Twitter" icon={<Twitter className="w-5 h-5" />} />
-          </div>
-        </div>
-
-        {/* ─── RIGHT: Single Sharp Image ────────────────────────── */}
-        <div className="flex items-center justify-center order-first lg:order-last">
-          <div className="w-full max-w-[280px] lg:max-w-[320px]">
-            <img
-              src="/Alamin.webp"
-              alt="Alamin Rafi - Digital Service Provider"
-              className="w-full h-auto object-cover rounded-full shadow-sm border-2 border-zinc-100 dark:border-zinc-800"
-              loading="lazy"
-            />
-          </div>
-        </div>
+      {/* ─── Centered Content ─── */}
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 py-20 text-center">
         
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-bold text-white uppercase tracking-[0.2em]">
+          WELCOME
+        </div>
+
+        <h1 className="text-5xl sm:text-7xl lg:text-[5.5rem] font-black text-white leading-[1.1] tracking-tight mb-6 drop-shadow-xl">
+          I'm Alamin Rafi
+        </h1>
+
+        <h2 className="text-2xl sm:text-3xl font-bold text-violet-400 mb-8 drop-shadow-md">
+          Digital Service Provider
+        </h2>
+
+        <p className="text-zinc-100 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto mb-12 drop-shadow-sm font-medium">
+          I help businesses build modern, fast, and affordable websites that actually convert.
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
+          <a
+            href="#contact"
+            className="px-10 py-4 w-full sm:w-auto rounded-full font-bold text-white bg-violet-600 hover:bg-violet-700 transition-all text-center shadow-lg shadow-violet-600/20 hover:scale-105 active:scale-95"
+          >
+            Start Project
+          </a>
+          <a
+            href="#projects"
+            className="px-10 py-4 w-full sm:w-auto rounded-full font-bold text-white border border-white/30 bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all text-center shadow-lg hover:scale-105 active:scale-95"
+          >
+            View Portfolio
+          </a>
+        </div>
+
+        {/* Socials */}
+        <div className="mt-16 flex items-center justify-center gap-4">
+          <SocialLink href="https://github.com" label="GitHub" icon={<Github className="w-5 h-5" />} />
+          <SocialLink href="https://linkedin.com" label="LinkedIn" icon={<Linkedin className="w-5 h-5" />} />
+          <SocialLink href="https://twitter.com" label="Twitter" icon={<Twitter className="w-5 h-5" />} />
+        </div>
       </div>
     </section>
   );
 }
+
