@@ -12,6 +12,7 @@ import DashboardPage from "./pages/Dashboard";
 import ProjectTrackerPage from "./pages/ProjectTracker";
 import AdminProjectsPage from "./pages/AdminProjects";
 import GalleryPage from "./pages/Gallery";
+import PortfolioPage from "./pages/Portfolio";
 import NotFound from "./pages/NotFound";
 import AboutMe from "./pages/AboutMe";
 
@@ -34,6 +35,7 @@ const App = () => (
               <Route path="/project/:id" element={<ProjectTrackerPage />} />
               <Route path="/admin/projects" element={<AdminProjectsPage />} />
               <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/portfolio" element={<PortfolioPage />} />
               <Route path="/about-me" element={<AboutMe />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

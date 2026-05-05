@@ -45,10 +45,10 @@ export default function MobileBottomNav() {
             action: () => window.location.href = "mailto:hello@alaminrafi.com",
         },
         {
-            id: "projects",
-            label: "My Project",
+            id: "portfolio",
+            label: "Portfolio",
             icon: <FolderOpen className="w-5 h-5" />,
-            action: () => window.location.href = "/admin/projects",
+            action: () => window.location.href = "/portfolio",
         },
     ];
 

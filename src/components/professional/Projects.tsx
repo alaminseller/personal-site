@@ -136,76 +136,102 @@ function ProjectCard({ project }: { project: Project }) {
     );
 }
 
-export default function ProjectsSection() {
+interface ProjectsSectionProps {
+    isLanding?: boolean;
+}
+
+export default function ProjectsSection({ isLanding = false }: ProjectsSectionProps) {
     const [activeCategory, setActiveCategory] = useState<Category>("All");
     const [showAll, setShowAll] = useState(false);
 
     const filtered = activeCategory === "All" ? projects : projects.filter(p => p.category === activeCategory);
-    const visible = showAll ? filtered : filtered.slice(0, INITIAL_VISIBLE);
-    const hasMore = filtered.length > INITIAL_VISIBLE;
+    
+    // On landing page, we only show 3 items max. On the full page, we use the 'See More' logic.
+    const visibleCount = isLanding ? 3 : (showAll ? filtered.length : INITIAL_VISIBLE);
+    const visible = filtered.slice(0, visibleCount);
+    const hasMore = !isLanding && filtered.length > INITIAL_VISIBLE;
 
     return (
-        <section id="projects" className="bg-zinc-50 dark:bg-zinc-900/50 py-16 sm:py-24 border-t border-zinc-100 dark:border-zinc-800">
+        <section id="projects" className={`bg-zinc-50 dark:bg-zinc-900/50 border-t border-zinc-100 dark:border-zinc-800 ${isLanding ? "py-14 sm:py-20" : "py-16 sm:py-24"}`}>
 
-            {/* ── Section header (shared) ── */}
+            {/* ── Section header ── */}
             <div className="max-w-6xl mx-auto px-5 sm:px-6">
-                <p className="text-sm font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3">Portfolio</p>
+                <p className="text-sm font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3">
+                    {isLanding ? "Portfolio Preview" : "Full Portfolio"}
+                </p>
 
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-4 sm:mb-5">
                     <h2 className="text-2xl sm:text-4xl font-bold text-zinc-900 dark:text-white max-w-lg leading-snug">
-                        Selected Work &{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">
-                            Case Studies
-                        </span>
+                        {isLanding ? "Selected Projects" : (
+                            <>
+                                Selected Work &{" "}
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">
+                                    Case Studies
+                                </span>
+                            </>
+                        )}
                     </h2>
-                </div>
-
-                <p className="text-zinc-500 dark:text-zinc-400 text-sm sm:text-base mb-5 sm:mb-6 max-w-2xl leading-relaxed">
-                    I design and build modern, high-quality websites tailored to different business needs.
-                </p>
-
-                {/* Website type pills — horizontal scroll on mobile */}
-                <div className="flex gap-2 mb-6 sm:mb-10 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible scrollbar-none">
-                    {websiteTypes.map((type, i) => (
-                        <span
-                            key={i}
-                            className="shrink-0 px-3 py-1.5 text-xs font-medium rounded-full bg-white dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 shadow-sm"
+                    
+                    {isLanding && (
+                        <a 
+                            href="/portfolio" 
+                            className="inline-flex items-center gap-2 text-violet-600 dark:text-violet-400 font-bold hover:gap-3 transition-all"
                         >
-                            {type}
-                        </span>
-                    ))}
+                            View All Projects <ArrowRight className="w-5 h-5" />
+                        </a>
+                    )}
                 </div>
 
-                {/* Filter tabs — desktop only */}
-                <div className="hidden sm:flex flex-wrap gap-2 mb-10">
-                    {categories.map(cat => (
-                        <button
-                            key={cat}
-                            onClick={() => { setActiveCategory(cat); setShowAll(false); }}
-                            className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${activeCategory === cat
-                                    ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-sm"
-                                    : "bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700"
-                                }`}
-                        >
-                            {cat === "UI/UX Design" ? "🎨 UI/UX Design" : "✦ All"}
-                        </button>
-                    ))}
-                </div>
+                {!isLanding && (
+                    <>
+                        <p className="text-zinc-500 dark:text-zinc-400 text-sm sm:text-base mb-5 sm:mb-6 max-w-2xl leading-relaxed">
+                            I design and build modern, high-quality websites tailored to different business needs.
+                        </p>
+
+                        {/* Website type pills */}
+                        <div className="flex gap-2 mb-6 sm:mb-10 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible scrollbar-none">
+                            {websiteTypes.map((type, i) => (
+                                <span
+                                    key={i}
+                                    className="shrink-0 px-3 py-1.5 text-xs font-medium rounded-full bg-white dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 shadow-sm"
+                                >
+                                    {type}
+                                </span>
+                            ))}
+                        </div>
+
+                        {/* Filter tabs */}
+                        <div className="hidden sm:flex flex-wrap gap-2 mb-10">
+                            {categories.map(cat => (
+                                <button
+                                    key={cat}
+                                    onClick={() => { setActiveCategory(cat); setShowAll(false); }}
+                                    className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${activeCategory === cat
+                                            ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-sm"
+                                            : "bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700"
+                                        }`}
+                                >
+                                    {cat === "UI/UX Design" ? "🎨 UI/UX Design" : "✦ All"}
+                                </button>
+                            ))}
+                        </div>
+                    </>
+                )}
             </div>
 
             <div className="max-w-6xl mx-auto px-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {visible.map((project, i) => (
                         <div
-                            key={`desktop-${activeCategory}-${i}`}
+                            key={`${isLanding ? 'landing' : 'full'}-${activeCategory}-${i}`}
                         >
                             <ProjectCard project={project} />
                         </div>
                     ))}
                 </div>
 
-                {/* See More / Show Less */}
-                {hasMore && (
+                {/* See More / Show Less (Full page only) */}
+                {!isLanding && hasMore && (
                     <div className="flex flex-col items-center gap-3 mt-12">
                         <button
                             onClick={() => setShowAll(prev => !prev)}
@@ -217,24 +243,32 @@ export default function ProjectsSection() {
                                 <>See More Projects <ChevronDown className="w-4 h-4" /></>
                             )}
                         </button>
-                        {!showAll && (
-                            <p className="text-xs text-zinc-400 dark:text-zinc-500">
-                                More demo projects available on request
-                            </p>
-                        )}
+                    </div>
+                )}
+
+                {isLanding && (
+                    <div className="mt-12 flex justify-center sm:hidden">
+                         <a 
+                            href="/portfolio" 
+                            className="px-8 py-3 rounded-full bg-violet-600 text-white font-bold shadow-lg shadow-violet-600/20"
+                        >
+                            View All Projects
+                        </a>
                     </div>
                 )}
 
                 {/* Bottom note */}
-                <p className="text-center text-zinc-400 dark:text-zinc-500 text-sm mt-14">
-                    Selected works created for diverse clients across multiple industries.
-                </p>
+                {!isLanding && (
+                    <p className="text-center text-zinc-400 dark:text-zinc-500 text-sm mt-14">
+                        Selected works created for diverse clients across multiple industries.
+                    </p>
+                )}
             </div>
 
-            {/* Scrollbar hide */}
             <style>{`
                 .scrollbar-none::-webkit-scrollbar { display: none; }
             `}</style>
         </section>
     );
 }
+

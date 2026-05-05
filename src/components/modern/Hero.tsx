@@ -17,7 +17,7 @@ function SocialLink({ href, label, icon }: SocialLinkProps) {
       title={label}
       className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md border border-white/20
         flex items-center justify-center text-white hover:text-violet-400
-        transition-all hover:scale-110"
+        transition-colors"
     >
       {icon}
     </a>
@@ -32,13 +32,13 @@ export default function ModernHeroVisual() {
       {/* ─── Background Image with Overlay ─── */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/Alamin.webp"
+          src="/5.png"
           alt="Alamin Rafi - Digital Service Provider"
-          className="w-full h-full object-cover object-center scale-105"
+          className="w-full h-full object-cover object-center"
           loading="lazy"
         />
-        {/* Soft dark overlay (approx 30%) */}
-        <div className="absolute inset-0 bg-zinc-950/30 dark:bg-black/40" />
+        {/* Soft light overlay (approx 25%) */}
+        <div className="absolute inset-0 bg-black/25 dark:bg-black/40" />
       </div>
 
       {/* ─── Centered Content ─── */}
@@ -57,19 +57,19 @@ export default function ModernHeroVisual() {
         </h2>
 
         <p className="text-zinc-100 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto mb-12 drop-shadow-sm font-medium">
-          I help businesses build modern, fast, and affordable websites that actually convert.
+          I build modern, fast, and affordable websites for businesses.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
           <a
             href="#contact"
-            className="px-10 py-4 w-full sm:w-auto rounded-full font-bold text-white bg-violet-600 hover:bg-violet-700 transition-all text-center shadow-lg shadow-violet-600/20 hover:scale-105 active:scale-95"
+            className="px-10 py-4 w-full sm:w-auto rounded-full font-bold text-white bg-violet-600 hover:bg-violet-700 transition-all text-center shadow-lg shadow-violet-600/20"
           >
             Start Project
           </a>
           <a
-            href="#projects"
-            className="px-10 py-4 w-full sm:w-auto rounded-full font-bold text-white border border-white/30 bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all text-center shadow-lg hover:scale-105 active:scale-95"
+            href="/portfolio"
+            className="px-10 py-4 w-full sm:w-auto rounded-full font-bold text-white border border-white/30 bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all text-center shadow-lg"
           >
             View Portfolio
           </a>
@@ -85,4 +85,5 @@ export default function ModernHeroVisual() {
     </section>
   );
 }
+
 
