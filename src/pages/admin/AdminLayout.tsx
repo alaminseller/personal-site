@@ -1,16 +1,12 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate, useLocation, Navigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { 
   LayoutDashboard, 
   FileText, 
-  Tag, 
-  Settings, 
   LogOut, 
   Menu, 
   X, 
-  ChevronRight,
-  Database,
   Briefcase,
   DollarSign
 } from "lucide-react";
@@ -27,12 +23,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
   const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  useEffect(() => {
-    // Basic protection - should be admin, for now just check if logged in
-    if (!user) navigate("/login");
-  }, [user, navigate]);
-
-  if (!user) return null;
+  if (!user) return <Navigate to="/login" replace />;
 
   const navItems = [
     { label: "Overview", href: "/admin/dashboard", icon: LayoutDashboard },

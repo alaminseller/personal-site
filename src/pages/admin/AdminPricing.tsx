@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import AdminLayout from "./AdminLayout";
 import { plans as initialPlans, addons as initialAddons, maintenanceOption as initialMaint, PricingPlan, AddonOption } from "@/data/pricingData";
-import { Edit2, Save, X, DollarSign, Package, Plus, Trash2 } from "lucide-react";
+import { Package, Plus, Trash2 } from "lucide-react";
 
 export default function AdminPricing() {
   const [plans, setPlans] = useState<PricingPlan[]>([]);
@@ -11,12 +11,15 @@ export default function AdminPricing() {
   useEffect(() => {
     const savedPlans = localStorage.getItem("admin_plans");
     const savedAddons = localStorage.getItem("admin_addons");
+    const savedMaint = localStorage.getItem("admin_maint");
     if (savedPlans) setPlans(JSON.parse(savedPlans)); else setPlans(initialPlans);
     if (savedAddons) setAddons(JSON.parse(savedAddons)); else setAddons(initialAddons);
+    if (savedMaint) setMaint(JSON.parse(savedMaint));
   }, []);
 
   const savePlans = (p: PricingPlan[]) => { setPlans(p); localStorage.setItem("admin_plans", JSON.stringify(p)); };
   const saveAddons = (a: AddonOption[]) => { setAddons(a); localStorage.setItem("admin_addons", JSON.stringify(a)); };
+  const saveMaint = (m: typeof maint) => { setMaint(m); localStorage.setItem("admin_maint", JSON.stringify(m)); };
 
   return (
     <AdminLayout title="Pricing & Add-ons">
@@ -107,11 +110,11 @@ export default function AdminPricing() {
              <div className="flex flex-col sm:flex-row gap-4">
                 <div className="flex-1">
                   <label htmlFor="maint-name" className="block text-xs font-bold text-zinc-400 uppercase mb-2">Label</label>
-                  <input id="maint-name" className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border-zinc-100 dark:border-white/[0.05]" defaultValue={maint.name} />
+                   <input id="maint-name" className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border-zinc-100 dark:border-white/[0.05]" defaultValue={maint.name} onBlur={(e) => saveMaint({ ...maint, name: e.target.value })} />
                 </div>
                 <div className="flex-1">
                   <label htmlFor="maint-price" className="block text-xs font-bold text-zinc-400 uppercase mb-2">Price Info</label>
-                  <input id="maint-price" className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border-zinc-100 dark:border-white/[0.05]" defaultValue={maint.priceLabel} />
+                  <input id="maint-price" className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border-zinc-100 dark:border-white/[0.05]" defaultValue={maint.priceLabel} onBlur={(e) => saveMaint({ ...maint, priceLabel: e.target.value })} />
                 </div>
              </div>
           </div>

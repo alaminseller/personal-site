@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import AdminLayout from "./AdminLayout";
 import { blogPosts as initialPosts, BlogPost } from "@/data/blogData";
-import { Plus, Edit2, Trash2, Save, X, Image as ImageIcon } from "lucide-react";
+import { Plus, Edit2, Trash2, X } from "lucide-react";
 
 export default function AdminBlog() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -40,10 +40,12 @@ export default function AdminBlog() {
       saveToLocal(updated);
       setEditingPost(null);
     } else {
+      const title = postData.title || "untitled";
       const newPost: BlogPost = {
         id: Date.now().toString(),
-        slug: (postData.title || "").toLowerCase().replace(/\s+/g, "-"),
-        ...postData as BlogPost
+        slug: title.toLowerCase().replace(/\s+/g, "-"),
+        ...postData,
+        title,
       };
       saveToLocal([newPost, ...posts]);
       setIsAdding(false);

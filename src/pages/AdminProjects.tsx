@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
 import {
     Plus, Trash2, Save, ChevronDown, ChevronUp,
-    Lock, Eye, EyeOff, ArrowLeft, ExternalLink
+    ArrowLeft, ExternalLink
 } from "lucide-react";
 import {
     loadProjects, saveProjects, STEPS,
     type Project, type ProjectStatus, type Step
 } from "@/data/projects";
-
-const ADMIN_PASSWORD = "rafi2026"; // ← change this to your own password
 
 const STATUS_OPTIONS: ProjectStatus[] = ["Active", "In Progress", "Completed", "On Hold"];
 
@@ -29,64 +28,6 @@ function emptyProject(): Project {
         email: "hello@alaminrafi.com",
         deliverableUrl: "",
     };
-}
-
-/* ── Login Gate ─────────────────────────────────────────────── */
-function LoginGate({ onAuth }: { onAuth: () => void }) {
-    const [pw, setPw] = useState("");
-    const [show, setShow] = useState(false);
-    const [error, setError] = useState(false);
-
-    const attempt = () => {
-        if (pw === ADMIN_PASSWORD) { onAuth(); }
-        else { setError(true); setPw(""); }
-    };
-
-    return (
-        <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-950 px-5">
-            <div className="w-full max-w-sm bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-sm p-8 space-y-5">
-                <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center">
-                        <Lock className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                        <h1 className="text-base font-semibold text-zinc-900 dark:text-white">Admin Access</h1>
-                        <p className="text-xs text-zinc-400">Project Manager</p>
-                    </div>
-                </div>
-
-                <div className="relative">
-                    <input
-                        type={show ? "text" : "password"}
-                        value={pw}
-                        onChange={e => { setPw(e.target.value); setError(false); }}
-                        onKeyDown={e => e.key === "Enter" && attempt()}
-                        placeholder="Enter password"
-                        className={`w-full pr-10 pl-4 py-2.5 text-sm rounded-xl border ${
-                            error
-                                ? "border-red-300 dark:border-red-700"
-                                : "border-zinc-200 dark:border-zinc-700"
-                        } bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-violet-500/40`}
-                    />
-                    <button
-                        onClick={() => setShow(s => !s)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400"
-                    >
-                        {show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                    </button>
-                </div>
-
-                {error && <p className="text-xs text-red-500">Incorrect password</p>}
-
-                <button
-                    onClick={attempt}
-                    className="w-full py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white text-sm font-semibold hover:opacity-90 transition-opacity"
-                >
-                    Sign In
-                </button>
-            </div>
-        </div>
-    );
 }
 
 /* ── Project Form ────────────────────────────────────────────── */
@@ -262,7 +203,7 @@ function Field({
 /* ── Main Admin Page ─────────────────────────────────────────── */
 export default function AdminProjectsPage() {
     const navigate = useNavigate();
-    const [authed, setAuthed] = useState(false);
+    const { user } = useAuth();
     const [projects, setProjects] = useState<Project[]>([]);
     const [editing, setEditing] = useState<Project | null>(null);
     const [isNew, setIsNew] = useState(false);
@@ -293,7 +234,7 @@ export default function AdminProjectsPage() {
         setEditing(null);
     };
 
-    if (!authed) return <LoginGate onAuth={() => setAuthed(true)} />;
+    if (!user) return <Navigate to="/login" replace />;
 
     /* ── Admin Dashboard ── */
     return (

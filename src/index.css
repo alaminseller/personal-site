@@ -255,7 +255,9 @@
 /* Violet-to-cyan brand gradient — logo badge & Hire Me CTA */
 .bg-brand-gradient {
   background: linear-gradient(135deg, #7c3aed, #06b6d4);
-}/* ─── Mobile Performance & UX ────────────────────────────────────────── */
+}
+
+/* ─── Mobile Performance & UX ────────────────────────────────────────── */
 
 @media (max-width: 639px) {
   /* Speed up / simplify all animations on mobile */

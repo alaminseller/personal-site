@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { blogPosts } from "@/data/blogData";
-import { ArrowRight, Calendar, User, Tag } from "lucide-react";
+import { ArrowRight, Calendar, User } from "lucide-react";
 import Header from "@/components/modern/Header";
 import Footer from "@/components/professional/Footer";
 

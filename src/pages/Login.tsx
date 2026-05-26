@@ -18,7 +18,6 @@ export default function LoginPage() {
         if (!email || !password) { setError("Please fill in all fields."); return; }
         setLoading(true);
         setError("");
-        await new Promise((r) => setTimeout(r, 600)); // brief UX delay
         const result = login(email, password);
         setLoading(false);
         if (result.ok) navigate("/dashboard");
