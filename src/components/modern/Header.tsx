@@ -78,19 +78,18 @@ export default function ModernHeader() {
         >
             <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                 {/* Logo */}
-                <a
-                    href="#"
-                    onClick={(e) => scrollToSection(e, "body")}
+                <Link
+                    to="/"
                     className="text-xl font-black tracking-tighter text-zinc-900 dark:text-white flex items-center gap-2.5"
                 >
                     <div className="bg-brand-gradient h-8 w-8 rounded-lg flex items-center justify-center text-white font-black text-sm shadow-md">
                         AR
                     </div>
                     <span className="hidden sm:block bg-gradient-to-r from-violet-600 to-cyan-500 dark:from-violet-400 dark:to-cyan-400 bg-clip-text text-transparent">Alamin Rafi</span>
-                </a>
+                </Link>
 
                 {/* Desktop Navigation */}
-                <nav className="hidden lg:flex items-center gap-1">
+                <nav className="hidden lg:flex items-center gap-1" aria-label="Primary navigation">
                     <ul className="flex items-center gap-1 mr-4">
                         {navLinks.map((link) => (
                             <li key={link.href}>
@@ -123,6 +122,7 @@ export default function ModernHeader() {
                             <button
                                 onClick={() => { logout(); navigate("/"); }}
                                 title="Logout"
+                                aria-label="Logout"
                                 className="p-2 rounded-full text-zinc-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors"
                             >
                                 <LogOut className="w-4 h-4" />
@@ -158,6 +158,8 @@ export default function ModernHeader() {
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                         className="p-2 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
                         aria-label="Toggle menu"
+                        aria-expanded={isMenuOpen}
+                        aria-controls="mobile-navigation"
                     >
                         {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
                     </button>
@@ -167,7 +169,7 @@ export default function ModernHeader() {
             {/* Mobile Menu */}
             {isMenuOpen && (
                 <div className="lg:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-[#0d0b1f]/95 border-b border-zinc-200 dark:border-white/[0.08] shadow-lg">
-                    <nav className="flex flex-col p-6 space-y-1">
+                    <nav id="mobile-navigation" className="flex flex-col p-6 space-y-1" aria-label="Mobile navigation">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.href}

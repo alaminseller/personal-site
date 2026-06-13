@@ -20,6 +20,10 @@
   <meta property="og:title" content="Alamin Rafi — Website & Digital Services" />
   <meta property="og:description"
     content="Modern, affordable websites for businesses. Web design, development, WordPress, UI/UX." />
+  <meta property="og:image" content="https://alaminrafi.com/5.png" />
+  <meta property="og:image:alt" content="Alamin Rafi - Digital Service Provider" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="Alamin Rafi" />
 
   <!-- Twitter -->
@@ -28,9 +32,14 @@
   <meta property="twitter:title" content="Alamin Rafi — Website & Digital Services" />
   <meta property="twitter:description"
     content="Modern, affordable websites for businesses. Web design, development, WordPress, UI/UX." />
+  <meta property="twitter:image" content="https://alaminrafi.com/5.png" />
+  <meta property="twitter:image:alt" content="Alamin Rafi - Digital Service Provider" />
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://alaminrafi.com" />
+
+  <!-- Performance: hero image is the initial LCP candidate -->
+  <link rel="preload" as="image" href="/5.png" />
 
   <!-- ── PWA: Manifest ── -->
   <link rel="manifest" href="/manifest.webmanifest" />
@@ -58,6 +67,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Alamin Rafi",
+      "url": "https://alaminrafi.com/",
+      "jobTitle": "Digital Service Provider",
+      "description": "Modern, affordable websites for businesses. Web design, development, WordPress, and UI/UX services.",
+      "image": "https://alaminrafi.com/5.png"
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Alamin Rafi",
+      "url": "https://alaminrafi.com/",
+      "description": "Portfolio and digital services website for Alamin Rafi."
+    }
+  </script>
 
   <!-- ── PWA: Safe Area CSS for notched phones ── -->
   <style>

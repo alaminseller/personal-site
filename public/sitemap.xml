@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://alaminrafi.com/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://alaminrafi.com/portfolio</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://alaminrafi.com/blog</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://alaminrafi.com/blog/who-is-alamin-rafi</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alaminrafi.com/blog/affordable-website-development-services</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alaminrafi.com/blog/how-i-build-fast-business-websites</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alaminrafi.com/blog/why-small-businesses-need-websites</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alaminrafi.com/about-me</loc>
+    <priority>0.7</priority>
+  </url>
+</urlset>

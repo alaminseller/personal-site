@@ -35,7 +35,8 @@ export default function ModernHeroVisual() {
           src="/5.png"
           alt="Alamin Rafi - Digital Service Provider"
           className="w-full h-full object-cover object-center"
-          loading="lazy"
+          loading="eager"
+          fetchPriority="high"
         />
         {/* Soft light overlay (approx 25%) */}
         <div className="absolute inset-0 bg-black/25 dark:bg-black/40" />
@@ -85,5 +86,4 @@ export default function ModernHeroVisual() {
     </section>
   );
 }
-
 

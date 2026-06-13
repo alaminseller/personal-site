@@ -2,7 +2,6 @@ import ModernHeader from "@/components/modern/Header";
 import ModernHeroVisual from "@/components/modern/Hero";
 import ServicesSection from "@/components/professional/Services";
 import PricingSection from "@/components/professional/Pricing";
-import ProjectsSection from "@/components/professional/Projects";
 import AboutSection from "@/components/professional/About";
 
 import ProfessionalContact from "@/components/professional/Contact";

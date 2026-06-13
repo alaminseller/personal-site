@@ -63,11 +63,12 @@ export default async function handler(req: Request) {
         "Connection": "keep-alive",
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Claude API Error:", error);
+    const message = error instanceof Error ? error.message : String(error);
     return new Response(JSON.stringify({
       error: "Failed to communicate with Claude.",
-      details: error.message
+      details: message
     }), {
       status: 500,
       headers: { "Content-Type": "application/json" },

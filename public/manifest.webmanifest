@@ -41,7 +41,7 @@
       "name": "Track My Project",
       "short_name": "My Project",
       "description": "View your project status",
-      "url": "/admin/projects",
+      "url": "/admin/portfolio",
       "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
     }
   ]
