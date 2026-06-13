@@ -24,7 +24,7 @@ export default function ProfessionalContact() {
     const whatsappMsg = encodeURIComponent("Hi Alamin! I'd like to discuss a web project with you.");
 
     return (
-        <section className="bg-zinc-50 dark:bg-zinc-900/50 py-24 border-t border-zinc-100 dark:border-zinc-800">
+        <section id="contact" className="bg-zinc-50 dark:bg-zinc-900/50 py-24 border-t border-zinc-100 dark:border-zinc-800">
             <div className="max-w-6xl mx-auto px-6">
                 <p className="text-sm font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3">Contact</p>
                 <h2 className="text-4xl font-bold text-zinc-900 dark:text-white mb-4 leading-snug">

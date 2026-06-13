@@ -12,14 +12,14 @@ import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 
 export default function ModernPage() {
     return (
-        <div className="min-h-screen bg-white dark:bg-zinc-950 transition-colors duration-300">
+        <div className="min-h-screen bg-white dark:bg-zinc-950">
             <ModernHeader />
             <main>
                 <ModernHeroVisual />
-                <div id="about"><AboutSection /></div>
-                <div id="services"><ServicesSection /></div>
-                <div id="pricing"><PricingSection /></div>
-                <div id="contact"><ProfessionalContact /></div>
+                <AboutSection />
+                <ServicesSection />
+                <PricingSection />
+                <ProfessionalContact />
             </main>
             <ProfessionalFooter />
             <MobileBottomNav />
