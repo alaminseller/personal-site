@@ -19,7 +19,7 @@ import AdminPricing from "./pages/admin/AdminPricing";
 import NotFound from "./pages/NotFound";
 import AboutMe from "./pages/AboutMe";
 import AdminProjects from "./pages/AdminProjects";
-
+import ProfessionalPage from "./pages/Professional";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +45,7 @@ const App = () => (
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/:slug" element={<BlogPostPage />} />
               <Route path="/about-me" element={<AboutMe />} />
+              <Route path="/professional" element={<ProfessionalPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
